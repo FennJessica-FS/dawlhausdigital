@@ -3,58 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>313 Hospitality Sync | Proof of Concept</title>
+    <title>313 Hospitality Sync | Dawlhaus Digital Proof of Concept</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
         /* Industry Specific Overrides */
-        :root {
-            --accent-cyan: #00f2ff; /* Keeping your branding but shifting the vibe */
+        body {
+            background: #050505; /* Deeper black for higher contrast */
         }
         
         .hospitality-hero {
-            height: 60vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1200');
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1550966841-3ee322878440?auto=format&fit=crop&q=80&w=1200');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 2px solid var(--accent-cyan);
+        }
+
+        .rush-indicator {
+            background: var(--accent-pink);
+            color: black;
+            font-family: var(--font-retro);
+            font-size: 0.8rem;
+            padding: 5px 15px;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
         }
 
         .menu-section {
-            padding: 60px 10%;
-            background: #0f0f12;
+            padding: 80px 10%;
+            background: #0a0a0c;
+        }
+
+        .menu-category {
+            margin-bottom: 60px;
+        }
+
+        .menu-category h3 {
+            font-family: var(--font-retro);
+            color: var(--accent-pink);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
         }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 40px;
-            margin-top: 40px;
         }
 
         .menu-item {
             display: flex;
-            justify-content: space-between;
-            border-bottom: 1px dashed var(--border);
-            padding-bottom: 10px;
+            flex-direction: column;
+            padding: 20px;
+            border-left: 2px solid var(--border);
+            transition: 0.3s;
         }
 
-        .price {
-            color: var(--accent-cyan);
+        .menu-item:hover {
+            border-left-color: var(--accent-cyan);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .item-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .item-price {
             font-family: var(--font-retro);
+            color: var(--accent-cyan);
+        }
+
+        .item-desc {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.4;
         }
 
         .back-nav {
-            padding: 20px 10%;
-            display: flex;
-            justify-content: flex-start;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -62,46 +118,72 @@
     <div class="noise-overlay"></div>
     
     <div class="back-nav">
-        <a href="index.html" class="nav-link-simple">← Back to Dawlhaus</a>
+        <a href="index.html" class="nav-btn" style="font-size: 0.7rem; padding: 8px 15px;">← Return to Dawlhaus</a>
     </div>
 
     <header class="hospitality-hero">
         <div class="hero-text">
-            <div class="badge">Live Demo</div>
-            <h1 style="font-family: 'Bungee';">313 SYNC</h1>
-            <p>High-speed digital menus for the Detroit rush.</p>
+            <div class="rush-indicator">Status: Live Sync Active</div>
+            <h1 style="font-family: 'Bungee';">313 Hospitality Sync</h1>
+            <p style="max-width: 600px; margin: 0 auto;">
+                Websites built for the <strong>Honor of Service.</strong> 
+                Zero friction. High volume. Grit tested.
+            </p>
         </div>
     </header>
 
     <section class="menu-section">
-        <div class="about-text-box glass">
-            <h2 style="font-family: 'Bungee'; color: var(--accent-cyan);">Saturday Night Specials</h2>
-            
+        <div class="about-text-box glass" style="margin-bottom: 80px; border-left: 4px solid var(--accent-cyan);">
+            <h2>The Digital Service Standard</h2>
+            <p>
+                When the dining room is full and the tickets are hanging, your digital presence shouldn't be a liability. 
+                I build hospitality tools that respect the hustle. Fast-loading menus, instant reservation hooks, 
+                and a UI that your staff and your guests can trust.
+            </p>
+        </div>
+
+        <div class="menu-category">
+            <h3>Featured Fare</h3>
             <div class="menu-grid">
                 <div class="menu-item">
-                    <span>The "Dawl" Burger</span>
-                    <span class="price">$18</span>
+                    <div class="item-header">
+                        <span class="item-name">The "Dawl" Burger</span>
+                        <span class="item-price">$18</span>
+                    </div>
+                    <p class="item-desc">Double patty, sharp white cheddar, house-made dill pickles, served on a toasted brioche. No shortcuts.</p>
                 </div>
                 <div class="menu-item">
-                    <span>Eastern Market Greens</span>
-                    <span class="price">$14</span>
+                    <div class="item-header">
+                        <span class="item-name">Lafayette Street Tacos</span>
+                        <span class="item-price">$15</span>
+                    </div>
+                    <p class="item-desc">Slow-roasted carnitas, pickled onion, cilantro, lime. A nod to the neighborhood.</p>
                 </div>
                 <div class="menu-item">
-                    <span>Detroit Style Pizza</span>
-                    <span class="price">$22</span>
+                    <div class="item-header">
+                        <span class="item-name">Eastern Market Greens</span>
+                        <span class="item-price">$14</span>
+                    </div>
+                    <p class="item-desc">Seasonal vegetables sourced from the 313, tossed in a lemon-tahini vinaigrette.</p>
                 </div>
                 <div class="menu-item">
-                    <span>Hand-Cut Fries</span>
-                    <span class="price">$8</span>
+                    <div class="item-header">
+                        <span class="item-name">Short Rib Poutine</span>
+                        <span class="item-price">$17</span>
+                    </div>
+                    <p class="item-desc">Hand-cut fries, local cheese curds, 12-hour braised short rib. Grit in a bowl.</p>
                 </div>
-            </div>
-
-            <div class="cta-group" style="justify-content: center;">
-                <a href="#" class="btn primary">Book a Table</a>
-                <a href="#" class="btn secondary">View Full Menu</a>
             </div>
         </div>
+
+        <div class="cta-group" style="justify-content: center; margin-top: 50px;">
+            <a href="#" class="btn primary">Inquire for Your Venue</a>
+        </div>
     </section>
+
+    <footer style="padding: 40px; text-align: center; border-top: 1px solid var(--border); font-size: 0.8rem; opacity: 0.5;">
+        <p>313 HOSPITALITY SYNC • A DAWLHAUS DIGITAL PROOF OF CONCEPT</p>
+    </footer>
 
 </body>
 </html>
