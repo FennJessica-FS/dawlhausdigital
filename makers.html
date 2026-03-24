@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maker's Marketplace | Jessica Fenn Portfolio Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #ff0055; color: #fff; }
+        .nav { background: transparent; border: none; }
+        .nav .logo span { color: #000; }
+        .maker-hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+        }
+        .maker-hero h1 {
+            font-family: 'Bungee';
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            line-height: 0.9;
+            transform: rotate(-2deg);
+            background: #fff;
+            color: #ff0055;
+            display: inline-block;
+            padding: 10px 20px;
+        }
+        .maker-card {
+            background: #fff;
+            color: #000;
+            padding: 40px;
+            margin-top: 40px;
+            border-radius: 0;
+            box-shadow: 15px 15px 0px #000;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <h1 class="logo" style="color:#fff;">MAKER <span>MKT</span></h1>
+        <a href="index.html" class="nav-link-simple" style="color:#fff !important;">← Home</a>
+    </nav>
+
+    <div class="maker-hero">
+        <h1>WE MAKE<br>SHIT REAL.</h1>
+        <div class="maker-card">
+            <h2 style="font-family: 'Bungee';">The Creator's Edge</h2>
+            <p>You build products. I build the engine that sells them. No fluff, no corporate boringness—just bold design for bold makers.</p>
+            <br>
+            <a href="index.html#contact" class="btn primary" style="background:#000; color:#fff;">Let's Create</a>
+        </div>
+    </div>
+</body>
+</html>
