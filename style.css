@@ -8,6 +8,7 @@
   --font-retro: "Bungee", cursive;
 }
 
+/* 1. RESET & BASE */
 * {
   box-sizing: border-box;
 }
@@ -23,6 +24,9 @@ body {
   color: white;
   overflow-x: hidden;
   line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .sr-only {
@@ -36,7 +40,7 @@ body {
   border: 0;
 }
 
-/* TEXTURES */
+/* 2. TEXTURES */
 .noise-overlay {
   position: fixed;
   top: 0;
@@ -56,29 +60,27 @@ body {
   width: 100%;
   height: 100%;
   background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
-    linear-gradient(
-      90deg,
-      rgba(255, 0, 0, 0.06),
-      rgba(0, 255, 0, 0.02),
-      rgba(0, 0, 255, 0.06)
-    );
+    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
   background-size: 100% 4px, 3px 100%;
   pointer-events: none;
   z-index: 998;
 }
 
-/* NAV */
+/* 3. NAVIGATION */
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 30px 10%;
+  width: 100%;
 }
+
 .logo {
   font-family: var(--font-retro);
   font-size: 1.4rem;
   text-transform: uppercase;
 }
+
 .logo span {
   color: var(--accent-pink);
   text-shadow: 0 0 10px var(--accent-pink);
@@ -89,16 +91,17 @@ body {
   align-items: center;
   gap: 30px;
 }
+
 .nav-link-simple {
   text-decoration: none;
   color: white;
-  font-family: var(--font-main);
   font-weight: 700;
   text-transform: uppercase;
   font-size: 0.9rem;
   letter-spacing: 1px;
   transition: 0.3s;
 }
+
 .nav-link-simple:hover {
   color: var(--accent-cyan);
 }
@@ -112,39 +115,71 @@ body {
   border-radius: 4px;
   transition: 0.3s;
 }
+
 .nav-btn:hover {
   background: var(--accent-pink);
   color: black;
   box-shadow: 0 0 15px var(--accent-pink);
 }
 
-/* HERO */
+/* 4. LAYOUT SECTIONS */
+section {
+  width: 100%;
+  padding: 100px 10%;
+  position: relative;
+  display: block;
+  clear: both;
+}
+
+/* HERO SPECIFIC */
 .hero {
   min-height: 85vh;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  padding: 0 10%;
+  justify-content: space-between;
   gap: 50px;
+  padding-top: 140px;
 }
+
+.hero-text {
+  flex: 1;
+  min-width: 300px;
+}
+
 .hero-text h1 {
   font-family: var(--font-retro);
   font-size: clamp(2rem, 5vw, 4rem);
   line-height: 1.1;
   margin-bottom: 20px;
 }
+
 .hero-text h1 span {
   background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+.hero-image {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 30px rgba(255, 0, 85, 0.2);
+}
+
+/* 5. COMPONENTS */
 .cta-group {
   display: flex;
   gap: 15px;
   margin-top: 30px;
 }
 
-/* BUTTONS */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -154,119 +189,57 @@ body {
   text-decoration: none;
   font-family: var(--font-retro);
 }
+
 .btn.primary {
   background: white;
   color: black;
   border: 2px solid white;
   padding: 18px 40px;
 }
+
 .btn.primary:hover {
   background: var(--accent-cyan);
   border-color: var(--accent-cyan);
   transform: translateY(-3px);
 }
+
 .btn.secondary {
   background: transparent;
   color: white;
   border: 2px solid var(--border);
   padding: 18px 40px;
 }
+
 .btn.secondary:hover {
   border-color: var(--accent-pink);
   color: var(--accent-pink);
 }
 
-/* LAYOUT & CARDS */
-section {
-  padding: 100px 10%;
-}
+/* CARDS & GLASSMORPHISM */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
+  width: 100%;
 }
+
 .glass {
   background: var(--glass);
   backdrop-filter: blur(15px);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 40px;
-  transition: 0.4s;
-}
-
-/* ABOUT SECTION FIX */
-.about-text-box {
-  max-width: 900px;
-  margin: 0 auto;
-}
-.about-text-box h2 {
-  font-family: var(--font-retro);
-  color: var(--accent-cyan);
-  font-size: 2.2rem;
-  margin-bottom: 20px;
-}
-
-.hero-image img {
-  width: 100%;
-  max-width: 400px;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  box-shadow: 0 0 30px rgba(255, 0, 85, 0.2);
-}
-
-/* REVEAL */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: 0.8s ease-out;
-}
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* FORM */
-form input,
-form textarea {
-  width: 100%;
-  padding: 15px;
-  margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border);
-  color: white;
-  border-radius: 4px;
-}
-form input:focus {
-  border-color: var(--accent-cyan);
-  outline: none;
-}
-/* --- DAY 2: THE GLOW UP --- */
-
-/* FORCED VISIBILITY: Overrides the hidden state */
-.reveal {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* THE NEON GLASS CARDS */
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 30px;
   transition: 0.3s ease;
   position: relative;
 }
 
-/* NEON GLOW ON HOVER */
-.card.glass:hover {
+.glass:hover {
   border-color: var(--accent-cyan);
   box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
   transform: translateY(-5px);
 }
 
-/* BROWSER WINDOW PREVIEWS */
+/* PROJECT PREVIEWS */
 .project-preview {
   width: 100%;
   height: 180px;
@@ -280,7 +253,6 @@ form input:focus {
   flex-direction: column;
 }
 
-/* The Browser Header Bar (The "Three Dots") */
 .project-preview::before {
   content: "● ● ●";
   padding: 8px 12px;
@@ -291,4 +263,39 @@ form input:focus {
   width: 100%;
   border-bottom: 1px solid var(--border);
   letter-spacing: 2px;
+}
+
+/* 6. UTILITY & FORMS */
+.about-text-box {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-text-box h2 {
+  font-family: var(--font-retro);
+  color: var(--accent-cyan);
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: white;
+  border-radius: 4px;
+}
+
+form input:focus {
+  border-color: var(--accent-cyan);
+  outline: none;
+}
+
+/* ANIMATION STATE (FORCE VISIBLE FOR NOW) */
+.reveal {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
