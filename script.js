@@ -1,16 +1,23 @@
-function reveal() {
-  var reveals = document.querySelectorAll(".reveal");
-  for (var i = 0; i < reveals.length; i++) {
-    var windowHeight = window.innerHeight;
-    var elementTop = reveals[i].getBoundingClientRect().top;
-    var elementVisible = 150;
-    if (elementTop < windowHeight - elementVisible) {
-      reveals[i].classList.add("active");
-    }
-  }
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const reveal = () => {
+    const reveals = document.querySelectorAll(".reveal");
+    reveals.forEach((el) => {
+      const windowHeight = window.innerHeight;
+      const elementTop = el.getBoundingClientRect().top;
+      const elementVisible = 100; // Trigger slightly earlier
 
-window.addEventListener("scroll", reveal);
+      if (elementTop < windowHeight - elementVisible) {
+        el.classList.add("active");
+      }
+    });
+  };
 
-// To check the reveal on load
-reveal();
+  // Run on scroll
+  window.addEventListener("scroll", reveal);
+
+  // Run immediately on load to catch boxes already in view
+  reveal();
+  
+  // Backup: Force active class after 1 second if still hidden
+  setTimeout(reveal, 1000);
+});
