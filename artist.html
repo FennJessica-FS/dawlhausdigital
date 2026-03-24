@@ -3,305 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Hair Artists | Dawlhaus Digital</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Alexis Vane | Editorial Stylist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #ffffff;
-            --text: #0e0e0e;
-            --accent: #ff3e00; 
-            --light-grey: #f9f9f9;
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --accent: #bcbcbc;
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background: var(--bg);
             color: var(--text);
             font-family: 'Space Grotesk', sans-serif;
-            margin: 0;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            scroll-behavior: smooth;
         }
 
-        /* --- NAVIGATION & SIDEBAR --- */
-        .nav-container {
+        /* --- NAVIGATION --- */
+        nav {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 30px 5%;
+            top: 0; width: 100%;
+            padding: 40px;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            z-index: 100;
-            pointer-events: none; /* Allows clicking items behind it if needed */
+            z-index: 1000;
+            mix-blend-mode: difference; /* Makes text visible over any background */
         }
 
-        .nav-container a, .nav-container li { pointer-events: auto; }
-
-        .back-nav a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            border-bottom: 2px solid var(--text);
-            padding-bottom: 5px;
-            transition: 0.3s;
-        }
-
-        .side-meta ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: right;
-        }
-
-        .side-meta a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 10px;
-            transition: 0.3s;
-        }
-
-        .side-meta a:hover, .back-nav a:hover { color: var(--accent); border-color: var(--accent); }
-
-        /* --- HERO HEADER --- */
-        .artist-header {
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
-            border-bottom: 1px solid #eee;
-        }
-
-        .badge {
-            display: inline-block;
-            background: var(--text);
+        nav a {
             color: white;
-            padding: 5px 15px;
-            font-size: 0.7rem;
-            font-weight: 700;
+            text-decoration: none;
             text-transform: uppercase;
+            font-size: 11px;
             letter-spacing: 3px;
-            margin-bottom: 20px;
-            width: fit-content;
-        }
-
-        .artist-header h1 {
-            font-size: clamp(4rem, 15vw, 11rem);
-            line-height: 0.85;
-            margin: 0;
             font-weight: 700;
-            letter-spacing: -0.05em;
-            text-transform: uppercase;
         }
 
-        .header-meta {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            margin-top: 50px;
-            align-items: flex-start;
-        }
-
-        .header-meta p {
-            font-size: 1.25rem;
-            line-height: 1.4;
-            max-width: 450px;
-            margin: 0;
-            font-weight: 300;
-        }
-
-        .btn-editorial {
-            background: var(--text);
-            border: none;
-            color: white;
-            padding: 22px 45px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            letter-spacing: 2px;
-            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        .btn-editorial:hover {
-            background: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        /* --- PHILOSOPHY SECTION --- */
-        .philosophy {
-            padding: 120px 10%;
-            background: var(--light-grey);
-            text-align: left;
-        }
-
-        .philosophy h2 {
-            font-weight: 300;
-            font-size: clamp(1.5rem, 4vw, 2.8rem);
-            line-height: 1.2;
-            max-width: 900px;
-            margin: 0;
-        }
-
-        .philosophy span { font-style: italic; font-weight: 700; }
-
-        /* --- SERVICES / CAPABILITIES --- */
-        .services-grid {
-            padding: 100px 10%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 60px;
-        }
-
-        .service-card h4 {
-            border-top: 1px solid #000;
-            padding-top: 20px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
-
-        .service-card p {
-            font-size: 1rem;
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .service-link {
-            font-weight: 700;
-            color: var(--text);
-            text-decoration: none;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
             position: relative;
         }
 
-        .service-link::after {
-            content: '';
-            position: absolute;
-            width: 0; height: 1px; bottom: -2px; left: 0;
-            background: var(--accent);
-            transition: 0.3s;
+        .hero-title {
+            font-size: clamp(5rem, 18vw, 15rem);
+            line-height: 0.8;
+            z-index: 10;
+            pointer-events: none;
         }
 
-        .service-link:hover::after { width: 100%; }
+        .hero-title span {
+            display: block;
+            margin-left: 10vw;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--text);
+        }
 
-        /* --- GALLERY SECTION --- */
-        .gallery-section { padding: 50px 5% 150px 5%; }
+        .hero-image-float {
+            position: absolute;
+            right: 15%;
+            top: 20%;
+            width: 30vw;
+            height: 40vw;
+            background: url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=800') center/cover;
+            filter: grayscale(1);
+            z-index: 5;
+            opacity: 0.6;
+        }
 
-        .gallery-grid {
+        /* --- CONTENT STRIP --- */
+        .manifesto {
+            padding: 150px 10%;
+            border-top: 1px solid #333;
+        }
+
+        .manifesto-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            grid-auto-rows: 15vw;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+        }
+
+        .manifesto h2 {
+            font-size: 3rem;
+            font-weight: 300;
+            line-height: 1.1;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
             gap: 20px;
         }
 
-        .gallery-item {
+        .editorial-link {
+            font-size: 1.5rem;
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+            transition: 0.4s;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .editorial-link:hover {
+            padding-left: 20px;
+            border-color: var(--text);
+        }
+
+        /* --- PORTFOLIO GRID --- */
+        .work {
+            padding: 0 5% 100px 5%;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        .work-item {
             background-size: cover;
             background-position: center;
             filter: grayscale(1);
-            transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-            position: relative;
-            background-color: #eee;
+            transition: 0.7s;
+            height: 60vh;
         }
 
-        .gallery-item:hover { filter: grayscale(0); }
+        .work-item:hover { filter: grayscale(0); transform: scale(0.98); }
 
-        /* Asymmetric Layout Rules */
-        .item-1 { grid-column: 1 / span 3; grid-row: 1 / span 3; }
-        .item-2 { grid-column: 4 / span 3; grid-row: 1 / span 2; margin-top: 60px; }
-        .item-3 { grid-column: 2 / span 2; grid-row: 4 / span 2; }
-        .item-4 { grid-column: 4 / span 2; grid-row: 3 / span 3; }
+        .item-small { grid-column: span 4; height: 40vh; margin-top: 100px; }
+        .item-large { grid-column: span 8; }
+        .item-mid { grid-column: 3 / span 6; height: 70vh; margin-top: -50px; }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 900px) {
-            .header-meta { grid-template-columns: 1fr; gap: 40px; }
-            .gallery-grid { display: flex; flex-direction: column; }
-            .gallery-item { aspect-ratio: 1/1; margin-bottom: 20px; }
-            .nav-container { position: absolute; padding: 20px 5%; }
-            .side-meta { display: none; } /* Hide secondary nav on mobile for space */
+        footer {
+            padding: 100px 40px;
+            text-align: center;
+            border-top: 1px solid #333;
         }
     </style>
 </head>
 <body>
 
-    <nav class="nav-container">
-        <div class="back-nav">
-            <a href="index.html">← Dawlhaus</a>
-        </div>
-        <div class="side-meta">
-            <ul>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#services">Capabilities</a></li>
-                <li><a href="#booking">Book the Chair</a></li>
-            </ul>
+    <nav>
+        <a href="index.html">← DAWLHAUS</a>
+        <div>
+            <a href="#work" style="margin-right: 30px;">Portfolio</a>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
 
-    <header class="artist-header">
-        <span class="badge">Master Stylist & Educator</span>
-        <h1>ELITE<br>HAIR<br>ARTISTS</h1>
-        
-        <div class="header-meta">
-            <p>Redefining editorial hair through architectural precision and a high-fashion sensibility.</p>
-            <div class="cta-container">
-                <button class="btn-editorial" id="booking">Book Appointment</button>
+    <section class="hero">
+        <h1 class="hero-title">ALEXIS<br><span>VANE</span></h1>
+        <div class="hero-image-float"></div>
+    </section>
+
+    <section class="manifesto">
+        <div class="manifesto-grid">
+            <h2>Architectural forms. <br>Editorial soul.</h2>
+            <div class="links-container">
+                <a href="#" class="editorial-link"><span>Portfolio</span> <span>→</span></a>
+                <a href="#" class="editorial-link"><span>Education</span> <span>→</span></a>
+                <a href="#" class="editorial-link"><span>The Chair</span> <span>→</span></a>
+                <p style="margin-top: 20px; color: #666; font-size: 0.9rem; line-height: 1.6;">
+                    Alexis Vane is a master educator and session stylist based in London/NYC, focusing on the intersection of geometry and movement.
+                </p>
             </div>
         </div>
-    </header>
-
-    <section class="philosophy">
-        <h2>
-            "Hair is the only <span>permanent</span> accessory. I believe in designing for the individual's bone structure, not the season's trends."
-        </h2>
-        <p style="margin-top: 40px; text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; font-weight: 700; color: var(--accent);">
-            — The Creative Manifesto
-        </p>
     </section>
 
-    <section id="services" class="services-grid">
-        <div class="service-card">
-            <h4>01. Editorial Session</h4>
-            <p>High-concept styling for international publications, runway, and commercial brand campaigns.</p>
-            <a href="#" class="service-link">VIEW EDITORIAL PORTFOLIO →</a>
-        </div>
-        <div class="service-card">
-            <h4>02. Education & Mentoring</h4>
-            <p>Hands-on architectural cutting workshops and business mentoring for rising stylists.</p>
-            <a href="#" class="service-link">REQUEST A WORKSHOP →</a>
-        </div>
-        <div class="service-card">
-            <h4>03. Private Client Chair</h4>
-            <p>A bespoke, one-on-one experience focusing on signature color and precision cutting.</p>
-            <a href="#" class="service-link">RESERVE A DATE →</a>
-        </div>
+    <section class="work" id="work">
+        <div class="work-item item-large" style="background-image: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=1200');"></div>
+        <div class="work-item item-small" style="background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&q=80&w=600');"></div>
+        <div class="work-item item-mid" style="background-image: url('https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&q=80&w=800');"></div>
     </section>
 
-    <section id="portfolio" class="gallery-section">
-        <div class="gallery-grid">
-            <div class="gallery-item item-1" style="background-image: url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=800');"></div>
-            <div class="gallery-item item-2" style="background-image: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800');"></div>
-            <div class="gallery-item item-3" style="background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&q=80&w=800');"></div>
-            <div class="gallery-item item-4" style="background-image: url('https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&q=80&w=800');"></div>
-        </div>
-    </section>
-
-    <footer style="padding: 100px 10%; background: #000; color: #fff; text-align: center;">
-        <p style="text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem;">Inquiries</p>
-        <h3 style="font-size: 2rem; margin: 20px 0;">studio@eliteartist.com</h3>
-        <p style="color: #666; font-size: 0.8rem;">&copy; 2026 Dawlhaus Digital / Elite Artist Concept</p>
+    <footer>
+        <button onclick="window.location.href='mailto:hello@alexisvane.com'" style="background: white; border: none; padding: 25px 60px; font-family: 'Space Grotesk'; font-weight: 700; text-transform: uppercase; cursor: pointer; letter-spacing: 2px;">
+            Inquire for Bookings
+        </button>
+        <p style="margin-top: 40px; color: #444; font-size: 0.7rem; letter-spacing: 2px;">©2026 ALEXIS VANE DIGITAL</p>
     </footer>
 
 </body>
