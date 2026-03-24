@@ -1,13 +1,191 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>client</title>
+    <title>Dawlhaus Digital | Jessica Fenn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div class="noise-overlay"></div>
+    <div class="scanlines"></div>
+    <div class="cursor-glow"></div>
+
+    <nav class="nav">
+      <h1 class="logo">Dawlhaus Digital <span>by Jessica "Dawl" Fenn</span></h1>
+      <div class="nav-links">
+        <a href="#about" class="nav-link-simple">About</a>
+        <a href="#contact" class="nav-btn" role="button">Start Your Project</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-text">
+        <h1>
+          I build websites that actually <span>work for your business.</span>
+        </h1>
+        <p>
+          Specialized digital solutions for small businesses, makers, and
+          creators who need more than just a pretty page.
+        </p>
+        <div class="cta-group">
+          <a href="#about" class="btn secondary">My Story</a>
+          <a href="#contact" class="btn primary" role="button">Get a Quote</a>
+        </div>
+      </div>
+
+      <div class="hero-image glass">
+        <img
+          src="photos/jess_headshot.jpg"
+          alt="Jessica Fenn"
+          onerror="this.src='https://via.placeholder.com/400x500?text=Check+Path'"
+        />
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about-content">
+        <div class="about-text-box glass">
+          <h2>I Get Your Business Because I've Been In It.</h2>
+          <p>
+            I spent <strong>25 years</strong> in the restaurant industry,
+            working every role imaginable. I’ve lived the beauty industry from
+            the runway as a model to the chair as a stylist, esthetician, and
+            educator.
+          </p>
+          <p>
+            As a creative who has been in bands and designed my own clothes, I
+            have a gut feel for what makers and PEOPLE actually want. I build
+            digital tools that drive traffic, attract clients, and are genuinely
+            <strong>you</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="services">
+      <h2>Tailored For Your Industry</h2>
+      <div class="card-grid">
+        <div class="card glass reveal">
+          <h3>Restaurants & Bars</h3>
+          <p>
+            Digital menus, booking integration, and high-traffic landing pages
+            built for the rush.
+          </p>
+        </div>
+        <div class="card glass reveal">
+          <h3>Personalities & Brands</h3>
+          <p>
+            For speakers, educators, and influencers. A digital home that
+            captures your unique energy.
+          </p>
+        </div>
+        <div class="card glass reveal">
+          <h3>Events & Pop-Ups</h3>
+          <p>
+            High-converting pages for ticket sales, concert promotion, and brand
+            activations.
+          </p>
+        </div>
+        <div class="card glass reveal">
+          <h3>Creators & Makers</h3>
+          <p>
+            Portfolio sites and branding for the people who build, sew, play,
+            and create.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+      <div class="contact-header">
+        <h2>Proof of Concept</h2>
+      </div>
+      <div class="card-grid">
+        <div class="card glass reveal">
+          <div class="badge">Restaurant</div>
+          <h3>The Nightcap Lounge</h3>
+          <p>
+            Moody aesthetic with live-updating digital menus and zero-fee
+            booking systems.
+          </p>
+        </div>
+        <div class="card glass reveal">
+          <div class="badge">Personality</div>
+          <h3>The Master Class</h3>
+          <p>
+            Video-centric branding for educators and stylists focused on
+            authority and lead capture.
+          </p>
+        </div>
+        <div class="card glass reveal">
+          <div class="badge">Events</div>
+          <h3>Warehouse Pop-Up</h3>
+          <p>
+            High-energy landing pages with ticket-drop timers and mobile-first
+            navigation.
+          </p>
+        </div>
+        <div class="card glass reveal">
+          <div class="badge">Makers</div>
+          <h3>Threads & Tones</h3>
+          <p>
+            A digital gallery showcasing the intersection of fashion and music
+            for Detroit creators.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="contact-header">
+        <h2>Let’s build something genuinely you.</h2>
+      </div>
+
+      <form
+        action="https://formspree.io/f/mykkykrn"
+        method="POST"
+        class="glass"
+      >
+        <input
+          type="hidden"
+          name="_next"
+          value="https://jessicafenn.github.io/jesslanding/thankyou.html"
+        />
+
+        <label for="name" class="sr-only">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your Name"
+          required
+        />
+        <label for="email" class="sr-only">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email Address"
+          required
+        />
+        <label for="message" class="sr-only">Details</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Tell me about your business..."
+          required
+        ></textarea>
+        <button type="submit" class="btn primary">Send Message</button>
+      </form>
+    </section>
+
+    <script src="script.js"></script>
   </body>
 </html>
