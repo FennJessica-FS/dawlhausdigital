@@ -3,57 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Artist | Proof of Concept</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Elite Artist | Dawlhaus Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        .artist-header {
-            background: #fff;
-            color: #000;
-            padding: 100px 10%;
-            text-align: center;
+        :root {
+            --bg: #ffffff;
+            --text: #0e0e0e;
+            --accent: #ff3e00; /* Editorial Red accent */
         }
-        .artist-header h1 {
-            font-family: 'Space Grotesk';
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Sophisticated Back Nav */
+        .back-nav {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 100;
+        }
+        .back-nav a {
+            text-decoration: none;
+            color: var(--text);
             font-weight: 700;
-            letter-spacing: -2px;
-            font-size: 4rem;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border-bottom: 2px solid var(--text);
+            padding-bottom: 5px;
+            transition: 0.3s;
+        }
+        .back-nav a:hover { color: var(--accent); border-color: var(--accent); }
+
+        /* Award-Winning Header Layout */
+        .artist-header {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            border-bottom: 1px solid #eee;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--text);
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            width: fit-content;
+        }
+
+        .artist-header h1 {
+            font-size: clamp(4rem, 15vw, 12rem); /* Fluid Typography */
+            line-height: 0.85;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+        }
+
+        .header-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-top: 40px;
+            align-items: flex-start;
+        }
+
+        .header-meta p {
+            font-size: 1.2rem;
+            line-height: 1.4;
+            max-width: 400px;
             margin: 0;
         }
+
+        .cta-container { text-align: right; }
+
+        .btn-editorial {
+            background: none;
+            border: 2px solid var(--text);
+            color: var(--text);
+            padding: 20px 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .btn-editorial:hover {
+            background: var(--text);
+            color: white;
+            padding-right: 60px;
+        }
+
+        /* Broken Grid Gallery (The "Award Winning" Secret) */
+        .gallery-section {
+            padding: 100px 5%;
+        }
+
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            padding: 10px;
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: 15vw;
+            gap: 20px;
         }
+
         .gallery-item {
-            aspect-ratio: 1/1;
             background-size: cover;
             background-position: center;
             filter: grayscale(1);
-            transition: 0.5s;
+            transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            overflow: hidden;
         }
+
+        .gallery-item::after {
+            content: 'VIEW PROJECT';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: 700;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
         .gallery-item:hover {
             filter: grayscale(0);
+            transform: scale(0.98);
+        }
+        
+        .gallery-item:hover::after { opacity: 1; }
+
+        /* Asymmetric Layout */
+        .item-1 { grid-column: 1 / span 3; grid-row: 1 / span 3; }
+        .item-2 { grid-column: 4 / span 3; grid-row: 1 / span 2; margin-top: 50px; }
+        .item-3 { grid-column: 2 / span 2; grid-row: 4 / span 2; }
+        .item-4 { grid-column: 4 / span 2; grid-row: 3 / span 3; }
+
+        @media (max-width: 768px) {
+            .header-meta { grid-template-columns: 1fr; gap: 30px; }
+            .gallery-grid { display: flex; flex-direction: column; }
+            .gallery-item { aspect-ratio: 3/4; margin-bottom: 20px; }
         }
     </style>
 </head>
-<body style="background: #f9f9f9; color: #000;">
-    <div class="back-nav" style="padding: 20px 10%;">
-        <a href="index.html" style="color: #000; text-decoration: none; font-weight: bold;">← Return to Dawlhaus</a>
-    </div>
+<body>
+
+    <nav class="back-nav">
+        <a href="index.html">Index</a>
+    </nav>
 
     <header class="artist-header">
-        <div class="badge" style="background: #000; color: #fff; border: none;">Editorial Style</div>
-        <h1>ELITE ARTIST</h1>
-        <p style="color: #666; max-width: 600px; margin: 20px auto;">Portfolio and booking for master stylists and educators.</p>
-        <a href="#" class="btn primary" style="background: #000; color: #fff; border: none;">Book My Chair</a>
+        <span class="badge">Master Stylist & Educator</span>
+        <h1>ELITE<br>ARTIST</h1>
+        
+        <div class="header-meta">
+            <p>Redefining editorial hair through architectural precision and high-fashion sensibility.</p>
+            <div class="cta-container">
+                <button class="btn-editorial">Book the Chair —</button>
+            </div>
+        </div>
     </header>
 
-    <div class="gallery-grid">
-        <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=600');"></div>
-        <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=600');"></div>
-        <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&q=80&w=600');"></div>
-    </div>
+    <section class="gallery-section">
+        <div class="gallery-grid">
+            <div class="gallery-item item-1" style="background-image: url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=800');"></div>
+            <div class="gallery-item item-2" style="background-image: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800');"></div>
+            <div class="gallery-item item-3" style="background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&q=80&w=800');"></div>
+            <div class="gallery-item item-4" style="background-image: url('https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&q=80&w=800');"></div>
+        </div>
+    </section>
+
 </body>
 </html>
