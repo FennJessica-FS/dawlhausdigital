@@ -9,8 +9,11 @@
         :root {
             --bg: #ffffff;
             --text: #0e0e0e;
-            --accent: #ff3e00; /* Editorial Red accent */
+            --accent: #ff3e00; 
+            --light-grey: #f9f9f9;
         }
+
+        * { box-sizing: border-box; }
 
         body {
             background: var(--bg);
@@ -19,31 +22,60 @@
             margin: 0;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
         }
 
-        /* Sophisticated Back Nav */
-        .back-nav {
+        /* --- NAVIGATION & SIDEBAR --- */
+        .nav-container {
             position: fixed;
-            top: 40px;
-            left: 40px;
+            top: 0;
+            width: 100%;
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             z-index: 100;
+            pointer-events: none; /* Allows clicking items behind it if needed */
         }
+
+        .nav-container a, .nav-container li { pointer-events: auto; }
+
         .back-nav a {
             text-decoration: none;
             color: var(--text);
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             letter-spacing: 2px;
             border-bottom: 2px solid var(--text);
             padding-bottom: 5px;
             transition: 0.3s;
         }
-        .back-nav a:hover { color: var(--accent); border-color: var(--accent); }
 
-        /* Award-Winning Header Layout */
+        .side-meta ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: right;
+        }
+
+        .side-meta a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .side-meta a:hover, .back-nav a:hover { color: var(--accent); border-color: var(--accent); }
+
+        /* --- HERO HEADER --- */
         .artist-header {
-            min-height: 80vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -65,7 +97,7 @@
         }
 
         .artist-header h1 {
-            font-size: clamp(4rem, 15vw, 12rem); /* Fluid Typography */
+            font-size: clamp(4rem, 15vw, 11rem);
             line-height: 0.85;
             margin: 0;
             font-weight: 700;
@@ -76,41 +108,98 @@
         .header-meta {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            margin-top: 40px;
+            margin-top: 50px;
             align-items: flex-start;
         }
 
         .header-meta p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             line-height: 1.4;
-            max-width: 400px;
+            max-width: 450px;
             margin: 0;
+            font-weight: 300;
         }
 
-        .cta-container { text-align: right; }
-
         .btn-editorial {
-            background: none;
-            border: 2px solid var(--text);
-            color: var(--text);
-            padding: 20px 40px;
-            font-size: 1rem;
+            background: var(--text);
+            border: none;
+            color: white;
+            padding: 22px 45px;
+            font-size: 0.9rem;
             font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
+            letter-spacing: 2px;
             transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         .btn-editorial:hover {
-            background: var(--text);
-            color: white;
-            padding-right: 60px;
+            background: var(--accent);
+            transform: translateY(-5px);
         }
 
-        /* Broken Grid Gallery (The "Award Winning" Secret) */
-        .gallery-section {
-            padding: 100px 5%;
+        /* --- PHILOSOPHY SECTION --- */
+        .philosophy {
+            padding: 120px 10%;
+            background: var(--light-grey);
+            text-align: left;
         }
+
+        .philosophy h2 {
+            font-weight: 300;
+            font-size: clamp(1.5rem, 4vw, 2.8rem);
+            line-height: 1.2;
+            max-width: 900px;
+            margin: 0;
+        }
+
+        .philosophy span { font-style: italic; font-weight: 700; }
+
+        /* --- SERVICES / CAPABILITIES --- */
+        .services-grid {
+            padding: 100px 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+        }
+
+        .service-card h4 {
+            border-top: 1px solid #000;
+            padding-top: 20px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .service-link {
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .service-link::after {
+            content: '';
+            position: absolute;
+            width: 0; height: 1px; bottom: -2px; left: 0;
+            background: var(--accent);
+            transition: 0.3s;
+        }
+
+        .service-link:hover::after { width: 100%; }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-section { padding: 50px 5% 150px 5%; }
 
         .gallery-grid {
             display: grid;
@@ -125,44 +214,40 @@
             filter: grayscale(1);
             transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
             position: relative;
-            overflow: hidden;
+            background-color: #eee;
         }
 
-        .gallery-item::after {
-            content: 'VIEW PROJECT';
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-weight: 700;
-            opacity: 0;
-            transition: 0.4s;
-        }
+        .gallery-item:hover { filter: grayscale(0); }
 
-        .gallery-item:hover {
-            filter: grayscale(0);
-            transform: scale(0.98);
-        }
-        
-        .gallery-item:hover::after { opacity: 1; }
-
-        /* Asymmetric Layout */
+        /* Asymmetric Layout Rules */
         .item-1 { grid-column: 1 / span 3; grid-row: 1 / span 3; }
-        .item-2 { grid-column: 4 / span 3; grid-row: 1 / span 2; margin-top: 50px; }
+        .item-2 { grid-column: 4 / span 3; grid-row: 1 / span 2; margin-top: 60px; }
         .item-3 { grid-column: 2 / span 2; grid-row: 4 / span 2; }
         .item-4 { grid-column: 4 / span 2; grid-row: 3 / span 3; }
 
-        @media (max-width: 768px) {
-            .header-meta { grid-template-columns: 1fr; gap: 30px; }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .header-meta { grid-template-columns: 1fr; gap: 40px; }
             .gallery-grid { display: flex; flex-direction: column; }
-            .gallery-item { aspect-ratio: 3/4; margin-bottom: 20px; }
+            .gallery-item { aspect-ratio: 1/1; margin-bottom: 20px; }
+            .nav-container { position: absolute; padding: 20px 5%; }
+            .side-meta { display: none; } /* Hide secondary nav on mobile for space */
         }
     </style>
 </head>
 <body>
 
-    <nav class="back-nav">
-        <a href="index.html">Index</a>
+    <nav class="nav-container">
+        <div class="back-nav">
+            <a href="index.html">← Dawlhaus</a>
+        </div>
+        <div class="side-meta">
+            <ul>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#services">Capabilities</a></li>
+                <li><a href="#booking">Book the Chair</a></li>
+            </ul>
+        </div>
     </nav>
 
     <header class="artist-header">
@@ -170,14 +255,41 @@
         <h1>ELITE<br>ARTIST</h1>
         
         <div class="header-meta">
-            <p>Redefining editorial hair through architectural precision and high-fashion sensibility.</p>
+            <p>Redefining editorial hair through architectural precision and a high-fashion sensibility.</p>
             <div class="cta-container">
-                <button class="btn-editorial">Book the Chair —</button>
+                <button class="btn-editorial" id="booking">Book Appointment</button>
             </div>
         </div>
     </header>
 
-    <section class="gallery-section">
+    <section class="philosophy">
+        <h2>
+            "Hair is the only <span>permanent</span> accessory. I believe in designing for the individual's bone structure, not the season's trends."
+        </h2>
+        <p style="margin-top: 40px; text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; font-weight: 700; color: var(--accent);">
+            — The Creative Manifesto
+        </p>
+    </section>
+
+    <section id="services" class="services-grid">
+        <div class="service-card">
+            <h4>01. Editorial Session</h4>
+            <p>High-concept styling for international publications, runway, and commercial brand campaigns.</p>
+            <a href="#" class="service-link">VIEW EDITORIAL PORTFOLIO →</a>
+        </div>
+        <div class="service-card">
+            <h4>02. Education & Mentoring</h4>
+            <p>Hands-on architectural cutting workshops and business mentoring for rising stylists.</p>
+            <a href="#" class="service-link">REQUEST A WORKSHOP →</a>
+        </div>
+        <div class="service-card">
+            <h4>03. Private Client Chair</h4>
+            <p>A bespoke, one-on-one experience focusing on signature color and precision cutting.</p>
+            <a href="#" class="service-link">RESERVE A DATE →</a>
+        </div>
+    </section>
+
+    <section id="portfolio" class="gallery-section">
         <div class="gallery-grid">
             <div class="gallery-item item-1" style="background-image: url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=800');"></div>
             <div class="gallery-item item-2" style="background-image: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800');"></div>
@@ -185,6 +297,12 @@
             <div class="gallery-item item-4" style="background-image: url('https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&q=80&w=800');"></div>
         </div>
     </section>
+
+    <footer style="padding: 100px 10%; background: #000; color: #fff; text-align: center;">
+        <p style="text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem;">Inquiries</p>
+        <h3 style="font-size: 2rem; margin: 20px 0;">studio@eliteartist.com</h3>
+        <p style="color: #666; font-size: 0.8rem;">&copy; 2026 Dawlhaus Digital / Elite Artist Concept</p>
+    </footer>
 
 </body>
 </html>
