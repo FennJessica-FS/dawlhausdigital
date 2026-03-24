@@ -3,65 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Artist | Portfolio Demo</title>
+    <title>Elite Artist | Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> <style>
-        /* OVERRIDING DAWLHAUS VIBE FOR LUXURY LOOK */
-        body { background: #ffffff; color: #000000; overflow-x: hidden; }
-        .noise-overlay, .scanlines, .cursor-glow { display: none; } /* Kill the tech effects */
-        
-        .nav { background: #fff; border-bottom: 1px solid #000; height: 60px; }
-        .nav .logo { font-family: 'Space Grotesk'; font-weight: 700; color: #000; letter-spacing: -1px; }
-        .nav .logo span { color: #666; font-weight: 300; }
-
-        .artist-hero {
-            padding: 160px 10% 80px;
-            text-align: center;
+    <style>
+        /* RESET - This keeps it from using your main site styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: #ffffff; 
+            color: #000; 
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.2;
+        }
+        nav {
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
             border-bottom: 1px solid #000;
         }
-        .artist-hero h1 { 
-            font-size: clamp(3.5rem, 12vw, 8rem); 
-            line-height: 0.85; 
+        .logo { font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+        .hero {
+            padding: 100px 5%;
+            text-align: left;
+        }
+        h1 {
+            font-size: clamp(4rem, 15vw, 10rem);
             text-transform: uppercase;
+            letter-spacing: -5px;
             margin-bottom: 40px;
         }
-        .artist-hero p { color: #444; font-size: 1.2rem; max-width: 500px; margin: 0 auto; }
-
-        .gallery {
+        .grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            border-left: 1px solid #000;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            border-top: 1px solid #000;
         }
-        .gallery-item {
+        .item {
+            padding: 60px 30px;
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
-            padding: 100px 40px;
-            text-align: center;
-            transition: background 0.3s;
         }
-        .gallery-item:hover { background: #f5f5f5; }
-        .gallery-item h2 { font-family: 'Space Grotesk'; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; }
-        
-        .back-btn { position: fixed; bottom: 20px; left: 20px; background: #000; color: #fff; padding: 10px 20px; text-decoration: none; font-size: 0.8rem; z-index: 1000; }
+        .item h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: #000;
+            text-decoration: none;
+            font-size: 0.7rem;
+            border: 1px solid #000;
+            padding: 10px 20px;
+        }
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <h1 class="logo">ELITE <span>ARTIST</span></h1>
+    <nav>
+        <div class="logo">Elite Artist</div>
+        <div>Est. 2026</div>
     </nav>
-
-    <header class="artist-hero">
-        <h1>The<br>New<br>Standard.</h1>
-        <p>A digital authority for stylists, educators, and creators who lead the industry.</p>
-    </header>
-
-    <section class="gallery">
-        <div class="gallery-item"><h2>Editorial</h2></div>
-        <div class="gallery-item"><h2>Education</h2></div>
-        <div class="gallery-item"><h2>Booking</h2></div>
-        <div class="gallery-item"><h2>Contact</h2></div>
+    <section class="hero">
+        <h1>Authority<br>Built.</h1>
+        <p>Strategic digital homes for the industry's top educators.</p>
+        <a href="index.html" class="back-link">EXIT DEMO</a>
     </section>
-
-    <a href="index.html" class="back-btn">← RETURN TO DAWLHAUS</a>
+    <div class="grid">
+        <div class="item"><h2>Editorial</h2><p>Vogue, Allure, Harper's.</p></div>
+        <div class="item"><h2>Education</h2><p>Masterclasses & Tours.</p></div>
+    </div>
 </body>
 </html>
