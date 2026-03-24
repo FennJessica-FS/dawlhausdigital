@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@300;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="noise-overlay"></div>
@@ -42,7 +42,7 @@
 
       <div class="hero-image glass">
         <img
-          src="jess.jpg"
+          src="jess.png"
           alt="Jessica Fenn"
           onerror="this.src='https://via.placeholder.com/400x500?text=Check+Path'"
         />
@@ -137,10 +137,13 @@
 
         <label for="name" class="sr-only">Name</label>
         <input type="text" id="name" name="name" placeholder="Your Name" required />
+        
         <label for="email" class="sr-only">Email</label>
         <input type="email" id="email" name="email" placeholder="Email Address" required />
+        
         <label for="message" class="sr-only">Details</label>
         <textarea id="message" name="message" placeholder="Tell me about your business..." required></textarea>
+        
         <button type="submit" class="btn primary">Send Message</button>
       </form>
     </section>
