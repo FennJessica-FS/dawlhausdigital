@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Artist | Jessica Fenn Portfolio Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #fdfdfd; color: #1a1a1a; }
+        .nav { background: rgba(255, 255, 255, 0.9); border-bottom: 1px solid #eee; }
+        .nav .logo, .nav-link-simple { color: #1a1a1a !important; }
+        .artist-hero {
+            padding: 120px 10%;
+            text-align: center;
+            background: #fff;
+        }
+        .artist-hero h1 { 
+            font-size: clamp(3rem, 10vw, 5rem); 
+            letter-spacing: -2px; 
+            margin-bottom: 20px;
+            color: #000;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 10px;
+            padding: 20px;
+        }
+        .gallery-item {
+            aspect-ratio: 4/5;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            color: #999;
+            border: 1px solid #eee;
+        }
+        .btn.primary { background: #000; color: #fff; border: none; }
+        .noise-overlay { opacity: 0.03; } /* Subtle for light mode */
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    <nav class="nav">
+        <h1 class="logo">ELITE <span>ARTIST</span></h1>
+        <a href="index.html" class="nav-link-simple">← Back to Dawlhaus</a>
+    </nav>
+
+    <header class="artist-hero">
+        <p style="text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; margin-bottom: 10px;">Portfolio & Booking</p>
+        <h1>Define Your <span>Authority.</span></h1>
+        <p style="max-width: 600px; margin: 0 auto 30px;">For the educators and stylists who have outgrown "Linktree" and need a digital home that matches their craft.</p>
+        <a href="index.html#contact" class="btn primary">Start Your Rebrand</a>
+    </header>
+
+    <section class="gallery-grid">
+        <div class="gallery-item">Editorial Work</div>
+        <div class="gallery-item">Runway Highlights</div>
+        <div class="gallery-item">Masterclass Series</div>
+    </section>
+</body>
+</html>
