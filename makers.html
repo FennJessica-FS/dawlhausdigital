@@ -3,47 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maker Mkt | Proof of Concept</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>THE MAKERS | DETROIT ATELIER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Barlow+Condensed:wght@900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
-        .maker-hero {
-            background: var(--accent-pink);
-            padding: 100px 10%;
-            transform: skewY(-2deg);
-            margin-top: 50px;
+        :root {
+            --concrete: #e5e5e5;
+            --steel: #1a1a1a;
+            --hazard: #ff4d00; /* Detroit Orange */
+            --rust: #8b3a3a;
         }
-        .maker-hero-content {
-            transform: skewY(2deg);
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--concrete);
+            color: var(--steel);
+            font-family: 'Space Grotesk', sans-serif;
+            padding: 2vw;
+            /* Subtle texture overlay */
+            background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
         }
-        .product-card {
-            border: 4px solid #fff;
+
+        /* INDUSTRIAL HEADER */
+        header {
+            border: 4px solid var(--steel);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            background: #fff;
+        }
+
+        .location-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            background: var(--steel);
+            color: #fff;
+            padding: 5px 10px;
+            width: fit-content;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(5rem, 15vw, 12rem);
+            line-height: 0.8;
+            text-transform: uppercase;
+            letter-spacing: -4px;
+        }
+
+        /* THE WORK GRID (Factory Style) */
+        .work-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        .project-card {
+            grid-column: span 6;
+            border: 4px solid var(--steel);
+            background: #fff;
             padding: 20px;
-            background: #000;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 15px 15px 0px var(--hazard);
+        }
+
+        .project-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(1) sepia(0.2);
+            border: 2px solid var(--steel);
+            margin-bottom: 20px;
+        }
+
+        .project-card h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            border-bottom: 4px solid var(--steel);
+            margin-bottom: 15px;
+        }
+
+        .specs {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 20px;
+            color: var(--hazard);
+        }
+
+        /* STENCIL BUTTON */
+        .cta-stencil {
+            grid-column: span 12;
+            background: var(--steel);
+            color: #fff;
+            text-align: center;
+            padding: 60px;
+            text-decoration: none;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 4rem;
+            text-transform: uppercase;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .cta-stencil:hover {
+            background: var(--hazard);
+            color: var(--steel);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 800px) {
+            .project-card { grid-column: span 12; }
+            h1 { font-size: 5rem; letter-spacing: -1px; }
         }
     </style>
 </head>
-<body style="background: #111;">
-    <div class="back-nav" style="padding: 20px 10%;">
-        <a href="index.html" class="nav-link-simple">← Back to Dawlhaus</a>
-    </div>
+<body>
 
-    <header class="maker-hero">
-        <div class="maker-hero-content">
-            <h1 style="font-family: 'Bungee'; font-size: 5rem; line-height: 0.9; margin: 0;">SHOP THE DROP</h1>
-            <p style="font-family: 'Bungee';">Handmade. Detroit Made. Raw Art.</p>
-        </div>
+    <header>
+        <div class="location-tag">DETROIT_MI // AREA_CODE_313</div>
+        <h1>THE<br>MAKERS</h1>
+        <p style="max-width: 500px; font-weight: 700; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px;">
+            A collective of creators, welders, and digital architects forging the new industrial landscape.
+        </p>
     </header>
 
-    <section style="padding: 80px 10%;">
-        <div class="card-grid">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?auto=format&fit=crop&q=80&w=400" style="width: 100%;">
-                <h3 style="font-family: 'Bungee'; margin-top: 15px;">Graffiti Print #01</h3>
-                <p class="price" style="font-size: 1.5rem;">$45</p>
-                <button class="btn primary" style="width: 100%;">Add to Cart</button>
+    <main class="work-container">
+        <div class="project-card">
+            <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800');"></div>
+            <h2>Iron & Pixel</h2>
+            <p>Custom furniture fabrication blending reclaimed Detroit steel with interactive LED mapping.</p>
+            <div class="specs">
+                <span>LOT_NO: A-99</span>
+                <span>TYPE: FABRICATION</span>
             </div>
         </div>
-    </section>
+
+        <div class="project-card">
+            <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&q=80&w=800');"></div>
+            <h2>Foundry Ghost</h2>
+            <p>Sound sculpture recorded from the echoes of abandoned assembly lines. Physical vinyl release.</p>
+            <div class="specs">
+                <span>LOT_NO: B-12</span>
+                <span>TYPE: SONIC_ART</span>
+            </div>
+        </div>
+
+        <a href="#" class="cta-stencil">Start a Project</a>
+    </main>
+
+    <footer style="margin-top: 100px; padding: 40px; border: 4px solid var(--steel); background: #fff; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 10px;">
+        BUILT IN THE MOTOR CITY // DAWLHAUS DIGITAL © 2026
+    </footer>
+
 </body>
 </html>
