@@ -3,164 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE MAKERS // DETROIT</title>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <title>THE MAKERS | DETROIT ATELIER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=JetBrains+Mono:wght@400;800&display=swap" rel="stylesheet">
     <style>
-        /* 1. RESET & TEXTURE */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --detroit-pink: #ff0055;
+            --black: #000000;
+            --white: #ffffff;
+            --grey: #1a1a1a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
         
         body { 
-            background: #e0e0e0; /* Concrete Grey */
-            color: #1a1a1a;
+            background: var(--black); 
+            color: var(--white);
             font-family: 'JetBrains Mono', monospace;
-            padding: 20px;
-            /* Subtle concrete texture overlay */
-            background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+            overflow-x: hidden;
         }
 
-        /* 2. THE INDUSTRIAL FRAME */
-        .container {
-            border: 8px solid #1a1a1a; /* Thick Steel Beams */
-            min-height: 90vh;
-            padding: 40px;
-            background: #fdfdfd;
-            position: relative;
-        }
-
-        /* 3. DETROIT HEADER */
-        header {
-            margin-bottom: 60px;
-            border-bottom: 4px solid #1a1a1a;
-            padding-bottom: 20px;
-        }
-
-        h1 {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: clamp(5rem, 18vw, 15rem);
-            line-height: 0.8;
-            text-transform: uppercase;
-            letter-spacing: -5px;
-            color: #1a1a1a;
-        }
-
-        .hazard-tag {
-            background: #ff4d00; /* SAFETY ORANGE */
+        /* 1. KINETIC MARQUEE (The "Cool" Divider) */
+        .marquee {
+            background: var(--detroit-pink);
             color: white;
-            padding: 5px 15px;
-            display: inline-block;
-            font-weight: bold;
+            padding: 15px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            font-weight: 800;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            border-bottom: 5px solid white;
         }
 
-        /* 4. THE BLUEPRINT GRID */
-        .maker-grid {
+        .marquee-inner {
+            display: inline-block;
+            animation: scroll 15s linear infinite;
+        }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* 2. ASYMMETRIC ART ARCHIVE */
+        .archive-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 30px;
+            padding: 80px 5%;
         }
 
-        .product-card {
-            border: 3px solid #1a1a1a;
-            padding: 0;
-            transition: 0.3s;
+        .art-item {
             position: relative;
+            border: 4px solid var(--white);
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            background: var(--grey);
         }
 
-        .product-card:hover {
-            box-shadow: 12px 12px 0px #ff4d00; /* Bold Orange Shadow */
-            transform: translate(-4px, -4px);
+        .art-item:hover {
+            transform: scale(1.02) rotate(-1deg);
+            border-color: var(--detroit-pink);
+            box-shadow: 25px 25px 0px var(--detroit-pink);
         }
 
-        .img-box {
-            width: 100%;
-            aspect-ratio: 1/1;
-            background: #ddd;
-            border-bottom: 3px solid #1a1a1a;
+        /* Dynamic Sizes */
+        .large { grid-column: span 8; height: 600px; }
+        .small { grid-column: span 4; height: 400px; margin-top: 150px; }
+        .tall { grid-column: span 5; height: 700px; margin-top: -100px; }
+        .wide { grid-column: span 7; height: 500px; }
+
+        .img-fill {
+            width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
             filter: grayscale(1) contrast(1.2);
+            transition: 0.5s;
         }
 
-        .card-info {
+        .art-item:hover .img-fill { filter: grayscale(0); }
+
+        .blueprint-label {
+            position: absolute;
+            bottom: -15px;
+            left: 20px;
+            background: white;
+            color: black;
+            padding: 5px 15px;
+            font-weight: 800;
+            font-size: 12px;
+            z-index: 10;
+        }
+
+        /* 3. COMMISSION TERMINAL */
+        .commission-section {
+            background: white;
+            color: black;
+            padding: 100px 10%;
+            margin-top: 100px;
+        }
+
+        .commission-section h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(4rem, 10vw, 8rem);
+            line-height: 0.8;
+            margin-bottom: 40px;
+        }
+
+        .work-order-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            border-top: 10px solid black;
+            padding-top: 40px;
+        }
+
+        input, textarea {
+            width: 100%;
             padding: 20px;
+            border: 3px solid black;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            background: transparent;
         }
 
-        .card-info h2 {
+        button.submit-work {
+            grid-column: span 2;
+            background: var(--detroit-pink);
+            color: white;
+            border: none;
+            padding: 30px;
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 2rem;
-            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-        .price {
-            font-size: 1.5rem;
-            color: #ff4d00;
-            font-weight: bold;
+        button.submit-work:hover {
+            background: black;
+            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
         }
 
-        .btn-add {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background: #1a1a1a;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-top: 15px;
-            transition: 0.3s;
-        }
-
-        .btn-add:hover {
-            background: #ff4d00;
-        }
-
-        /* FOOTER SPECS */
-        footer {
-            margin-top: 80px;
-            font-size: 10px;
-            text-transform: uppercase;
-            color: #888;
-            display: flex;
-            justify-content: space-between;
+        @media (max-width: 900px) {
+            .archive-grid { display: flex; flex-direction: column; }
+            .art-item { height: 400px !important; margin: 0 !important; }
+            .work-order-form { grid-template-columns: 1fr; }
+            button.submit-work { grid-column: span 1; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <div class="hazard-tag">Facility: Dawlhaus_Detroit</div>
-            <h1>THE<br>MAKERS</h1>
-            <p style="margin-top: 10px; font-weight: bold;">[ BATCH_NO: 313-001 ] — CURATED ARTIFACTS AND RAW CREATIONS</p>
-        </header>
+    <div class="marquee">
+        <div class="marquee-inner">
+            • RAW DETROIT ART • COMMISSION A PIECE • BATCH_313 • ATELIER DATA • RAW DETROIT ART • COMMISSION A PIECE • BATCH_313 • ATELIER DATA • 
+        </div>
+    </div>
 
-        <div class="maker-grid">
-            <div class="product-card">
-                <div class="img-box" style="background-image: url('https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&q=80&w=800');"></div>
-                <div class="card-info">
-                    <h2>Industrial Lithograph</h2>
-                    <p class="price">$85.00</p>
-                    <a href="#" class="btn-add">Load to Cart</a>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="img-box" style="background-image: url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=800');"></div>
-                <div class="card-info">
-                    <h2>Foundry Sculpture</h2>
-                    <p class="price">$320.00</p>
-                    <a href="#" class="btn-add">Load to Cart</a>
-                </div>
-            </div>
+    <section class="archive-grid">
+        <div class="art-item large">
+            <div class="blueprint-label">ART_ID: 313_001 // LITHOGRAPH</div>
+            <div class="img-fill" style="background-image: url('https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&q=80&w=1200');"></div>
         </div>
 
-        <footer>
-            <span>Location: 42.3314° N, 83.0458° W</span>
-            <span>Est. 2026 // Dawlhaus Digital</span>
-        </footer>
-    </div>
+        <div class="art-item small">
+            <div class="blueprint-label">ART_ID: 313_002 // METAL_FORM</div>
+            <div class="img-fill" style="background-image: url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=800');"></div>
+        </div>
+
+        <div class="art-item tall">
+            <div class="blueprint-label">ART_ID: 313_003 // RAW_POUR</div>
+            <div class="img-fill" style="background-image: url('https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&q=80&w=1000');"></div>
+        </div>
+
+        <div class="art-item wide">
+            <div class="blueprint-label">ART_ID: 313_004 // KINETIC</div>
+            <div class="img-fill" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1000');"></div>
+        </div>
+    </section>
+
+    <section class="commission-section">
+        <h2>COMMISSION<br>A BUILD</h2>
+        <form class="work-order-form">
+            <input type="text" placeholder="NAME_OR_ENTITY">
+            <input type="email" placeholder="COMM_CHANNELS_EMAIL">
+            <textarea placeholder="DESCRIBE_THE_VISION" style="grid-column: span 2; height: 150px;"></textarea>
+            <button class="submit-work">INITIALIZE WORK ORDER</button>
+        </form>
+    </section>
+
+    <footer style="padding: 100px 5%; text-align: center; color: #444; font-size: 10px; letter-spacing: 5px;">
+        © 2026 DAWLHAUS DETROIT // ALL SYSTEMS OPERATIONAL
+    </footer>
 
 </body>
 </html>
