@@ -3,259 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE MAKERS // ATELIER 313 // DAWLHAUS PROOF OF CONCEPT</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+    <title>THE MAKERS // ATELIER 313</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-            --maker-pink: #ff0055;
-            --maker-red: #ff3b3b;
-            --maker-warm: #ffcc00; /* Amber light from the workshop */
-            --border: rgba(255, 255, 255, 0.05);
-        }
-
         body {
             background: #000;
             color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
             margin: 0;
-            line-height: 1.4;
+            overflow-x: hidden;
         }
 
-        /* Top Scrolling Marquee (image_1 top bar) */
+        /* The Ticker - Keeping it simple and bold */
         .marquee {
-            background: var(--maker-pink);
+            background: #ff0055;
             color: #fff;
-            padding: 10px 0;
-            white-space: nowrap;
-            overflow: hidden;
+            padding: 12px 0;
             font-family: 'Bungee', cursive;
-            font-size: 0.8rem;
             text-transform: uppercase;
             border-bottom: 2px solid #000;
+            overflow: hidden;
         }
 
-        .marquee-content {
-            display: inline-block;
-            animation: scroll 20s linear infinite;
-        }
-
-        @keyframes scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-
-        /* Hero: The Russell Workshop */
-        .makers-hero {
-            height: 70vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), 
-                        url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&q=80&w=1200'); /* Placeholder workshop, swap with image_3 if needed */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-left: 5%;
-            border-bottom: 4px solid var(--maker-pink);
-        }
-
-        .coord-label {
-            font-family: monospace;
-            color: var(--maker-pink);
-            font-size: 0.8rem;
-            letter-spacing: 5px;
-            margin-bottom: 15px;
-        }
-
-        .makers-hero h1 {
-            font-family: 'Bungee';
-            font-size: clamp(3rem, 10vw, 6rem);
-            margin: 0;
-            line-height: 0.9;
-            color: #fff;
-        }
-
-        /* Technical Log Section */
-        .log-section {
-            padding: 60px 5%;
-            background: rgba(0,0,0,0.3);
-        }
-
-        .archive-header {
-            color: var(--maker-red);
-            font-family: monospace;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-        }
-
-        .build-card {
-            background: #111;
-            border: 1px solid var(--border);
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-        }
-
-        .technical-spec {
-            font-family: monospace;
-            font-size: 0.8rem;
-            color: #aaa;
-            border-left: 2px solid #222;
-            padding-left: 15px;
-        }
-
-        .technical-spec h4 {
-            color: #fff;
-            margin-bottom: 5px;
-        }
-
-        /* Archive Grid (Matches image_1) */
+        /* THE FIX: Gritty Image Treatment */
         .archive-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 10px;
+            padding: 20px;
         }
 
         .archive-item {
             position: relative;
-            filter: grayscale(1);
+            background: #111;
+            border: 1px solid #222;
+            overflow: hidden;
+            /* This makes them feel like the screenshot - heavy and dark */
+            filter: grayscale(1) contrast(1.5) brightness(0.8);
             transition: 0.3s ease;
-            cursor: pointer;
-            border: 1px solid #111;
         }
 
         .archive-item:hover {
-            filter: grayscale(0);
-            border-color: var(--maker-pink);
-            box-shadow: 0 0 15px rgba(255, 0, 85, 0.2);
+            filter: grayscale(0) contrast(1) brightness(1);
+            border-color: #ff0055;
         }
 
         .archive-item img {
             width: 100%;
+            height: 300px;
+            object-fit: cover;
             display: block;
         }
 
-        .archive-label {
+        .label {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
+            bottom: 0;
+            left: 0;
+            background: #000;
+            color: #fff;
             font-family: monospace;
+            padding: 5px 10px;
             font-size: 0.7rem;
-            background: rgba(0,0,0,0.7);
-            padding: 2px 5px;
-            text-transform: uppercase;
         }
 
-        /* Status Indicator (image_1 centerpiece) */
-        .unit-status {
+        .unit-active {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin: 50px 0;
+            gap: 15px;
+            padding: 60px 0;
         }
 
-        .status-light {
-            width: 25px;
-            height: 25px;
+        .dot {
+            width: 15px;
+            height: 15px;
+            background: #ff0055;
             border-radius: 50%;
-            background: var(--maker-pink);
-            box-shadow: 0 0 15px rgba(255, 0, 85, 0.5);
+            box-shadow: 0 0 15px #ff0055;
         }
 
-        .status-badge {
+        .status-text {
             background: #fff;
             color: #000;
             font-family: monospace;
             font-weight: bold;
-            padding: 5px 12px;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-        }
-
-        .back-nav {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
+            padding: 4px 8px;
         }
     </style>
 </head>
 <body>
-    <div class="noise-overlay"></div>
-    
-    <div class="back-nav">
-        <a href="index.html" class="nav-btn" style="font-size: 0.7rem; padding: 8px 15px;">← Return to Dawlhaus</a>
-    </div>
 
     <div class="marquee">
-        <div class="marquee-content">
-            RAW BUILDS • COMMISSION A PIECE • CONSIGNMENT OPEN • 313 MADE • DETROIT ATELIER • RAW BUILDS • COMMISSION A PIECE • CONSIGNMENT OPEN • 313 MADE • DETROIT ATELIER • RAW BUILDS • COMMISSION A PIECE • CONSIGNMENT OPEN • 313 MADE •
+        <div style="display: flex; gap: 50px;">
+            <span>COMMISSION A PIECE • CONSIGNMENT OPEN • 313 MADE • DETROIT ATELIER • RAW BUILDS • </span>
+            <span>COMMISSION A PIECE • CONSIGNMENT OPEN • 313 MADE • DETROIT ATELIER • RAW BUILDS • </span>
         </div>
     </div>
 
-    <header class="makers-hero">
-        <div class="coord-label">42.3744° N, 83.0645° W // RUSSELL IND.</div>
-        <h1>ATELIER<br>313</h1>
-    </header>
+    <div style="color: #ff3b3b; font-family: monospace; padding: 40px 20px 10px;">// ARCHIVE_FEED_PAST_EVENTS</div>
 
-    <section class="log-section">
-        <div class="archive-header">// TECHNICAL_LOG // CURRENT BUILD</div>
-
-        <div class="build-card glass">
-            <div>
-                <div style="font-family: monospace; opacity: 0.6; font-size: 0.8rem; margin-bottom: 10px;">
-                    ID: 313_VES_04 | ACTIVE COMMISSION
-                </div>
-                <h2 style="font-family: 'Bungee'; font-size: 2.8rem; margin: 10px 0; line-height: 1;">INDUSTRIAL VESSEL</h2>
-                <div class="technical-spec">
-                    <h4>Materials</h4>
-                    <p>Heavy Metal Cast, Steel Sub-frame, Vintage Riser ( image_2 ).</p>
-                    <h4>Scope</h4>
-                    <p>Web log & Technical Spec Sheet for physical commission piece.</p>
-                </div>
-                <div class="cta-group" style="margin-top: 30px;">
-                    <a href="#commission" class="btn primary" style="background: white; color: black; border: none;">View Full Spec Sheet</a>
-                </div>
-            </div>
-            
-            <div class="archive-item" style="border: 2px solid var(--maker-warm);">
-                <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=400" alt="Vessel Image">
-                <div class="archive-label">UNIT_313_VES_04</div>
-            </div>
+    <div class="archive-grid">
+        <div class="archive-item">
+            <img src="image_cfce6b.jpg" alt="The Russell">
+            <div class="label">RUSSELL_IND_2026</div>
         </div>
-
-        <div class="unit-status">
-            <div class="status-light"></div>
-            <div class="status-badge">UNIT_313_ACTIVE</div>
+        <div class="archive-item">
+            <img src="iron_works.jpg" alt="Work" onerror="this.src='https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=600'">
+            <div class="label">UNIT_313_CORE</div>
         </div>
-
-        <div class="archive-header">// ARCHIVE_FEED_PAST_EVENTS</div>
-        <div class="archive-grid">
-            <div class="archive-item">
-                <img src="https://images.unsplash.com/photo-1514467958504-2455b9d32551?auto=format&fit=crop&q=80&w=400" alt="">
-                <div class="archive-label">RUSSELL_IND_2025</div>
-            </div>
-            <div class="archive-item">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=400" alt="">
-                <div class="archive-label">EASTERN_MKT_FALL</div>
-            </div>
-            <div class="archive-item">
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=400" alt="">
-                <div class="archive-label">CASS_CORR_COLLECTIVE</div>
-            </div>
-            <div class="archive-item">
-                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=400" alt="">
-                <div class="archive-label">IRON_WORKS_EXPO</div>
-            </div>
+        <div class="archive-item">
+            <img src="vessel.jpg" alt="Vessel" onerror="this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=600'">
+            <div class="label">CASS_CORR_PROX</div>
         </div>
-    </section>
+    </div>
 
-    <footer style="padding: 40px; text-align: center; border-top: 1px solid var(--border); font-size: 0.7rem; opacity: 0.5; letter-spacing: 2px;">
-        <p>ATELIER 313 // MAKERS • CREATORS • PEOPLE // DAWLHAUS PROOF OF CONCEPT</p>
-    </footer>
+    <div class="unit-active">
+        <div class="dot"></div>
+        <div class="status-text">UNIT_313_ACTIVE</div>
+    </div>
+
+    <div style="margin: 0 20px; border: 1px solid #222; padding: 40px; background: #0a0a0a; display: flex; gap: 40px; align-items: center;">
+        <img src="image_cfce6b.jpg" style="width: 200px; filter: grayscale(1) contrast(1.2);">
+        <div>
+            <div style="font-family: monospace; opacity: 0.5; margin-bottom: 10px;">ID: 313_VES_04 | $165.00</div>
+            <h2 style="font-family: 'Bungee'; font-size: 3rem; margin: 0;">INDUSTRIAL VESSEL</h2>
+        </div>
+    </div>
 
 </body>
 </html>
