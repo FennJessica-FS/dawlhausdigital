@@ -3,196 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE MAKERS | DETROIT ATELIER</title>
+    <title>THE MAKERS // ATELIER 313</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=JetBrains+Mono:wght@400;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --detroit-pink: #ff0055;
-            --black: #000000;
+            --black: #050505;
             --white: #ffffff;
-            --grey: #1a1a1a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
-        
-        body { 
-            background: var(--black); 
-            color: var(--white);
-            font-family: 'JetBrains Mono', monospace;
-            overflow-x: hidden;
+        body { background: var(--black); color: var(--white); font-family: 'JetBrains Mono', monospace; overflow-x: hidden; }
+
+        /* 1. THE GLITCH ANIMATION */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-5px, 5px); }
+            40% { transform: translate(-5px, -5px); }
+            60% { transform: translate(5px, 5px); }
+            80% { transform: translate(5px, -5px); }
+            100% { transform: translate(0); }
         }
 
-        /* 1. KINETIC MARQUEE (The "Cool" Divider) */
-        .marquee {
-            background: var(--detroit-pink);
-            color: white;
-            padding: 15px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-bottom: 5px solid white;
+        /* 2. PAST SHOWS TICKER */
+        .archive-label { padding: 40px 5% 10px; font-size: 10px; letter-spacing: 5px; color: var(--detroit-pink); }
+        .shows-ticker {
+            display: flex;
+            overflow-x: auto;
+            padding: 0 5% 60px;
+            gap: 20px;
+            scrollbar-width: none;
         }
-
-        .marquee-inner {
-            display: inline-block;
-            animation: scroll 15s linear infinite;
-        }
-
-        @keyframes scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-
-        /* 2. ASYMMETRIC ART ARCHIVE */
-        .archive-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 30px;
-            padding: 80px 5%;
-        }
-
-        .art-item {
-            position: relative;
+        .poster {
+            min-width: 280px;
+            height: 380px;
             border: 4px solid var(--white);
-            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            background: var(--grey);
-        }
-
-        .art-item:hover {
-            transform: scale(1.02) rotate(-1deg);
-            border-color: var(--detroit-pink);
-            box-shadow: 25px 25px 0px var(--detroit-pink);
-        }
-
-        /* Dynamic Sizes */
-        .large { grid-column: span 8; height: 600px; }
-        .small { grid-column: span 4; height: 400px; margin-top: 150px; }
-        .tall { grid-column: span 5; height: 700px; margin-top: -100px; }
-        .wide { grid-column: span 7; height: 500px; }
-
-        .img-fill {
-            width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            filter: grayscale(1) contrast(1.2);
-            transition: 0.5s;
+            filter: grayscale(1) brightness(0.7);
+            transition: 0.3s;
+            display: flex;
+            align-items: flex-end;
+            padding: 15px;
         }
-
-        .art-item:hover .img-fill { filter: grayscale(0); }
-
-        .blueprint-label {
-            position: absolute;
-            bottom: -15px;
-            left: 20px;
-            background: white;
-            color: black;
-            padding: 5px 15px;
-            font-weight: 800;
-            font-size: 12px;
-            z-index: 10;
+        .poster:hover { 
+            filter: grayscale(0) brightness(1); 
+            border-color: var(--detroit-pink);
+            animation: glitch 0.2s infinite; /* THE GLITCH EFFECT */
         }
+        .poster span { background: var(--white); color: #000; font-weight: 800; padding: 5px; font-size: 10px; }
 
-        /* 3. COMMISSION TERMINAL */
-        .commission-section {
-            background: white;
-            color: black;
-            padding: 100px 10%;
-            margin-top: 100px;
-        }
-
-        .commission-section h2 {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: clamp(4rem, 10vw, 8rem);
-            line-height: 0.8;
-            margin-bottom: 40px;
-        }
-
-        .work-order-form {
+        /* 3. ASYMMETRIC ART GALLERY */
+        .gallery {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            border-top: 10px solid black;
-            padding-top: 40px;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 40px;
+            padding: 80px 5%;
+            border-top: 1px solid #222;
         }
-
-        input, textarea {
-            width: 100%;
+        .piece {
+            grid-column: span 6;
+            background: #000;
+            border: 2px solid #222;
             padding: 20px;
-            border: 3px solid black;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
-            background: transparent;
+            transition: 0.4s;
         }
+        .piece:nth-child(even) { margin-top: 120px; }
+        .piece:hover { border-color: var(--detroit-pink); box-shadow: 20px 20px 0px var(--detroit-pink); }
+        
+        .piece img { width: 100%; filter: grayscale(1); transition: 0.4s; }
+        .piece:hover img { filter: grayscale(0); }
 
-        button.submit-work {
-            grid-column: span 2;
+        .piece-data { display: flex; justify-content: space-between; margin-top: 15px; font-size: 12px; }
+
+        /* 4. THE COMMISSION TERMINAL BUTTON */
+        .commission-hero {
             background: var(--detroit-pink);
-            color: white;
-            border: none;
-            padding: 30px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 2rem;
-            cursor: pointer;
+            padding: 120px 5%;
+            text-align: center;
+            clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%);
+            margin: 100px 0;
+        }
+        .btn-work-order {
+            background: var(--white);
+            color: var(--black);
+            padding: 30px 60px;
+            font-family: 'Barlow Condensed';
+            font-size: clamp(2rem, 8vw, 5rem);
+            text-decoration: none;
+            display: inline-block;
+            border: 8px solid var(--black);
             transition: 0.2s;
         }
-
-        button.submit-work:hover {
-            background: black;
-            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+        .btn-work-order:hover {
+            transform: scale(1.1) rotate(-2deg);
+            background: var(--black);
+            color: var(--white);
         }
 
-        @media (max-width: 900px) {
-            .archive-grid { display: flex; flex-direction: column; }
-            .art-item { height: 400px !important; margin: 0 !important; }
-            .work-order-form { grid-template-columns: 1fr; }
-            button.submit-work { grid-column: span 1; }
+        /* 5. THE FORM */
+        .form-container { max-width: 900px; margin: 0 auto 150px; padding: 0 5%; }
+        .input-row { border-bottom: 2px solid #333; margin-bottom: 30px; display: flex; align-items: center; }
+        .input-row label { font-size: 10px; color: var(--detroit-pink); width: 150px; }
+        input, textarea { 
+            background: transparent; border: none; color: white; width: 100%; 
+            padding: 15px; font-family: 'JetBrains Mono'; outline: none; font-size: 1.2rem;
         }
+
     </style>
 </head>
 <body>
 
-    <div class="marquee">
-        <div class="marquee-inner">
-            • RAW DETROIT ART • COMMISSION A PIECE • BATCH_313 • ATELIER DATA • RAW DETROIT ART • COMMISSION A PIECE • BATCH_313 • ATELIER DATA • 
+    <p class="archive-label">// SHOW_ARCHIVE_AUTO_FEED</p>
+    <div class="shows-ticker">
+        <div class="poster" style="background-image: url('https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&q=80&w=600');">
+            <span>SHOW_01: RUSSELL INDUSTRIAL</span>
+        </div>
+        <div class="poster" style="background-image: url('https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&q=80&w=600');">
+            <span>SHOW_02: EASTERN MARKET</span>
+        </div>
+        <div class="poster" style="background-image: url('https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&q=80&w=600');">
+            <span>SHOW_03: CASS CORRIDOR</span>
+        </div>
+        <div class="poster" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600');">
+            <span>SHOW_04: BLUEPRINT GALLERY</span>
         </div>
     </div>
 
-    <section class="archive-grid">
-        <div class="art-item large">
-            <div class="blueprint-label">ART_ID: 313_001 // LITHOGRAPH</div>
-            <div class="img-fill" style="background-image: url('https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&q=80&w=1200');"></div>
+    <div class="gallery">
+        <div class="piece">
+            <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&q=80&w=800">
+            <div class="piece-data"><span>REF: DET-001</span><span>$450.00</span></div>
+            <h2 style="font-family:'Barlow Condensed'; font-size: 2.5rem; margin-top: 10px;">MOLTEN STEEL #01</h2>
         </div>
+        <div class="piece">
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=800">
+            <div class="piece-data"><span>REF: DET-004</span><span>$120.00</span></div>
+            <h2 style="font-family:'Barlow Condensed'; font-size: 2.5rem; margin-top: 10px;">CYBERNETIC PRINT</h2>
+        </div>
+    </div>
 
-        <div class="art-item small">
-            <div class="blueprint-label">ART_ID: 313_002 // METAL_FORM</div>
-            <div class="img-fill" style="background-image: url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=800');"></div>
-        </div>
-
-        <div class="art-item tall">
-            <div class="blueprint-label">ART_ID: 313_003 // RAW_POUR</div>
-            <div class="img-fill" style="background-image: url('https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&q=80&w=1000');"></div>
-        </div>
-
-        <div class="art-item wide">
-            <div class="blueprint-label">ART_ID: 313_004 // KINETIC</div>
-            <div class="img-fill" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1000');"></div>
-        </div>
+    <section class="commission-hero">
+        <a href="#terminal" class="btn-work-order">COMMISSION A BUILD</a>
     </section>
 
-    <section class="commission-section">
-        <h2>COMMISSION<br>A BUILD</h2>
-        <form class="work-order-form">
-            <input type="text" placeholder="NAME_OR_ENTITY">
-            <input type="email" placeholder="COMM_CHANNELS_EMAIL">
-            <textarea placeholder="DESCRIBE_THE_VISION" style="grid-column: span 2; height: 150px;"></textarea>
-            <button class="submit-work">INITIALIZE WORK ORDER</button>
-        </form>
-    </section>
-
-    <footer style="padding: 100px 5%; text-align: center; color: #444; font-size: 10px; letter-spacing: 5px;">
-        © 2026 DAWLHAUS DETROIT // ALL SYSTEMS OPERATIONAL
-    </footer>
+    <div class="form-container" id="terminal">
+        <div class="input-row"><label>CLIENT_ID</label><input type="text" placeholder="NAME / ENTITY"></div>
+        <div class="input-row"><label>SIGNAL_PATH</label><input type="email" placeholder="EMAIL_ADDRESS"></div>
+        <div class="input-row" style="align-items: flex-start;"><label>BUILD_SPECS</label><textarea rows="5" placeholder="VISION / DIMENSIONS / MATERIALS"></textarea></div>
+        <button style="width: 100%; padding: 30px; background: var(--white); color: black; font-weight: 800; border: none; cursor: pointer; text-transform: uppercase;">Initialize Work Order</button>
+    </div>
 
 </body>
 </html>
