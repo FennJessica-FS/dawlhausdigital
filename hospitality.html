@@ -7,41 +7,43 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=IBM+Plex+Mono:wght@400;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     
     <style>
         :root {
-            --detroit-amber: #ffaa00;
-            --steel-gray: #1a1a1a;
+            --detroit-gold: #D4AF37; /* Metallic Gold */
+            --industrial-black: #0a0a0a;
             --font-mono: 'IBM Plex Mono', monospace;
         }
 
         body {
-            background-color: #050505;
+            background-color: var(--industrial-black);
+            background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png"); /* Raw Texture */
             color: #fff;
             margin: 0;
             font-family: var(--font-mono);
-            letter-spacing: -0.5px;
+            overflow-x: hidden;
         }
 
-        /* HIGH-END STATUS BAR */
-        .system-status {
+        /* THE STATUS STRIP */
+        .status-strip {
+            background: var(--detroit-gold);
+            color: #000;
             font-family: var(--font-mono);
             font-size: 0.65rem;
-            color: var(--detroit-amber);
-            border: 1px solid rgba(255, 170, 0, 0.3);
-            padding: 5px 15px;
-            display: inline-block;
-            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+            padding: 8px 0;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            background: rgba(255, 170, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 2000;
         }
 
-        /* THE HERO: INDUSTRIAL LUXE */
+        /* HERO: THE ARCHITECTURAL LOOK */
         .hospitality-hero {
-            height: 90vh;
-            background: linear-gradient(rgba(0,0,0,0.4), #050505), 
+            height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.3), var(--industrial-black)), 
                         url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&q=80&w=1600');
             background-size: cover;
             background-position: center;
@@ -49,157 +51,175 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            border-bottom: 1px solid #222;
+            border-bottom: 10px solid #1a1a1a;
         }
 
         .hero-title {
             font-family: 'Bungee', cursive;
-            font-size: clamp(4rem, 12vw, 8rem);
-            line-height: 0.85;
+            font-size: clamp(5rem, 15vw, 10rem); /* MASSIVE TYPE */
+            line-height: 0.8;
             margin: 0;
-            text-shadow: 0 0 30px rgba(255, 170, 0, 0.2);
+            letter-spacing: -2px;
+            color: #fff;
         }
 
-        .hero-subtitle {
+        .hero-title span {
+            color: var(--detroit-gold);
+            display: block;
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+        }
+
+        .hero-tagline {
             font-family: 'Syncopate', sans-serif;
             font-size: 0.75rem;
-            letter-spacing: 8px;
-            color: var(--detroit-amber);
-            margin-top: 15px;
+            letter-spacing: 12px;
+            margin-top: 20px;
             text-transform: uppercase;
+            opacity: 0.8;
         }
 
-        /* THE MENU: CLEAN & DURABLE */
-        .menu-grid {
+        /* THE MENU: POS SYSTEM STYLE */
+        .menu-container {
             padding: 100px 10%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 80px;
         }
 
-        .category-title {
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .menu-category-header {
             grid-column: 1 / -1;
             font-family: 'Bungee', cursive;
-            font-size: 2rem;
-            border-bottom: 4px solid var(--detroit-amber);
+            font-size: 2.5rem;
+            color: var(--detroit-gold);
+            border-bottom: 2px solid #333;
             padding-bottom: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
 
         .menu-item {
-            position: relative;
-            padding-bottom: 20px;
+            border: 1px solid #222;
+            padding: 30px;
+            background: rgba(255,255,255,0.02);
+            transition: 0.3s;
+        }
+
+        .menu-item:hover {
+            border-color: var(--detroit-gold);
+            background: rgba(212, 175, 55, 0.05);
         }
 
         .item-header {
             display: flex;
             justify-content: space-between;
-            font-family: var(--font-mono);
-            font-weight: 700;
-            font-size: 1.1rem;
-            border-bottom: 1px solid #222;
-            padding-bottom: 5px;
+            font-family: 'Bungee', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
         }
 
-        .item-price {
-            color: var(--detroit-amber);
-        }
+        .item-price { color: var(--detroit-gold); }
 
         .item-desc {
+            font-family: var(--font-mono);
             font-size: 0.85rem;
             color: #888;
-            margin-top: 10px;
             line-height: 1.6;
             text-transform: uppercase;
         }
 
-        /* THE "86" SLAP */
+        /* ELEGANT 86 LIST */
         .item-86 {
-            opacity: 0.2;
+            opacity: 0.25;
+            filter: grayscale(1);
+            position: relative;
         }
-        
-        .item-86::before {
+
+        .item-86::after {
             content: "SOLD OUT // 86";
             position: absolute;
             top: 20px;
-            left: -10px;
-            background: var(--detroit-amber);
-            color: #000;
-            padding: 2px 10px;
+            right: 20px;
+            background: #ff0000;
+            color: #fff;
+            padding: 4px 10px;
+            font-size: 0.6rem;
             font-weight: 700;
-            font-size: 0.7rem;
-            transform: rotate(-2deg);
         }
 
         .back-nav {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            z-index: 1000;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            z-index: 3000;
         }
-        
+
         .back-nav a {
             text-decoration: none;
             color: #fff;
-            font-size: 0.7rem;
-            font-weight: 700;
-            border: 1px solid #333;
+            border: 1px solid #fff;
             padding: 10px 20px;
-            background: #000;
+            font-size: 0.7rem;
+            font-family: 'Syncopate', sans-serif;
             transition: 0.3s;
         }
 
         .back-nav a:hover {
-            background: var(--detroit-amber);
+            background: #fff;
             color: #000;
-            border-color: var(--detroit-amber);
         }
     </style>
 </head>
 <body>
 
+    <div class="status-strip">
+        SYSTEM_ACTIVE // LIVE_RESTAURANT_SYNC_V1.0 // DETROIT_313
+    </div>
+
     <div class="back-nav">
-        <a href="index.html">← DAWLHAUS STUDIO</a>
+        <a href="index.html">← RETURN TO STUDIO</a>
     </div>
 
     <header class="hospitality-hero">
         <div class="hero-content">
-            <div class="system-status">LIVE_SYNC // SATURDAY_NIGHT</div>
-            <h1 class="hero-title">313<br/><span style="color: var(--detroit-amber)">SYNC</span></h1>
-            <p class="hero-subtitle">High-Performance Hospitality</p>
+            <h1 class="hero-title">313 <span>SYNC</span></h1>
+            <p class="hero-tagline">Provisions & Operations</p>
         </div>
     </header>
 
-    <main class="menu-grid">
-        <h2 class="category-title">Provisions</h2>
-        
-        <div class="menu-item">
-            <div class="item-header">
-                <span>The Signature Burger</span>
-                <span class="item-price">22.00</span>
+    <main class="menu-container">
+        <div class="menu-grid">
+            <h2 class="menu-category-header">House Provisions</h2>
+            
+            <div class="menu-item">
+                <div class="item-header">
+                    <span>Dawl Burger</span>
+                    <span class="item-price">22.</span>
+                </div>
+                <p class="item-desc">Wagyu beef / double-aged cheddar / burnt onion / brioche.</p>
             </div>
-            <p class="item-desc">Dry-aged wagyu / reserve cheddar / truffle aioli / brioche.</p>
-        </div>
 
-        <div class="menu-item item-86">
-            <div class="item-header">
-                <span>Dry-Aged Ribeye</span>
-                <span class="item-price">64.00</span>
+            <div class="menu-item item-86">
+                <div class="item-header">
+                    <span>Bone-In Ribeye</span>
+                    <span class="item-price">85.</span>
+                </div>
+                <p class="item-desc">32oz / dry-aged 45 days / marrow butter / smoked salt.</p>
             </div>
-            <p class="item-desc">24oz bone-in / black garlic / smoked sea salt.</p>
-        </div>
 
-        <div class="menu-item">
-            <div class="item-header">
-                <span>Short Rib Poutine</span>
-                <span class="item-price">18.00</span>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span>Short Rib Poutine</span>
+                    <span class="item-price">19.</span>
+                </div>
+                <p class="item-desc">Hand-cut fries / local curds / 12-hour braised beef.</p>
             </div>
-            <p class="item-desc">Hand-cut frites / local curds / 12-hr braise.</p>
         </div>
     </main>
 
-    <footer style="padding: 60px; text-align: center; border-top: 1px solid #111;">
-        <p style="font-size: 0.6rem; letter-spacing: 5px; opacity: 0.4;">DAWLHAUS DIGITAL // SERVICE OVER EVERYTHING</p>
+    <footer style="padding: 100px; text-align: center; border-top: 1px solid #222; opacity: 0.3;">
+        <p style="font-family: 'Syncopate', sans-serif; font-size: 0.7rem; letter-spacing: 5px;">DAWLHAUS DIGITAL // SERVICE • HONOR • CODE</p>
     </footer>
 
 </body>
