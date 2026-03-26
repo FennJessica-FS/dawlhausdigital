@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PULSE TECH FEST | Toledo 2026</title>
+    <title>PULSE TECHNO FESTIVAL | Toledo 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=IBM+Plex+Mono:wght@400;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -28,7 +28,51 @@
         #cursor.active { width: 80px; height: 80px; background: rgba(255, 255, 255, 0.1); }
 
         html { scroll-behavior: smooth; }
-        body { background-color: var(--deep-void); color: #fff; margin: 0; font-family: var(--font-mono); overflow-x: hidden; }
+        body { 
+            background-color: var(--deep-void); 
+            color: #fff; 
+            margin: 0; 
+            font-family: var(--font-mono); 
+            overflow-x: hidden; 
+        }
+
+        /* SIDE NAVIGATION */
+        .side-nav {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 5000;
+        }
+
+        .nav-btn {
+            font-family: 'Bungee';
+            font-size: 0.9rem;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0,0,0,0.8);
+            transition: 0.3s;
+            text-align: center;
+            width: 140px;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--acid-green);
+            color: var(--acid-green);
+            transform: translateX(10px);
+            box-shadow: -5px 0 15px var(--acid-green);
+        }
+
+        .nav-btn.buy-tickets {
+            border-color: var(--acid-green);
+            background: var(--acid-green);
+            color: #000;
+        }
 
         /* GRID BACKGROUND */
         #grid-bg {
@@ -42,32 +86,10 @@
         }
         .bass-flash { background-color: rgba(188, 0, 255, 0.2) !important; }
 
-        /* BIG BUTTONS */
-        .btn-neon {
-            font-family: 'Bungee';
-            padding: 25px 45px;
-            text-decoration: none;
-            text-transform: uppercase;
-            border: 3px solid var(--acid-green);
-            color: var(--acid-green);
-            background: rgba(0,0,0,0.9);
-            font-size: 1.5rem;
-            display: inline-block;
-            transition: 0.3s;
-        }
-        .btn-neon:hover { background: var(--acid-green); color: #000; box-shadow: 0 0 30px var(--acid-green); }
+        section { padding: 120px 10% 120px 200px; border-bottom: 1px solid #222; position: relative; z-index: 3; }
 
-        .tactical-link {
-            font-size: 1.2rem !important;
-            border-color: var(--electric-purple) !important;
-            color: #fff !important;
-            margin: 10px;
-        }
-
-        /* HEADINGS */
-        h2 { font-family: var(--font-techno); font-size: 2.5rem; color: var(--acid-green); margin-bottom: 30px; }
-        
-        section { padding: 120px 10%; border-bottom: 1px solid #222; position: relative; z-index: 3; }
+        h1 { font-family: var(--font-techno); font-size: clamp(3rem, 10vw, 7rem); margin: 0; line-height: 0.85; }
+        h2 { font-family: var(--font-techno); font-size: 3rem; color: var(--acid-green); margin-bottom: 40px; }
 
         .hero-player {
             width: 100%; max-width: 800px;
@@ -76,10 +98,9 @@
             margin: 40px 0;
         }
 
-        /* LINEUP LIST */
         .lineup-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; width: 100%; }
-        .artist-card { border: 1px solid #333; padding: 40px; background: rgba(255,255,255,0.02); font-family: 'Bungee'; font-size: 2rem; }
-        .artist-card:hover { color: var(--acid-green); border-color: var(--acid-green); }
+        .card { border: 1px solid #333; padding: 50px; background: rgba(255,255,255,0.02); font-family: 'Bungee'; font-size: 2rem; transition: 0.3s; }
+        .card:hover { color: var(--acid-green); border-color: var(--acid-green); background: rgba(204, 255, 0, 0.05); }
 
         #countdown span { font-size: 5rem; color: var(--acid-green); font-weight: bold; }
     </style>
@@ -89,77 +110,85 @@
     <div id="grid-bg"></div>
     <div id="cursor"></div>
 
-    <section style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-        <h1 style="font-family: var(--font-techno); font-size: 6rem; margin: 0;">PULSE</h1>
+    <nav class="side-nav">
+        <a href="javascript:void(0)" onclick="generatePass()" class="nav-btn buy-tickets">TICKETS</a>
+        <a href="#lineup" class="nav-btn">LINEUP</a>
+        <a href="#map" class="nav-btn">MAP</a>
+        <a href="#vendors" class="nav-btn">VENDORS</a>
+        <a href="#rules" class="nav-btn">RULES</a>
+    </nav>
+
+    <section id="hero" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; text-align: left;">
+        <p style="color: var(--electric-purple); font-weight: bold; letter-spacing: 10px; margin-bottom: 10px;">EST. 2026 // TOLEDO, OH</p>
+        <h1>PULSE<br>TECHNO<br>FESTIVAL</h1>
         
         <div class="hero-player">
-            <p style="font-size: 1rem; color: var(--acid-green); letter-spacing: 5px; margin-bottom: 15px;">LIVE_STREAM // SUBDERMAL_SOUND</p>
             <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
                 src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1967063683&color=%23bc00ff&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
             </iframe>
         </div>
 
         <div id="countdown">
-            <span id="days">00</span><label style="font-size: 1rem;">DAYS</label>
-            <span id="hours">00</span><label style="font-size: 1rem;">HRS</label>
+            <span id="days">00</span><label style="font-size: 1.2rem;"> DAYS </label>
+            <span id="hours">00</span><label style="font-size: 1.2rem;"> HOURS </label>
         </div>
 
-        <div style="margin-top: 50px;">
-            <a href="javascript:void(0)" onclick="generatePass()" class="btn-neon">[ GET YOUR TICKETS NOW ]</a>
-            <p id="status-msg" style="font-size: 1.2rem; margin-top: 20px; color: var(--electric-purple); font-weight: bold;"></p>
-        </div>
-
-        <div style="margin-top: 30px;">
-            <a href="#lineup" class="btn-neon tactical-link">[ THE LINEUP ]</a>
-            <a href="#vendors" class="btn-neon tactical-link">[ FOOD & DRINK ]</a>
+        <div style="margin-top: 40px;">
+            <p id="status-msg" style="font-size: 1.2rem; color: var(--electric-purple); font-weight: bold; height: 30px;"></p>
         </div>
     </section>
 
     <section id="lineup">
-        <h2>FEATURED DJS</h2>
+        <h2>THE LINEUP</h2>
         <div class="lineup-grid">
-            <div class="artist-card">SUB_ZERO</div>
-            <div class="artist-card">NEON_SOUL</div>
-            <div class="artist-card">TOLEDO_BASS</div>
-            <div class="artist-card">CYBER_KINETIC</div>
+            <div class="card">SUB_ZERO</div>
+            <div class="card">NEON_SOUL</div>
+            <div class="card">TOLEDO_BASS</div>
+            <div class="card">CYBER_KINETIC</div>
+        </div>
+    </section>
+
+    <section id="map">
+        <h2>SITE MAP</h2>
+        <div class="card" style="font-size: 1.2rem; font-family: var(--font-mono); line-height: 2;">
+            <span style="color: var(--acid-green);">[ MAIN STAGE ]</span> GLASS CITY ARENA - NORTH WING<br>
+            <span style="color: var(--acid-green);">[ FOOD COURT ]</span> THE FUEL STATION - SOUTH PLAZA<br>
+            <span style="color: var(--acid-green);">[ WATER ]</span> SYNC STATION - ALL SECTORS<br>
+            <span style="color: var(--acid-green);">[ VIP ]</span> NEON LOUNGE - OVERLOOK DECK
         </div>
     </section>
 
     <section id="vendors">
-        <h2>FESTIVAL FOOD STATIONS</h2>
+        <h2>FOOD & DRINK</h2>
         <div class="lineup-grid">
-            <div class="artist-card" style="font-size: 1.5rem;">RUDY'S HOT DOGS</div>
-            <div class="artist-card" style="font-size: 1.5rem;">BALANCE ASIAN FUSION</div>
-            <div class="artist-card" style="font-size: 1.5rem;">FRICKER'S CHICKEN</div>
-            <div class="artist-card" style="font-size: 1.5rem;">BREW_CO DRINK LAB</div>
+            <div class="card" style="font-size: 1.5rem;">RUDY'S HOT DOGS</div>
+            <div class="artist-card card" style="font-size: 1.5rem;">BALANCE ASIAN FUSION</div>
+            <div class="card" style="font-size: 1.5rem;">FRICKER'S</div>
+            <div class="card" style="font-size: 1.5rem;">BREW_CO DRINK LAB</div>
         </div>
     </section>
 
     <section id="rules">
         <h2>FESTIVAL RULES</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
-            <div style="border: 2px solid var(--acid-green); padding: 40px; font-size: 1.2rem;">
-                <h3 style="color: var(--acid-green);">WHAT TO BRING</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+            <div style="border: 2px solid var(--acid-green); padding: 40px; font-size: 1.4rem;">
+                <h3 style="color: var(--acid-green); font-family: 'Bungee';">YES</h3>
                 <ul style="list-style: square;">
-                    <li>Clear bags only</li>
-                    <li>Factory sealed water</li>
-                    <li>Good energy</li>
+                    <li>Clear bags</li>
+                    <li>Sealed water</li>
+                    <li>Ear protection</li>
                 </ul>
             </div>
-            <div style="border: 2px solid #ff0055; padding: 40px; font-size: 1.2rem;">
-                <h3 style="color: #ff0055;">PROHIBITED</h3>
+            <div style="border: 2px solid #ff0055; padding: 40px; font-size: 1.4rem;">
+                <h3 style="color: #ff0055; font-family: 'Bungee';">NO</h3>
                 <ul style="list-style: square;">
-                    <li>No pets (Service animals only)</li>
-                    <li>No flash photography</li>
-                    <li>No outside food</li>
+                    <li>Pets (Service Only)</li>
+                    <li>Flash photography</li>
+                    <li>Bad vibes</li>
                 </ul>
             </div>
         </div>
-        <div style="margin-top: 50px; font-size: 1.3rem; line-height: 1.6;">
-            <p><b>SMOKING:</b> Designated areas only. Look for the signs.</p>
-            <p><b>ADA ACCESS:</b> Reserved zones are for those who need them. Respect your fellow fans.</p>
-            <p><b>SECURITY:</b> No re-entry if you are removed from the venue.</p>
-        </div>
+        <p style="font-size: 1.5rem;"><b>SMOKING:</b> Designated areas only. <b>ADA:</b> Reserved zones available at all stages. <b>RE-ENTRY:</b> Strictly prohibited.</p>
     </section>
 
     <script>
@@ -176,20 +205,19 @@
             setTimeout(() => grid.classList.remove('bass-flash'), 100);
         });
 
-        document.querySelectorAll('a').forEach(el => {
+        document.querySelectorAll('a, .nav-btn').forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('active'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
         });
 
         function generatePass() {
             const msg = document.getElementById('status-msg');
-            msg.innerText = "GENERATING YOUR PASS...";
+            msg.innerText = "REDIRECTING TO SECURE TICKET TERMINAL...";
             setTimeout(() => {
                 window.location.href = "thankyou.html";
             }, 1000);
         }
 
-        // Simple Countdown
         const festDate = new Date("August 14, 2026").getTime();
         setInterval(() => {
             const now = new Date().getTime();
