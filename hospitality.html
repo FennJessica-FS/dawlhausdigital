@@ -3,202 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>313 Hospitality Sync | Dawlhaus Digital Proof of Concept</title>
+    <title>313 SYNC | Bespoke Hospitality Solutions</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@300;700&family=Syncopate:wght@700&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syncopate:wght@400;700&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     
     <style>
         :root {
-            --detroit-gold: #ffcc00;
-            --heat-lamp: #FF4500;
-            --industrial-black: #0d0d0d;
-            --font-mono: 'IBM Plex Mono', monospace;
+            --luxury-gold: #D4AF37;
+            --live-emerald: #00FF85;
+            --soft-white: #F5F5F7;
+            --deep-overlay: rgba(10, 10, 10, 0.85);
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         body {
-            background-color: var(--industrial-black);
-            background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
-            color: #fff;
-            margin: 0;
+            background-color: #080808;
+            color: var(--soft-white);
             font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
         }
-        
-        .hospitality-hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(13,13,13,1)), 
-                        url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&q=80&w=1200');
+
+        /* SOPHISTICATED LIVE INDICATOR */
+        .live-sync-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 20px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--live-emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--live-emerald);
+            animation: soft-pulse 2s infinite;
+        }
+
+        @keyframes soft-pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* HERO SECTION */
+        .premium-hero {
+            height: 90vh;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), #080808),
+                        url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1600');
             background-size: cover;
             background-position: center;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            justify-content: center;
             text-align: center;
-            border-bottom: 2px solid var(--detroit-gold);
+            padding: 0 20px;
         }
 
-        .rush-indicator {
-            background: var(--heat-lamp);
-            color: #fff;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            padding: 8px 16px;
-            border: 1px solid #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: bold;
-            box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
-            animation: alert-pulse 1.5s infinite ease-in-out;
-            margin-bottom: 15px;
-            display: inline-block;
-        }
-
-        @keyframes alert-pulse {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.02); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        .essentials-bar {
-            display: flex;
-            gap: 20px;
-            padding: 15px;
-            margin: 25px auto;
-            max-width: 650px;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-family: var(--font-mono);
-            letter-spacing: 1px;
-            border: 1px solid rgba(255, 204, 0, 0.2);
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            text-transform: uppercase;
-        }
-
-        .menu-section { padding: 60px 10%; }
-        
-        .menu-category h3 {
+        .premium-hero h1 {
             font-family: 'Syncopate', sans-serif;
-            color: var(--detroit-gold);
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -2px;
+            line-height: 0.9;
         }
 
-        .menu-item { margin-bottom: 30px; position: relative; }
-        .item-header { display: flex; justify-content: space-between; font-family: 'Bungee', sans-serif; font-size: 1.2rem; }
-        .item-price { color: var(--heat-lamp); font-family: var(--font-mono); }
-        .item-desc { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-top: 5px; }
-
-        .item-86 { opacity: 0.3; filter: grayscale(1); }
-        .item-86::after {
-            content: "SOLD OUT // 86";
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) rotate(-5deg);
-            background: var(--heat-lamp);
-            color: white;
-            font-family: var(--font-mono);
-            padding: 5px 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            border: 2px solid white;
-            z-index: 10;
-        }
-
-        .specials-board {
-            background: #1a1a1a;
-            border: 8px solid #3d2b1f; 
-            padding: 30px;
-            margin: 50px auto;
+        .hero-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
             max-width: 600px;
-            box-shadow: inset 0 0 50px #000;
-            position: relative;
+            margin-top: 20px;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 1px;
         }
 
-        .specials-board h3 { font-family: 'Bungee', cursive; color: #fff; text-align: center; text-decoration: underline; margin-bottom: 20px; }
-        .chalk-text { font-family: 'Space Grotesk', sans-serif; color: #ececec; font-style: italic; text-align: center; line-height: 1.8; }
-        .specials-board::before {
-            content: "★ FRESH TODAY ★";
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            background: #3d2b1f; padding: 2px 15px; font-size: 0.7rem; font-family: var(--font-mono);
+        /* THE MENU GRID */
+        .menu-section {
+            padding: 100px 10%;
         }
 
-        .back-nav { position: fixed; top: 20px; left: 20px; z-index: 1000; }
+        .category-label {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.8rem;
+            color: var(--luxury-gold);
+            margin-bottom: 40px;
+            display: block;
+            letter-spacing: 5px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+        }
+
+        .menu-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 30px;
+            transition: all 0.4s ease;
+        }
+
+        .menu-item:hover {
+            border-bottom: 1px solid var(--luxury-gold);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+        }
+
+        .item-name {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .item-price {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        .item-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.5);
+            font-weight: 300;
+        }
+
+        /* ELEGANT 86 STYLE */
+        .item-sold-out {
+            opacity: 0.2;
+            filter: blur(1px);
+        }
+
+        /* BACK NAV */
+        .back-nav {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 1000;
+        }
+
+        .back-nav a {
+            text-decoration: none;
+            color: var(--soft-white);
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px 20px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .back-nav a:hover {
+            border-color: var(--luxury-gold);
+            color: var(--luxury-gold);
+        }
     </style>
 </head>
 <body>
-    <div class="noise-overlay"></div>
-    
     <div class="back-nav">
-        <a href="index.html" class="nav-btn" style="text-decoration: none; color: #fff; background: rgba(0,0,0,0.5); padding: 8px 15px; border: 1px solid var(--detroit-gold); font-size: 0.7rem; font-family: var(--font-mono);">← RETURN_TO_DAWLHAUS</a>
+        <a href="index.html">RETURN TO STUDIO</a>
     </div>
 
-    <header class="hospitality-hero">
-        <div class="hero-text">
-            <div class="rush-indicator">STATUS: SATURDAY_NIGHT_RUSH</div>
-            <p style="font-family: var(--font-mono); color: var(--heat-lamp); font-size: 0.7rem; margin-bottom: 15px;">
-                SYS_TIME: <span id="current-time">00:00:00</span> // DETROIT_313
-            </p>
-            <h1 style="font-family: 'Bungee'; font-size: clamp(2.5rem, 6vw, 5rem); margin: 0; line-height: 1;">313 <span style="color: var(--detroit-gold);">SYNC</span></h1>
-            <div class="essentials-bar">
-                <span>● FULL BAR</span> 
-                <span>● 45 MIN WAIT</span> 
-                <span>● CARRY-OUT OPEN</span>
-            </div>
+    <header class="premium-hero">
+        <div class="live-sync-status">
+            <div class="pulse-dot"></div>
+            LIVE SYNC ACTIVE // 313_PROPER
         </div>
+        <h1>313<br/><span style="color: var(--luxury-gold);">SYNC</span></h1>
+        <p class="hero-subtitle">High-performance digital architecture for the modern table.</p>
     </header>
 
     <section class="menu-section">
-        <div class="menu-category">
-            <h3>Detroit Soul Fare</h3>
-            <div class="menu-grid">
-                <div class="menu-item item-86">
-                    <div class="item-header">
-                        <span class="item-name">The "Dawl" Burger</span>
-                        <span class="item-price">$18</span>
-                    </div>
-                    <p class="item-desc">Double patty, sharp white cheddar, house-made dill pickles, toasted brioche. No shortcuts.</p>
+        <span class="category-label">Curated Offerings</span>
+        <div class="menu-grid">
+            
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">The Signature Burger</span>
+                    <span class="item-price">22.</span>
                 </div>
-                <div class="menu-item">
-                    <div class="item-header">
-                        <span class="item-name">Short Rib Poutine</span>
-                        <span class="item-price">$17</span>
-                    </div>
-                    <p class="item-desc">Hand-cut fries, local cheese curds, 12-hour braised short rib. Pure grit in a bowl.</p>
-                </div>
+                <p class="item-desc">Dry-aged Wagyu, reserve cheddar, truffle aioli, toasted brioche. Crafted for the rush.</p>
             </div>
+
+            <div class="menu-item item-sold-out">
+                <div class="item-header">
+                    <span class="item-name">Dry-Aged Ribeye</span>
+                    <span class="item-price">64.</span>
+                </div>
+                <p class="item-desc">24oz bone-in, black garlic butter, smoked sea salt. (Limited Availability)</p>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Hand-Cut Frites</span>
+                    <span class="item-price">12.</span>
+                </div>
+                <p class="item-desc">Double-fried Kennebec potatoes, rosemary salt, house-made dijonnaise.</p>
+            </div>
+
         </div>
     </section>
 
-    <section style="padding: 0 10% 60px;">
-        <div class="specials-board">
-            <h3>Chef's Specials</h3>
-            <div class="chalk-text">
-                <p>● Midnight Coney Egg Rolls — $12</p>
-                <p>● Faygo Root Beer Braised Wings — $16</p>
-                <p>● The "313" Deep Dish Focaccia — $14</p>
-            </div>
-        </div>
-    </section>
-
-    <footer style="padding: 40px; text-align: center; opacity: 0.5; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 2px;">
-        <p>313 HOSPITALITY SYNC // SERVICE • HONOR • CODE</p>
+    <footer style="padding: 100px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
+        <p style="font-family: 'Syncopate', sans-serif; font-size: 0.7rem; letter-spacing: 5px; opacity: 0.3;">
+            DAWLHAUS DIGITAL // DETROIT MADE
+        </p>
     </footer>
-
-    <script>
-        function updateClock() {
-            const now = new Date();
-            const timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
-                            now.getMinutes().toString().padStart(2, '0') + ":" + 
-                            now.getSeconds().toString().padStart(2, '0');
-            document.getElementById('current-time').textContent = timeStr;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
 </body>
 </html>
