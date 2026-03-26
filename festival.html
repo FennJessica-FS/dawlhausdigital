@@ -9,13 +9,12 @@
         :root {
             --acid-green: #ccff00;
             --electric-purple: #bc00ff;
-            --glass-white: rgba(255, 255, 255, 0.05);
             --deep-void: #05000a;
             --font-techno: 'Syncopate', sans-serif;
             --font-mono: 'IBM Plex Mono', monospace;
         }
 
-        /* FIX: CURSOR VISIBILITY & INVERSION */
+        /* CURSOR INVERSION */
         * { cursor: none !important; }
         #cursor {
             width: 25px; height: 25px;
@@ -24,80 +23,65 @@
             pointer-events: none;
             z-index: 99999;
             transform: translate(-50%, -50%);
-            transition: width 0.15s, height 0.15s, background 0.2s;
-            mix-blend-mode: difference; /* Cursor colors invert over buttons! */
+            mix-blend-mode: difference;
         }
-        #cursor.active {
-            width: 60px; height: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #fff;
-        }
+        #cursor.active { width: 80px; height: 80px; background: rgba(255, 255, 255, 0.1); }
 
         html { scroll-behavior: smooth; }
+        body { background-color: var(--deep-void); color: #fff; margin: 0; font-family: var(--font-mono); overflow-x: hidden; }
 
-        body {
-            background-color: var(--deep-void);
-            color: #fff;
-            margin: 0;
-            font-family: var(--font-mono);
-            overflow-x: hidden;
-        }
-
-        /* GRID BACKGROUND & BASS FLASH */
+        /* GRID BACKGROUND */
         #grid-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: linear-gradient(rgba(188, 0, 255, 0.05) 1px, transparent 1px), 
                               linear-gradient(90deg, rgba(188, 0, 255, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
+            background-size: 60px 60px;
             z-index: 1;
             pointer-events: none;
-            transition: background-color 0.1s;
         }
         .bass-flash { background-color: rgba(188, 0, 255, 0.2) !important; }
 
-        /* REUSABLE BUTTONS */
+        /* BIG BUTTONS */
         .btn-neon {
             font-family: 'Bungee';
-            padding: 15px 25px;
+            padding: 25px 45px;
             text-decoration: none;
             text-transform: uppercase;
-            border: 2px solid var(--acid-green);
+            border: 3px solid var(--acid-green);
             color: var(--acid-green);
-            background: rgba(0,0,0,0.8);
-            text-align: center;
+            background: rgba(0,0,0,0.9);
+            font-size: 1.5rem;
             display: inline-block;
-            transition: 0.2s;
+            transition: 0.3s;
         }
-        .btn-neon:hover { background: var(--acid-green); color: #000; box-shadow: 0 0 20px var(--acid-green); }
+        .btn-neon:hover { background: var(--acid-green); color: #000; box-shadow: 0 0 30px var(--acid-green); }
 
-        /* TACTICAL BRIDGE LINKS (BIGGER) */
         .tactical-link {
-            font-size: 1rem !important;
-            padding: 18px 35px !important;
-            letter-spacing: 2px;
+            font-size: 1.2rem !important;
             border-color: var(--electric-purple) !important;
             color: #fff !important;
+            margin: 10px;
         }
 
-        .ticker { background: var(--acid-green); color: #000; padding: 10px 0; font-family: var(--font-techno); overflow: hidden; font-size: 0.7rem; position: sticky; top: 0; z-index: 999; }
-        .ticker-content { display: inline-block; white-space: nowrap; animation: ticker-move 30s linear infinite; }
-        @keyframes ticker-move { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        /* HEADINGS */
+        h2 { font-family: var(--font-techno); font-size: 2.5rem; color: var(--acid-green); margin-bottom: 30px; }
+        
+        section { padding: 120px 10%; border-bottom: 1px solid #222; position: relative; z-index: 3; }
 
-        section { padding: 100px 10%; border-bottom: 1px solid #111; position: relative; z-index: 3; }
-
-        .vendor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .vendor-card { background: var(--glass-white); padding: 30px; border-left: 3px solid var(--electric-purple); transition: 0.3s; }
-        .vendor-card:hover { border-left-color: var(--acid-green); background: rgba(188, 0, 255, 0.1); animation: glitch 0.3s infinite; }
-
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            25% { transform: translate(-2px, 2px); }
-            50% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
+        .hero-player {
+            width: 100%; max-width: 800px;
+            background: #000; padding: 20px;
+            border: 2px solid var(--electric-purple);
+            margin: 40px 0;
         }
 
-        #countdown span { font-size: clamp(2rem, 10vw, 4rem); color: var(--acid-green); text-shadow: 0 0 15px var(--acid-green); font-weight: bold; }
+        /* LINEUP LIST */
+        .lineup-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; width: 100%; }
+        .artist-card { border: 1px solid #333; padding: 40px; background: rgba(255,255,255,0.02); font-family: 'Bungee'; font-size: 2rem; }
+        .artist-card:hover { color: var(--acid-green); border-color: var(--acid-green); }
+
+        #countdown span { font-size: 5rem; color: var(--acid-green); font-weight: bold; }
     </style>
 </head>
 <body>
@@ -105,89 +89,76 @@
     <div id="grid-bg"></div>
     <div id="cursor"></div>
 
-    <div class="ticker">
-        <div class="ticker-content">
-            // LIVE FROM TOLEDO // AUGUST 14 2026 // TICKETS ON SALE // GLASS CITY CONVENTION CENTER // ACCESSING GRID...
-        </div>
-    </div>
-
-    <section style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-top: 50px;">
-        <div style="font-family: 'Bungee'; color: var(--electric-purple); border: 1px solid var(--electric-purple); padding: 5px 15px; margin-bottom: 20px; letter-spacing: 5px;">[ P_L_S ]</div>
-        <h1 style="font-family: var(--font-techno); font-size: clamp(2rem, 8vw, 5.5rem); margin: 0; line-height: 0.9;">PULSE<span>TECH_FEST</span></h1>
+    <section style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <h1 style="font-family: var(--font-techno); font-size: 6rem; margin: 0;">PULSE</h1>
         
-        <div id="countdown" style="display: flex; gap: 30px; margin: 40px 0;">
-            <div class="time-unit"><span id="days">00</span><label style="display:block; font-size: 0.6rem; color: #888;">DAYS</label></div>
-            <div class="time-unit"><span id="hours">00</span><label style="display:block; font-size: 0.6rem; color: #888;">HRS</label></div>
-            <div class="time-unit"><span id="mins">00</span><label style="display:block; font-size: 0.6rem; color: #888;">MIN</label></div>
+        <div class="hero-player">
+            <p style="font-size: 1rem; color: var(--acid-green); letter-spacing: 5px; margin-bottom: 15px;">LIVE_STREAM // SUBDERMAL_SOUND</p>
+            <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1967063683&color=%23bc00ff&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
+            </iframe>
         </div>
 
-        <div id="ticket-area">
-            <a href="javascript:void(0)" onclick="generatePass()" class="btn-neon" style="font-size: 1.4rem; padding: 25px 50px;">
-                [ INITIATE_TICKETING ]
-            </a>
-            <p id="status-msg" style="margin-top: 15px; font-size: 0.7rem; color: var(--electric-purple); font-family: var(--font-mono); height: 20px;"></p>
+        <div id="countdown">
+            <span id="days">00</span><label style="font-size: 1rem;">DAYS</label>
+            <span id="hours">00</span><label style="font-size: 1rem;">HRS</label>
         </div>
 
-        <div style="margin-top: 40px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-            <a href="#map" class="btn-neon tactical-link">[ LOCATE_STAGES ]</a>
-            <a href="#vendors" class="btn-neon tactical-link">[ ACCESS_FUEL_STATION ]</a>
+        <div style="margin-top: 50px;">
+            <a href="javascript:void(0)" onclick="generatePass()" class="btn-neon">[ GET YOUR TICKETS NOW ]</a>
+            <p id="status-msg" style="font-size: 1.2rem; margin-top: 20px; color: var(--electric-purple); font-weight: bold;"></p>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <a href="#lineup" class="btn-neon tactical-link">[ THE LINEUP ]</a>
+            <a href="#vendors" class="btn-neon tactical-link">[ FOOD & DRINK ]</a>
         </div>
     </section>
 
-    <section id="map">
-        <h2 style="font-family: var(--font-techno);">SITE_ORIENTATION</h2>
-        <div style="background: var(--glass-white); padding: 40px; border: 1px solid #222; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-            <div>
-                <p style="color: var(--acid-green); font-weight: bold;">[●] STAGE_ALPHA</p>
-                <p style="font-size: 0.7rem; color: #888;">MAIN_GRID // SUB-BASS ENCLOSURE</p>
-            </div>
-            <div>
-                <p style="color: var(--acid-green); font-weight: bold;">[●] FUEL_HUB</p>
-                <p style="font-size: 0.7rem; color: #888;">LOCAL_NODES // TOLEDO EATS</p>
-            </div>
-            <div>
-                <p style="color: var(--acid-green); font-weight: bold;">[●] WATER_SYNC_STATION</p>
-                <p style="font-size: 0.7rem; color: #888;">HYDRATION_RECOVERY // STAY_VIGILANT</p>
-            </div>
+    <section id="lineup">
+        <h2>FEATURED DJS</h2>
+        <div class="lineup-grid">
+            <div class="artist-card">SUB_ZERO</div>
+            <div class="artist-card">NEON_SOUL</div>
+            <div class="artist-card">TOLEDO_BASS</div>
+            <div class="artist-card">CYBER_KINETIC</div>
         </div>
     </section>
 
     <section id="vendors">
-        <h2 style="font-family: var(--font-techno);">FUEL_STATION // LOCAL_NODES</h2>
-        <div class="vendor-grid">
-            <div class="vendor-card"><h4 style="font-size: 1.6rem; margin: 0;">RUDY'S</h4><p style="font-size: 0.8rem; color: #888;">CHILI_DOG_PROTOCOLS</p></div>
-            <div class="vendor-card"><h4 style="font-size: 1.6rem; margin: 0;">FRICKER'S</h4><p style="font-size: 0.8rem; color: #888;">CHICKEN_CHUNK_MODS</p></div>
-            <div class="vendor-card"><h4 style="font-size: 1.6rem; margin: 0;">BALANCE</h4><p style="font-size: 0.8rem; color: #888;">CLEAN_ENERGY_FUSION</p></div>
-            <div class="vendor-card"><h4 style="font-size: 1.6rem; margin: 0;">BREW_CO</h4><p style="font-size: 0.8rem; color: #888;">PULSE_CRAFT_INFUSIONS</p></div>
+        <h2>FESTIVAL FOOD STATIONS</h2>
+        <div class="lineup-grid">
+            <div class="artist-card" style="font-size: 1.5rem;">RUDY'S HOT DOGS</div>
+            <div class="artist-card" style="font-size: 1.5rem;">BALANCE ASIAN FUSION</div>
+            <div class="artist-card" style="font-size: 1.5rem;">FRICKER'S CHICKEN</div>
+            <div class="artist-card" style="font-size: 1.5rem;">BREW_CO DRINK LAB</div>
         </div>
     </section>
 
-    <section id="protocols" style="background: rgba(188, 0, 255, 0.02);">
-        <h2 style="font-family: var(--font-techno);">SYSTEM_RESTRICTIONS</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px;">
-            <div style="border: 1px solid var(--acid-green); padding: 30px; background: rgba(0,0,0,0.4);">
-                <h3 style="color: var(--acid-green); font-size: 0.8rem; letter-spacing: 2px;">[ ALLOWED_MODULES ]</h3>
-                <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 2.2; color: #ccc;">
-                    <li>+ CLEAR_BAGS (SECURITY_SYNC)</li>
-                    <li>+ FACTORY_SEALED_WATER</li>
-                    <li>+ SERVICE_ANIMALS_ONLY</li>
-                    <li>+ PORTABLE_POWER_CELLS</li>
+    <section id="rules">
+        <h2>FESTIVAL RULES</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+            <div style="border: 2px solid var(--acid-green); padding: 40px; font-size: 1.2rem;">
+                <h3 style="color: var(--acid-green);">WHAT TO BRING</h3>
+                <ul style="list-style: square;">
+                    <li>Clear bags only</li>
+                    <li>Factory sealed water</li>
+                    <li>Good energy</li>
                 </ul>
             </div>
-            <div style="border: 1px solid #ff0055; padding: 30px; background: rgba(0,0,0,0.4);">
-                <h3 style="color: #ff0055; font-size: 0.8rem; letter-spacing: 2px;">[ RESTRICTED_ITEMS ]</h3>
-                <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 2.2; color: #ccc;">
-                    <li>- NO_PETS (SYSTEM_CONFLICT)</li>
-                    <li>- NO_FLASH_PHOTOGRAPHY</li>
-                    <li>- NO_OUTSIDE_FUEL_OR_LIQUIDS</li>
-                    <li>- NO_HARDWARE_WEAPONS</li>
+            <div style="border: 2px solid #ff0055; padding: 40px; font-size: 1.2rem;">
+                <h3 style="color: #ff0055;">PROHIBITED</h3>
+                <ul style="list-style: square;">
+                    <li>No pets (Service animals only)</li>
+                    <li>No flash photography</li>
+                    <li>No outside food</li>
                 </ul>
             </div>
         </div>
-        <div style="margin-top: 50px; border-left: 2px solid var(--electric-purple); padding-left: 30px; font-size: 0.85rem; line-height: 1.8;">
-            <p><b style="color: var(--electric-purple);">// SMOKING:</b> DESIGNATED EXHAUST NODES ONLY.</p>
-            <p><b style="color: var(--electric-purple);">// ADA:</b> ACCESSIBILITY ZONES ARE HIGH-PRIORITY. PLEASE RESPECT THE GRID.</p>
-            <p><b style="color: var(--electric-purple);">// RE_ENTRY:</b> CONNECTION TERMINATED ON EXIT. NO RE-SYNC ALLOWED.</p>
+        <div style="margin-top: 50px; font-size: 1.3rem; line-height: 1.6;">
+            <p><b>SMOKING:</b> Designated areas only. Look for the signs.</p>
+            <p><b>ADA ACCESS:</b> Reserved zones are for those who need them. Respect your fellow fans.</p>
+            <p><b>SECURITY:</b> No re-entry if you are removed from the venue.</p>
         </div>
     </section>
 
@@ -205,30 +176,26 @@
             setTimeout(() => grid.classList.remove('bass-flash'), 100);
         });
 
-        document.querySelectorAll('a, .vendor-card').forEach(el => {
+        document.querySelectorAll('a').forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('active'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
         });
 
         function generatePass() {
             const msg = document.getElementById('status-msg');
-            msg.innerText = "AUTHENTICATING_NEURAL_SIGNATURE...";
-            msg.style.color = "var(--electric-purple)";
-            
+            msg.innerText = "GENERATING YOUR PASS...";
             setTimeout(() => {
-                msg.innerText = "ACCESS_GRANTED: USER_ID_" + Math.floor(Math.random()*90000 + 10000);
-                msg.style.color = "var(--acid-green)";
-                setTimeout(() => { window.location.href = "thankyou.html"; }, 1200);
+                window.location.href = "thankyou.html";
             }, 1000);
         }
 
-        const festDate = new Date("August 14, 2026 12:00:00").getTime();
+        // Simple Countdown
+        const festDate = new Date("August 14, 2026").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const diff = festDate - now;
-            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById("hours").innerText = Math.floor((diff / (1000 * 60 * 60)) % 24).toString().padStart(2, '0');
-            document.getElementById("mins").innerText = Math.floor((diff / 1000 / 60) % 60).toString().padStart(2, '0');
+            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
         }, 1000);
     </script>
 </body>
