@@ -3,161 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>313 // INDUSTRIAL ARCHIVE</title>
+    <title>313 // ARCHIVE_ATELIER</title>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --hard-pink: #ff0055;
-            --white: #ffffff;
-            --border-thick: 6px solid #111;
+            --detroit-pink: #ff0055;
+            --heavy-border: 4px solid #fff;
+            --blueprint-line: rgba(255, 255, 255, 0.1);
         }
 
-        /* DETROIT D CURSOR */
+        /* CUSTOM DETROIT D CURSOR */
         html, body, a, button {
             cursor: url('detroit-d.png') 0 0, auto !important;
         }
 
         body {
             background: #000;
-            color: var(--white);
+            color: #fff;
             font-family: 'Space Grotesk', sans-serif;
             margin: 0;
             text-transform: uppercase;
-            overflow-x: hidden;
+            /* BLUEPRINT GRID BACKGROUND - This is the $5k detail */
+            background-image: 
+                linear-gradient(var(--blueprint-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
 
-        /* 1. THE INDUSTRIAL TICKER */
+        /* 1. THE REFINED TICKER */
         .marquee {
-            background: var(--hard-pink);
+            background: var(--detroit-pink);
             color: #000;
             font-family: 'Bungee', cursive;
-            padding: 25px 0;
-            font-size: 1.8rem;
-            border-bottom: 10px solid #000;
+            padding: 20px 0;
+            font-size: 1.5rem;
+            border-bottom: 8px solid #000;
             white-space: nowrap;
             overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        /* 2. ASYMMETRICAL ARCHIVE FEED */
-        .archive-wrap {
-            padding: 60px 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 100px;
-        }
-
-        .archive-header {
-            color: #ff3b3b;
-            font-family: monospace;
-            letter-spacing: 10px;
-            font-size: 1.2rem;
-            border-left: 10px solid #ff3b3b;
-            padding-left: 20px;
-        }
-
-        .raw-grid {
+        /* 2. BRUTALIST GRID - Not a standard row */
+        .archive-section {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr; /* Asymmetrical */
-            gap: 5px;
+            grid-template-columns: repeat(12, 1fr);
+            grid-gap: 0;
+            border-bottom: var(--heavy-border);
         }
 
-        .raw-grid .item {
+        .archive-item {
+            grid-column: span 3;
+            border-right: 1px solid var(--blueprint-line);
             position: relative;
-            background: #000;
-            border: 2px solid #1a1a1a;
             overflow: hidden;
+            height: 500px;
         }
 
-        /* IMAGE TREATMENT: THE XEROX FILTER */
-        .item img {
+        .archive-item.large { grid-column: span 6; }
+
+        .archive-item img {
             width: 100%;
             height: 100%;
-            min-height: 400px;
             object-fit: cover;
-            filter: grayscale(1) contrast(2.5) brightness(0.5) sepia(0.2);
-            display: block;
-            transition: 0.3s;
+            filter: grayscale(1) contrast(2) brightness(0.5);
+            transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        .item:hover img {
-            filter: grayscale(0) contrast(1.2) brightness(1);
+        .archive-item:hover img {
+            filter: grayscale(0) contrast(1.1) brightness(0.9);
+            transform: scale(1.05);
         }
 
-        .data-tag {
+        .item-label {
             position: absolute;
             top: 20px;
             left: 20px;
             background: #000;
-            color: var(--hard-pink);
+            border: 1px solid var(--detroit-pink);
+            color: var(--detroit-pink);
+            padding: 5px 12px;
             font-family: monospace;
-            padding: 5px 15px;
             font-size: 0.8rem;
-            border: 1px solid var(--hard-pink);
+            z-index: 10;
         }
 
-        /* 3. UNIT STATUS BLOCK */
-        .active-block {
-            border-top: var(--border-thick);
-            border-bottom: var(--border-thick);
-            padding: 100px 0;
+        /* 3. STATUS INDICATOR - High Fidelity */
+        .status-strip {
+            padding: 100px 5%;
             display: flex;
-            justify-content: space-around;
             align-items: center;
-            background: #050505;
+            justify-content: space-between;
+            background: #000;
         }
 
-        .glow-circle {
-            width: 60px;
-            height: 60px;
-            background: var(--hard-pink);
+        .glow-unit {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .dot {
+            width: 40px;
+            height: 40px;
+            background: var(--detroit-pink);
             border-radius: 50%;
-            box-shadow: 0 0 50px var(--hard-pink);
+            box-shadow: 0 0 40px var(--detroit-pink);
+            animation: pulse 2s infinite;
         }
 
-        .status-stamp {
-            background: var(--white);
-            color: #000;
-            padding: 20px 40px;
-            font-weight: 900;
-            font-size: 2rem;
-            font-family: 'Bungee', cursive;
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        /* 4. THE MAIN FEATURE: SCALE OVERLOAD */
-        .feature-hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 80vh;
-            align-items: stretch;
+        /* 4. THE MASTERPIECE HERO: INDUSTRIAL VESSEL */
+        .vessel-hero {
+            display: flex;
+            min-height: 100vh;
+            border-top: var(--heavy-border);
         }
 
-        .feature-img {
-            background: url('image_cfce6b.jpg') center/cover;
-            filter: grayscale(1) contrast(2) brightness(0.4);
-            border-right: var(--border-thick);
+        .vessel-image {
+            flex: 1;
+            background: url('image_cfce6b.jpg') center/cover; /* THE RUSSELL PHOTO */
+            filter: grayscale(1) contrast(1.5) brightness(0.4);
+            border-right: var(--heavy-border);
         }
 
-        .feature-content {
-            padding: 80px;
+        .vessel-content {
+            flex: 1;
+            padding: 100px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            background: #050505;
         }
 
-        .feature-content h2 {
+        .vessel-content h2 {
             font-family: 'Bungee', cursive;
-            font-size: clamp(4rem, 12vw, 10rem);
+            font-size: clamp(4rem, 15vw, 12rem);
             line-height: 0.8;
-            margin: 20px 0;
-            letter-spacing: -8px;
+            margin: 0;
+            letter-spacing: -10px;
+            color: #fff;
         }
 
-        .feature-meta {
+        .meta-data {
             font-family: monospace;
+            font-size: 1.2rem;
             color: #444;
-            font-size: 1.5rem;
-            border-bottom: 2px solid #222;
-            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
         }
 
     </style>
@@ -165,40 +165,51 @@
 <body>
 
     <div class="marquee">
-        RAW BUILDS • COMMISSION A PIECE • CONSIGNMENT OPEN • 313 MADE • DETROIT INDUSTRIAL • RAW BUILDS • 
+        RAW BUILDS • COMMISSION A PIECE • 313 MADE • DETROIT INDUSTRIAL ARCHIVE • RAW BUILDS • COMMISSION A PIECE • 
     </div>
 
-    <div class="archive-wrap">
-        <div class="archive-header">// ARCHIVE_FEED: RUSSELL_ST_FACILITY</div>
-        
-        <div class="raw-grid">
-            <div class="item">
-                <img src="image_cfce6b.jpg" alt="Primary Facility">
-                <div class="data-tag">LOC: 42.3744° N, 83.0645° W</div>
-            </div>
-            <div class="item">
-                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80" alt="Iron">
-                <div class="data-tag">UNIT: CORE_01</div>
-            </div>
-            <div class="item">
-                <img src="https://images.unsplash.com/photo-1516216628859-9bccecad13ca?q=80" alt="Heat">
-                <div class="data-tag">TEMP: NOMINAL</div>
-            </div>
+    <section class="archive-section">
+        <div class="archive-item large">
+            <div class="item-label">LOC: 42.3744° N, 83.0645° W</div>
+            <img src="image_cfce6b.jpg" alt="Russell Ind">
+        </div>
+        <div class="archive-item">
+            <div class="item-label">UNIT: CORE_SYS_01</div>
+            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80" alt="Steel">
+        </div>
+        <div class="archive-item">
+            <div class="item-label">REF: IRON_WORKS_313</div>
+            <img src="https://images.unsplash.com/photo-1516216628859-9bccecad13ca?q=80" alt="Work">
+        </div>
+    </section>
+
+    <div class="status-strip">
+        <div class="glow-unit">
+            <div class="dot"></div>
+            <span style="font-family: 'Bungee'; font-size: 2rem;">UNIT_313_ACTIVE</span>
+        </div>
+        <div style="font-family: monospace; color: #444; width: 300px; text-align: right;">
+            SYSTEM STATUS: OPERATIONAL // ARCHIVAL FEED: LIVE // SOURCE: RUSSELL INDUSTRIAL
         </div>
     </div>
 
-    <div class="active-block">
-        <div class="glow-circle"></div>
-        <div class="status-stamp">UNIT_313_ACTIVE</div>
-        <div class="glow-circle"></div>
-    </div>
-
-    <section class="feature-hero">
-        <div class="feature-img"></div>
-        <div class="feature-content">
-            <div class="feature-meta">ID: 313_VES_04 | PRX: $165.00</div>
+    <section class="vessel-hero">
+        <div class="vessel-image"></div>
+        <div class="vessel-content">
+            <div class="meta-data">
+                <span>ID: 313_VES_04</span>
+                <span>$165.00</span>
+            </div>
             <h2>INDUSTRIAL<br>VESSEL</h2>
-            <p style="color: #666; font-family: monospace; margin-top: 40px;">// ARCHIVAL BUILD. NO SHORTCUTS. BUILT WITH GRIT.</p>
+            <div style="margin-top: 50px; border-left: 3px solid var(--detroit-pink); padding-left: 30px;">
+                <p style="font-family: monospace; color: #888; text-transform: none; line-height: 1.6;">
+                    Hand-forged in the heart of the Russell Industrial Center. This isn't decor; it's an archival build. 
+                    Constructed with grit, honor, and raw Detroit steel. 
+                </p>
+                <button style="background: var(--detroit-pink); border: none; padding: 15px 40px; font-family: 'Bungee'; font-size: 1rem; margin-top: 20px;">
+                    SECURE_UNIT
+                </button>
+            </div>
         </div>
     </section>
 
