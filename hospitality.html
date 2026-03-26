@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>313 SYNC | Digital Menu Architecture</title>
+    <title>313 SYNC | Hospitality Architecture</title>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --detroit-brass: #b58921;
+            --reserve-silver: #a8a8a8;
             --foundry-black: #0a0a0a;
             --concrete: #1a1a1a;
             --font-mono: 'IBM Plex Mono', monospace;
@@ -22,14 +23,15 @@
             margin: 0;
             font-family: var(--font-mono);
             -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
         }
 
         /* SYSTEM STATUS TOP BAR */
         .system-top-bar {
             display: flex;
             justify-content: space-between;
-            padding: 20px 40px;
-            background: rgba(0,0,0,0.8);
+            padding: 15px 40px;
+            background: rgba(0,0,0,0.95);
             border-bottom: 1px solid var(--concrete);
             font-family: 'Syncopate';
             font-size: 0.55rem;
@@ -37,49 +39,63 @@
             color: var(--detroit-brass);
             position: sticky;
             top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
+            z-index: 2000;
+            backdrop-filter: blur(15px);
         }
 
         /* HERO ARCHITECTURE */
         .hospitality-hero {
-            padding: 100px 40px 60px;
+            padding: 140px 40px 60px;
             text-align: center;
-            border-bottom: 1px solid var(--concrete);
         }
 
         .hero-title {
             font-family: 'Bungee';
-            font-size: clamp(3rem, 10vw, 6rem);
-            line-height: 0.9;
+            font-size: clamp(3.5rem, 12vw, 8rem);
+            line-height: 0.8;
             margin: 0;
+            letter-spacing: -2px;
         }
 
         .hero-title span {
             font-family: var(--font-serif);
             font-style: italic;
             color: var(--detroit-brass);
-            font-size: 0.7em;
+            font-size: 0.6em;
+            display: block;
         }
 
-        /* TABBED NAVIGATION - THE "APP" FEEL */
+        /* NAVIGATION CONSOLE */
         .menu-nav {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 15px;
             padding: 40px 0;
+            position: sticky;
+            top: 50px;
+            background: var(--foundry-black);
+            z-index: 1000;
             border-bottom: 1px solid var(--concrete);
         }
 
         .nav-btn {
             background: none;
-            border: 1px solid #333;
+            border: 1px solid #222;
             color: #555;
-            padding: 10px 25px;
+            padding: 12px 25px;
             font-family: 'Syncopate';
             font-size: 0.6rem;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--detroit-brass);
+            color: #fff;
+            background: rgba(181, 137, 33, 0.1);
+            transform: translateY(-2px);
         }
 
         .nav-btn.active {
@@ -88,20 +104,38 @@
             background: rgba(181, 137, 33, 0.05);
         }
 
-        /* THE MENU GRID */
-        .menu-container {
-            padding: 80px 10%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 40px;
+        /* SECTIONS */
+        .section-header {
+            padding: 100px 10% 20px;
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--detroit-brass);
+            border-bottom: 1px solid var(--detroit-brass);
+            margin: 0 10% 50px;
+            font-style: italic;
         }
 
+        .reserve-header {
+            color: var(--reserve-silver);
+            border-bottom-color: var(--reserve-silver);
+        }
+
+        .menu-container {
+            padding: 0 10% 120px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        /* THE CARD SYSTEM */
         .menu-card {
             border: 1px solid var(--concrete);
-            padding: 30px;
-            position: relative;
+            padding: 35px;
             background: rgba(255,255,255,0.01);
             transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .menu-card:hover {
@@ -109,66 +143,53 @@
             background: rgba(255,255,255,0.03);
         }
 
+        .reserve-card:hover {
+            border-color: var(--reserve-silver);
+        }
+
         .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .card-tag {
-            font-size: 0.5rem;
-            background: var(--detroit-brass);
-            color: #000;
-            padding: 2px 8px;
-            font-weight: 700;
-            letter-spacing: 1px;
+            align-items: flex-start;
         }
 
         .item-name {
             font-family: 'Bungee';
-            font-size: 1.4rem;
-            margin: 10px 0;
-            display: block;
+            font-size: 1.6rem;
+            margin: 15px 0;
+            line-height: 1;
         }
 
         .item-price {
             font-family: var(--font-serif);
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             color: var(--detroit-brass);
         }
+
+        .reserve-price { color: var(--reserve-silver); }
 
         .item-meta {
             display: flex;
             justify-content: space-between;
-            font-size: 0.7rem;
-            color: #666;
+            font-size: 0.65rem;
+            color: #555;
             border-top: 1px solid #222;
-            padding-top: 15px;
-            margin-top: 15px;
+            padding-top: 20px;
+            margin-top: 20px;
+            font-weight: 700;
             text-transform: uppercase;
         }
 
-        /* 86 OVERLAY */
-        .item-86 {
-            opacity: 0.15;
-            pointer-events: none;
-            filter: grayscale(1);
+        .status-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+            background: var(--detroit-brass);
         }
 
-        .item-86::before {
-            content: "86 // DEPLETED";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-10deg);
-            font-family: 'Bungee';
-            color: var(--detroit-brass);
-            font-size: 2rem;
-            z-index: 5;
-            border: 2px solid var(--detroit-brass);
-            padding: 5px 20px;
-        }
+        /* THE "86" LOGIC */
+        .item-86 { opacity: 0.1; filter: grayscale(1); pointer-events: none; }
 
         .back-nav {
             position: fixed;
@@ -181,76 +202,139 @@
             text-decoration: none;
             color: #fff;
             font-family: 'Syncopate';
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             border: 1px solid #333;
             padding: 12px 20px;
-            background: var(--foundry-black);
+            background: #000;
         }
     </style>
 </head>
 <body>
 
     <div class="system-top-bar">
-        <span>313_SYNC_V1.4</span>
-        <span style="color: #fff;">SENSORS: ACTIVE // TEMP: 74°F</span>
-        <span>DETROIT_METRO</span>
+        <span>313_SYNC_V2.0</span>
+        <span style="color: #fff;">HOUSE PULSE: <span id="pulse">THE RUSH</span> // 74°F</span>
+        <span id="clock">DETROIT // 00:00:00</span>
     </div>
 
     <header class="hospitality-hero">
         <h1 class="hero-title">313 <span>Operations</span></h1>
-        <div class="menu-nav">
-            <button class="nav-btn active">PROVISIONS</button>
-            <button class="nav-btn">LIBATIONS</button>
-            <button class="nav-btn">RESERVE</button>
-        </div>
     </header>
 
+    <nav class="menu-nav">
+        <a href="#provisions" class="nav-btn">PROVISIONS</a>
+        <a href="#libations" class="nav-btn">LIBATIONS</a>
+        <a href="#reserve" class="nav-btn">RESERVE</a>
+    </nav>
+
+    <div id="provisions" class="section-header">Provisions</div>
     <main class="menu-container">
-        
         <div class="menu-card">
             <div class="card-header">
-                <span class="card-tag">HOUSE SIGNATURE</span>
+                <span style="font-size: 0.6rem; color: var(--detroit-brass);">HOUSE_SIGNATURE</span>
                 <span class="item-price">24.</span>
             </div>
             <span class="item-name">The Foundry Burger</span>
-            <p style="color: #888; font-size: 0.8rem; line-height: 1.5;">DRY-AGED WAGYU / RESERVE SMOKED CHEDDAR / CHARRED ONION JAM / TRUFFLE AIOLI.</p>
+            <p style="color: #777; font-size: 0.8rem; line-height: 1.6;">DRY-AGED WAGYU / RESERVE CHEDDAR / BURNT ONION JAM / TRUFFLE AIOLI.</p>
             <div class="item-meta">
                 <span>PREP: 12 MIN</span>
-                <span style="color: var(--detroit-brass);">STOCK: HIGH</span>
+                <span><span class="status-dot"></span>STOCK: HIGH</span>
             </div>
         </div>
 
         <div class="menu-card item-86">
             <div class="card-header">
-                <span class="card-tag">LIMITED RELEASE</span>
+                <span style="font-size: 0.6rem;">MARKET_ENTRY</span>
                 <span class="item-price">85.</span>
             </div>
-            <span class="item-name">Dry-Aged Ribeye</span>
-            <p style="color: #888; font-size: 0.8rem; line-height: 1.5;">32OZ BONE-IN / 45-DAY CELLAR AGED / BONE MARROW BUTTER / SMOKED SALT.</p>
+            <span class="item-name">Bone-In Ribeye</span>
+            <p style="color: #777; font-size: 0.8rem; line-height: 1.6;">32OZ BONE-IN / 45-DAY CELLAR AGED / BONE MARROW BUTTER / SMOKED SALT.</p>
             <div class="item-meta">
                 <span>PREP: 25 MIN</span>
-                <span>STOCK: 0</span>
+                <span>STOCK: DEPLETED</span>
+            </div>
+        </div>
+    </main>
+
+    <div id="libations" class="section-header">Libations</div>
+    <main class="menu-container">
+        <div class="menu-card">
+            <div class="card-header">
+                <span style="font-size: 0.6rem; color: var(--detroit-brass);">CRAFT_COCKTAIL</span>
+                <span class="item-price">18.</span>
+            </div>
+            <span class="item-name">Motor City Old Fashioned</span>
+            <p style="color: #777; font-size: 0.8rem; line-height: 1.6;">DETROIT BOURBON / MAPLE / BLACK WALNUT BITTERS / SMOKED CEDAR.</p>
+            <div class="item-meta">
+                <span>STRENGTH: HEAVY</span>
+                <span><span class="status-dot"></span>BAR: ACTIVE</span>
             </div>
         </div>
 
         <div class="menu-card">
             <div class="card-header">
-                <span class="card-tag">DETROIT CLASSIC</span>
-                <span class="item-price">19.</span>
+                <span style="font-size: 0.6rem; color: var(--detroit-brass);">HOUSE_POUR</span>
+                <span class="item-price">16.</span>
             </div>
-            <span class="item-name">Short Rib Poutine</span>
-            <p style="color: #888; font-size: 0.8rem; line-height: 1.5;">TRIPLE-FRIED FRITES / LOCAL CHEESE CURDS / 12-HOUR BRAISED BEEF GRAVY.</p>
+            <span class="item-name">313 Gin & Tonic</span>
+            <p style="color: #777; font-size: 0.8rem; line-height: 1.6;">LOCAL BOTANICAL GIN / HOUSE-MADE TONIC / CHARRED GRAPEFRUIT.</p>
             <div class="item-meta">
-                <span>PREP: 8 MIN</span>
-                <span style="color: var(--detroit-brass);">STOCK: STEADY</span>
+                <span>TEMP: 38°F</span>
+                <span><span class="status-dot"></span>STOCK: STEADY</span>
+            </div>
+        </div>
+    </main>
+
+    <div id="reserve" class="section-header reserve-header">The Reserve Cellar</div>
+    <main class="menu-container">
+        <div class="menu-card reserve-card">
+            <div class="card-header">
+                <span style="font-size: 0.6rem; color: var(--reserve-silver);">VINTAGE_SELECTION</span>
+                <span class="item-price reserve-price">450.</span>
+            </div>
+            <span class="item-name">2014 Reserve Cabernet</span>
+            <p style="color: #777; font-size: 0.8rem; line-height: 1.6;">NAPA VALLEY / LIMITED RELEASE / HAND-CRAFTED FRENCH OAK AGING.</p>
+            <div class="item-meta">
+                <span>CELLAR: 55°F</span>
+                <span><span class="status-dot" style="background: var(--reserve-silver);"></span>QTY: 4</span>
             </div>
         </div>
 
+        <div class="menu-card reserve-card">
+            <div class="card-header">
+                <span style="font-size: 0.6rem; color: var(--reserve-silver);">RARE_SPIRIT</span>
+                <span class="item-price reserve-price">120.</span>
+            </div>
+            <span class="item-name">Single Barrel Bourbon</span>
+            <p style="color: #777; font-size: 0.8rem; line-height: 1.6;">2-OZ POUR / CHARRED OAK / CARAMELIZED VANILLA / 114 PROOF.</p>
+            <div class="item-meta">
+                <span>POUR: NEAT</span>
+                <span><span class="status-dot" style="background: var(--reserve-silver);"></span>STOCK: LOW</span>
+            </div>
+        </div>
     </main>
 
     <div class="back-nav">
         <a href="index.html">← RETURN TO STUDIO</a>
     </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById('clock').innerText = 'DETROIT // ' + timeString;
+            
+            // Pulse Logic
+            const hours = now.getHours();
+            let status = "STEADY";
+            if (hours >= 18 && hours <= 21) status = "THE RUSH";
+            if (hours >= 22) status = "LAST CALL";
+            if (hours < 11) status = "CLOSED";
+            document.getElementById('pulse').innerText = status;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
 
 </body>
 </html>
