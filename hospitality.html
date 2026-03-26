@@ -12,7 +12,7 @@
     <style>
         :root {
             --detroit-gold: #ffcc00;
-            --heat-lamp: #FF4500; /* High-priority Orange */
+            --heat-lamp: #FF4500;
             --industrial-black: #0d0d0d;
             --font-mono: 'IBM Plex Mono', monospace;
         }
@@ -25,7 +25,6 @@
             font-family: 'Space Grotesk', sans-serif;
         }
         
-        /* THE TICKET (CHIT) HEADER STYLING */
         .hospitality-hero {
             height: 80vh;
             background: linear-gradient(rgba(0,0,0,0.8), rgba(13,13,13,1)), 
@@ -77,7 +76,6 @@
             text-transform: uppercase;
         }
 
-        /* MENU STYLING */
         .menu-section { padding: 60px 10%; }
         
         .menu-category h3 {
@@ -90,38 +88,16 @@
             letter-spacing: 4px;
         }
 
-        .menu-item {
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Bungee', sans-serif;
-            font-size: 1.2rem;
-        }
-
+        .menu-item { margin-bottom: 30px; position: relative; }
+        .item-header { display: flex; justify-content: space-between; font-family: 'Bungee', sans-serif; font-size: 1.2rem; }
         .item-price { color: var(--heat-lamp); font-family: var(--font-mono); }
-        
-        .item-desc {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.6);
-            margin-top: 5px;
-            font-family: 'Space Grotesk', sans-serif;
-        }
+        .item-desc { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-top: 5px; }
 
-        /* THE 86 (SOLD OUT) STAMP */
-        .item-86 {
-            opacity: 0.3;
-            filter: grayscale(1);
-        }
-
+        .item-86 { opacity: 0.3; filter: grayscale(1); }
         .item-86::after {
             content: "SOLD OUT // 86";
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-5deg);
             background: var(--heat-lamp);
             color: white;
@@ -133,12 +109,25 @@
             z-index: 10;
         }
 
-        .back-nav {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
+        .specials-board {
+            background: #1a1a1a;
+            border: 8px solid #3d2b1f; 
+            padding: 30px;
+            margin: 50px auto;
+            max-width: 600px;
+            box-shadow: inset 0 0 50px #000;
+            position: relative;
         }
+
+        .specials-board h3 { font-family: 'Bungee', cursive; color: #fff; text-align: center; text-decoration: underline; margin-bottom: 20px; }
+        .chalk-text { font-family: 'Space Grotesk', sans-serif; color: #ececec; font-style: italic; text-align: center; line-height: 1.8; }
+        .specials-board::before {
+            content: "★ FRESH TODAY ★";
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: #3d2b1f; padding: 2px 15px; font-size: 0.7rem; font-family: var(--font-mono);
+        }
+
+        .back-nav { position: fixed; top: 20px; left: 20px; z-index: 1000; }
     </style>
 </head>
 <body>
@@ -151,22 +140,14 @@
     <header class="hospitality-hero">
         <div class="hero-text">
             <div class="rush-indicator">STATUS: SATURDAY_NIGHT_RUSH</div>
-            
             <p style="font-family: var(--font-mono); color: var(--heat-lamp); font-size: 0.7rem; margin-bottom: 15px;">
                 SYS_TIME: <span id="current-time">00:00:00</span> // DETROIT_313
             </p>
-
             <h1 style="font-family: 'Bungee'; font-size: clamp(2.5rem, 6vw, 5rem); margin: 0; line-height: 1;">313 <span style="color: var(--detroit-gold);">SYNC</span></h1>
-            
             <div class="essentials-bar">
                 <span>● FULL BAR</span> 
                 <span>● 45 MIN WAIT</span> 
                 <span>● CARRY-OUT OPEN</span>
-            </div>
-
-            <div class="cta-group" style="display: flex; gap: 15px; justify-content: center;">
-                <a href="#" class="btn primary" style="background: var(--detroit-gold); color: #000; padding: 12px 24px; text-decoration: none; font-family: 'Bungee';">Reserve</a>
-                <a href="#" class="btn secondary" style="border: 1px solid #fff; color: #fff; padding: 12px 24px; text-decoration: none; font-family: 'Bungee';">Order</a>
             </div>
         </div>
     </header>
@@ -175,7 +156,6 @@
         <div class="menu-category">
             <h3>Detroit Soul Fare</h3>
             <div class="menu-grid">
-                
                 <div class="menu-item item-86">
                     <div class="item-header">
                         <span class="item-name">The "Dawl" Burger</span>
@@ -183,7 +163,6 @@
                     </div>
                     <p class="item-desc">Double patty, sharp white cheddar, house-made dill pickles, toasted brioche. No shortcuts.</p>
                 </div>
-
                 <div class="menu-item">
                     <div class="item-header">
                         <span class="item-name">Short Rib Poutine</span>
@@ -191,7 +170,17 @@
                     </div>
                     <p class="item-desc">Hand-cut fries, local cheese curds, 12-hour braised short rib. Pure grit in a bowl.</p>
                 </div>
+            </div>
+        </div>
+    </section>
 
+    <section style="padding: 0 10% 60px;">
+        <div class="specials-board">
+            <h3>Chef's Specials</h3>
+            <div class="chalk-text">
+                <p>● Midnight Coney Egg Rolls — $12</p>
+                <p>● Faygo Root Beer Braised Wings — $16</p>
+                <p>● The "313" Deep Dish Focaccia — $14</p>
             </div>
         </div>
     </section>
