@@ -3,195 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DETROIT ARTIST COLLECTIVE // 313</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@300;900&display=swap" rel="stylesheet">
+    <title>313 // INDUSTRIAL_COLLECTIVE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --carhartt-brown: #3D2B1F;
-            --caution-yellow: #E6A313;
-            --steel: #1B1B1B;
-            --concrete: #f4f4f4;
+            --brass-plate: #E6A313;
+            --black-iron: #080808;
+            --blueprint-white: #ffffff;
         }
 
-        /* DETROIT D CURSOR - NO NEXT TO IT */
+        /* DETROIT D CURSOR */
         html, body, a, button {
             cursor: url('detroit-d.png') 0 0, auto !important;
         }
 
         body {
-            background: var(--steel);
-            color: var(--concrete);
+            background-color: var(--black-iron);
+            color: var(--blueprint-white);
             font-family: 'Space Grotesk', sans-serif;
             margin: 0;
-            overflow-x: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            /* GRIT TEXTURE OVERLAY */
+            background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
+            background-size: 20px 20px;
         }
 
-        /* HEAVY DUTY TICKER */
-        .industrial-marquee {
+        /* 1. THE SLOW-STEEL TICKER */
+        .marquee-strip {
             background: var(--carhartt-brown);
-            color: var(--caution-yellow);
-            padding: 20px 0;
-            border-bottom: 5px solid #000;
+            color: var(--brass-plate);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--brass-plate);
             overflow: hidden;
             display: flex;
             position: sticky;
             top: 0;
             z-index: 1000;
-            font-family: 'Bungee', cursive;
-            font-size: 1.5rem;
         }
 
-        .marquee-track {
+        .marquee-content {
             display: flex;
             white-space: nowrap;
-            animation: industrial-scroll 30s linear infinite;
+            animation: steel-slide 60s linear infinite;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 8px;
         }
 
-        @keyframes industrial-scroll {
+        @keyframes steel-slide {
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
         }
 
-        /* THE SPLIT HERO */
-        .split-hero {
+        /* 2. THE ARCHITECTURAL HERO */
+        .hero-vessel {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            height: 85vh;
-            border-bottom: 10px solid #000;
+            height: 95vh;
+            border-bottom: 1px solid #222;
         }
 
-        .hero-visual {
+        .visual-pane {
             background: url('image_cfce6b.jpg') center/cover no-repeat;
-            filter: grayscale(1) contrast(1.5) sepia(0.1) brightness(0.6);
-            border-right: 5px solid #000;
+            filter: grayscale(1) contrast(1.5) brightness(0.4);
+            border-right: 1px solid #222;
+            position: relative;
         }
 
-        .hero-content {
-            padding: 10% 15%;
+        /* TECHNICAL OVERLAY */
+        .visual-pane::after {
+            content: "REF_313_RUSSELL_ST";
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: var(--brass-plate);
+            border: 1px solid var(--brass-plate);
+            padding: 5px 10px;
+        }
+
+        .text-pane {
+            padding: 10%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             background: #000;
         }
 
-        .hero-content h1 {
-            font-family: 'Bungee';
-            font-size: clamp(4rem, 10vw, 9rem);
-            line-height: 0.8;
+        .text-pane h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.9;
             margin: 0;
-            color: var(--caution-yellow);
+            letter-spacing: -2px;
+            color: var(--blueprint-white);
         }
 
-        /* BRUTALIST ARCHIVE GRID */
-        .archive {
+        .text-pane h1 span {
+            color: var(--brass-plate);
+            display: block;
+        }
+
+        /* 3. ASYMMETRICAL "BLUEPRINT" GRID */
+        .blueprint-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: 150px;
-            gap: 10px;
-            padding: 10px;
-            background: #000;
+            padding: 2px;
+            gap: 2px;
+            background: #222;
         }
 
-        .archive-item {
+        .grid-cell {
             position: relative;
-            background: #111;
+            background: #000;
+            height: 550px;
             overflow: hidden;
-            border: 1px solid #222;
         }
 
-        .archive-item img {
+        .grid-cell img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(1) contrast(1.2);
-            opacity: 0.6;
-            transition: 0.4s;
+            filter: grayscale(1) contrast(1.2) brightness(0.5);
+            transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        .archive-item:hover img {
-            opacity: 1;
-            filter: grayscale(0) contrast(1);
+        .grid-cell:hover img {
+            filter: grayscale(0) brightness(0.8);
+            transform: scale(1.02);
         }
 
-        /* ASYMMETRICAL SPANNING */
-        .span-8 { grid-column: span 8; grid-row: span 4; }
-        .span-4 { grid-column: span 4; grid-row: span 4; }
-        .span-12 { grid-column: span 12; grid-row: span 3; }
+        .large-cell { grid-column: span 8; }
+        .small-cell { grid-column: span 4; }
 
-        .meta-stamp {
+        .data-tag {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            background: var(--caution-yellow);
-            color: #000;
+            top: 30px;
+            left: 30px;
             font-family: monospace;
-            padding: 5px 15px;
-            font-weight: 900;
             font-size: 0.8rem;
+            color: #555;
+            z-index: 10;
         }
 
-        /* PROJECT DATA SHEET FOOTER */
-        .manifest {
-            padding: 100px 5%;
-            background: var(--concrete);
+        /* 4. THE MANIFESTO (FOOTER) */
+        .manifesto {
+            padding: 120px 8%;
+            background: #f5f5f5;
             color: #000;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 100px;
         }
 
-        .manifest h3 { font-family: 'Bungee'; border-bottom: 4px solid #000; padding-bottom: 10px; }
-        .manifest p { font-family: monospace; font-size: 1.1rem; }
+        .manifesto h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .manifesto-detail {
+            font-family: 'Space Grotesk';
+            font-weight: 300;
+            border-top: 1px solid #000;
+            padding-top: 20px;
+        }
 
     </style>
 </head>
 <body>
 
-    <div class="industrial-marquee">
-        <div class="marquee-track">
-            DETROIT ARTIST COLLECTIVE // RUSSELL INDUSTRIAL // BUILT FOR THE CITY // EST. 313 // RAW OUTPUT // DETROIT ARTIST COLLECTIVE // RUSSELL INDUSTRIAL // BUILT FOR THE CITY // EST. 313 // RAW OUTPUT //
+    <div class="marquee-strip">
+        <div class="marquee-content">
+            DETROIT ARTIST COLLECTIVE // 1600 CLAY ST // RUSSELL INDUSTRIAL CENTER // RAW OUTPUT // NO SHORTCUTS // DETROIT ARTIST COLLECTIVE // 1600 CLAY ST // RUSSELL INDUSTRIAL CENTER // RAW OUTPUT // NO SHORTCUTS // 
         </div>
     </div>
 
-    <section class="split-hero">
-        <div class="hero-visual"></div>
-        <div class="hero-content">
-            <p style="font-family: monospace; letter-spacing: 5px; color: var(--caution-yellow);">[ PROJECT_PHASE_04 ]</p>
-            <h1>MAKER<br>CORPS</h1>
-            <p style="color: #666; margin-top: 30px; line-height: 1.6;">
-                A professional coalition of Detroit artists, fabricators, and industrial creators. 
-                We don't just design; we build.
+    <section class="hero-vessel">
+        <div class="visual-pane"></div>
+        <div class="text-pane">
+            <p style="font-family: monospace; font-size: 0.8rem; color: #444; margin-bottom: 20px;">[ ATELIER_ACTIVE_313 ]</p>
+            <h1>INDUSTRIAL<span>COLLECTIVE</span></h1>
+            <p style="margin-top: 40px; font-weight: 300; color: #666; max-width: 400px; text-transform: none;">
+                A convergence of professional makers, architectural fabricators, and Detroit artists operating out of the Russell Industrial Center.
             </p>
         </div>
     </section>
 
-    <div class="archive">
-        <div class="archive-item span-8">
-            <div class="meta-stamp">SITE_VIS_01 // RUSSELL_ST</div>
-            <img src="image_cfce6b.jpg" alt="Russell">
+    <div class="blueprint-grid">
+        <div class="grid-cell large-cell">
+            <div class="data-tag">DATA_SET: 01 // ORIGIN_RUSSELL</div>
+            <img src="image_cfce6b.jpg" alt="Russell Industrial">
         </div>
-        <div class="archive-item span-4">
-            <div class="meta-stamp">SPEC_09 // FABRICATION</div>
-            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80" alt="Steel">
-        </div>
-        <div class="archive-item span-12">
-            <div class="meta-stamp">COLLAB_FEED // ACTIVE</div>
-            <img src="https://images.unsplash.com/photo-1516216628859-9bccecad13ca?q=80" alt="Workshop">
+        <div class="grid-cell small-cell">
+            <div class="data-tag">DATA_SET: 02 // FABRICATION</div>
+            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80" alt="Steel Work">
         </div>
     </div>
 
-    <footer class="manifest">
+    <footer class="manifesto">
         <div>
-            <h3>LOCATION</h3>
-            <p>1600 CLAY ST<br>DETROIT, MI 48211</p>
+            <h2>MAKER<br>CORPS</h2>
         </div>
-        <div>
-            <h3>CONTRACT</h3>
-            <p>DAWLHAUS DIGITAL<br>SERVICE // HONOR // CODE</p>
+        <div class="manifesto-detail">
+            <strong>FACILITY</strong><br>
+            1600 CLAY ST<br>
+            DETROIT, MI 48211
         </div>
-        <div>
-            <h3>COLLECTIVE</h3>
-            <p>RUSSELL INDUSTRIAL CENTER<br>UNIT_313_ACTIVE</p>
+        <div class="manifesto-detail">
+            <strong>CONTACT</strong><br>
+            COLLECTIVE@313.COM<br>
+            @DAWLHAUS_DIGITAL
         </div>
     </footer>
 
