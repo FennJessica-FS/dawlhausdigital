@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PULSE SYNC | Detroit Techno Festival 2026</title>
+    <title>PULSE TECH FEST | Toledo 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=IBM+Plex+Mono:wght@400;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --acid-green: #ccff00;
             --electric-purple: #bc00ff;
+            --glass-white: rgba(255, 255, 255, 0.05);
             --deep-void: #05000a;
             --font-techno: 'Syncopate', sans-serif;
             --font-mono: 'IBM Plex Mono', monospace;
@@ -20,189 +21,153 @@
             margin: 0;
             font-family: var(--font-mono);
             overflow-x: hidden;
+            /* Suble Tech Grid */
+            background-image: linear-gradient(rgba(188, 0, 255, 0.05) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(188, 0, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
 
-        /* 1. ANIMATED BACKGROUND (The Pulse) */
-        body::before {
-            content: "";
+        /* BUTTONS & NAV */
+        .cta-header {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(188,0,255,0.15) 0%, transparent 70%);
-            animation: pulse-bg 4s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        @keyframes pulse-bg {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 1; }
-        }
-
-        /* 2. HERO SECTION */
-        .hero {
-            height: 100vh;
+            top: 60px;
+            right: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            border-bottom: 2px solid var(--acid-green);
-            background: linear-gradient(rgba(5,0,10,0.8), rgba(5,0,10,0.8)),
-                        url('https://images.unsplash.com/photo-1574391884720-bbe373c547d3?auto=format&fit=crop&q=80&w=1600');
-            background-size: cover;
-            background-attachment: fixed;
+            gap: 10px;
+            z-index: 2000;
         }
 
-        .glimmer {
-            font-family: var(--font-techno);
-            font-size: clamp(3rem, 15vw, 9rem);
-            line-height: 0.8;
-            letter-spacing: -5px;
-            color: #fff;
+        .btn-neon {
+            font-family: 'Bungee';
+            padding: 12px 25px;
+            text-decoration: none;
             text-transform: uppercase;
-            text-shadow: 0 0 20px var(--electric-purple);
-        }
-
-        .glimmer span {
+            font-size: 0.8rem;
+            transition: 0.3s;
+            border: 2px solid var(--acid-green);
             color: var(--acid-green);
-            display: block;
-            font-size: 0.35em;
-            letter-spacing: 25px;
-            margin-top: 15px;
-            text-shadow: none;
+            background: transparent;
+            text-align: center;
         }
 
-        /* 3. SOUNDCLOUD PLAYER (Sticky Bottom) */
-        .player-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(5, 0, 10, 0.95);
-            border-top: 1px solid var(--acid-green);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            padding: 5px 20px;
-            backdrop-filter: blur(10px);
+        .btn-neon:hover {
+            background: var(--acid-green);
+            color: #000;
+            box-shadow: 0 0 20px var(--acid-green);
         }
 
-        .player-label {
-            font-family: var(--font-techno);
-            font-size: 0.6rem;
-            color: var(--acid-green);
-            writing-mode: vertical-rl;
-            transform: rotate(180deg);
-            margin-right: 15px;
-            letter-spacing: 2px;
+        .btn-purple {
+            border-color: var(--electric-purple);
+            color: var(--electric-purple);
         }
 
-        /* 4. STAGE GRID */
-        .stage-section { padding: 100px 10%; margin-bottom: 150px; }
-        
-        .stage-grid {
+        .btn-purple:hover {
+            background: var(--electric-purple);
+            color: #fff;
+            box-shadow: 0 0 20px var(--electric-purple);
+        }
+
+        /* SECTIONS */
+        section { padding: 100px 10%; border-bottom: 1px solid #111; }
+        h2 { font-family: var(--font-techno); color: var(--acid-green); margin-bottom: 40px; font-size: 1.2rem; letter-spacing: 5px; }
+
+        /* VENDOR GRID */
+        .vendor-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
 
-        .stage-card {
-            border: 1px solid #1a1a1a;
-            padding: 50px 30px;
-            background: rgba(255,255,255,0.02);
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
+        .vendor-card {
+            background: var(--glass-white);
+            padding: 30px;
+            border-left: 3px solid var(--electric-purple);
+            transition: 0.3s;
         }
 
-        .stage-card:hover {
-            border-color: var(--acid-green);
-            transform: translateY(-10px);
-            background: rgba(204,255,0,0.05);
-        }
+        .vendor-card:hover { border-left-color: var(--acid-green); background: rgba(255,255,255,0.08); }
 
-        .stage-card h3 { 
-            font-family: var(--font-techno); 
-            color: var(--acid-green);
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        .bpm-tag {
-            font-size: 0.6rem;
-            color: var(--electric-purple);
-            border: 1px solid var(--electric-purple);
-            padding: 4px 8px;
-            display: inline-block;
-            margin-top: 20px;
-        }
+        /* LISTS */
+        .guide-list { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .guide-list li { padding: 10px; border-bottom: 1px solid #222; font-size: 0.9rem; }
+        .guide-list li span { color: var(--acid-green); margin-right: 10px; }
 
         /* TICKER SCROLL */
-        .ticker {
-            background: var(--acid-green);
-            color: #000;
-            padding: 12px 0;
-            font-family: var(--font-techno);
-            overflow: hidden;
-            font-size: 0.7rem;
-            position: sticky;
-            top: 0;
-            z-index: 999;
-        }
+        .ticker { background: var(--acid-green); color: #000; padding: 10px 0; font-family: var(--font-techno); overflow: hidden; font-size: 0.7rem; position: sticky; top: 0; z-index: 999; }
+        .ticker-content { display: inline-block; white-space: nowrap; animation: ticker-move 30s linear infinite; }
+        @keyframes ticker-move { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        .ticker-content {
-            display: inline-block;
-            white-space: nowrap;
-            padding-left: 100%;
-            animation: ticker-move 25s linear infinite;
-        }
-
-        @keyframes ticker-move {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-100%, 0); }
-        }
+        /* PLAYER BAR */
+        .player-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; border-top: 2px solid var(--acid-green); z-index: 1000; padding: 5px 0; }
     </style>
 </head>
 <body>
 
+    <div class="cta-header">
+        <a href="#" class="btn-neon">GET TICKETS</a>
+        <a href="#" class="btn-neon btn-purple">VIP PASSES</a>
+    </div>
+
     <div class="ticker">
         <div class="ticker-content">
-            // LIVE FROM DETROIT // MOODEYMANN // DJ STINGRAY 313 // JEFF MILLS // THE BELLEVILLE THREE // SYSTEM SYNC ACTIVE // 
+            // LIVE FROM THE 419 // AUGUST 14-16 // PROMETHECA PARK TOLEDO // RUDY'S HOT DOGS ON SITE // FRICKER'S LOUNGE ACTIVE // BALANCE GRILLE FEEDING THE VIBE //
         </div>
     </div>
 
-    <section class="hero">
-        <h1 class="glimmer">PULSE<span>313_SYNC</span></h1>
-        <div style="margin-top: 50px;">
-            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: #666; letter-spacing: 5px;">EST. 1980 // REBORN 2026</span>
+    <section style="height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <h1 style="font-family: var(--font-techno); font-size: clamp(2.5rem, 10vw, 7rem); margin: 0;">PULSE<span>TECH_FEST</span></h1>
+        <p style="margin-top: 30px; letter-spacing: 10px; color: var(--electric-purple); font-size: 0.8rem;">TOLEDO_OHIO // 2026</p>
+    </section>
+
+    <section id="guide">
+        <h2>FESTIVAL_GUIDE</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px;">
+            <div>
+                <h3 style="color: var(--electric-purple);">ALLOWED [ OK ]</h3>
+                <ul class="guide-list" style="grid-template-columns: 1fr;">
+                    <li><span>+</span> Empty Camelbaks / Reusable Bottles</li>
+                    <li><span>+</span> Portable Chargers</li>
+                    <li><span>+</span> Earplugs (Highly Recommended)</li>
+                    <li><span>+</span> Good Vibes & Toledo Pride</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: #ff3333;">PROHIBITED [ X ]</h3>
+                <ul class="guide-list" style="grid-template-columns: 1fr;">
+                    <li><span>-</span> Professional Cameras (No Flash)</li>
+                    <li><span>-</span> Outside Food & Drink</li>
+                    <li><span>-</span> Bad Attitudes</li>
+                    <li><span>-</span> Physical Tickets (Digital Entry Only)</li>
+                </ul>
+            </div>
         </div>
     </section>
 
-    <section class="stage-section">
-        <div class="stage-grid">
-            <div class="stage-card">
-                <h3>CORE_WAREHOUSE</h3>
-                <p>High-velocity industrial techno. No flash photography allowed.</p>
-                <div class="bpm-tag">142 BPM</div>
+    <section id="vendors">
+        <h2>FUEL_STATION // LOCAL EATS</h2>
+        <div class="vendor-grid">
+            <div class="vendor-card">
+                <h4 style="font-family: 'Bungee'; margin-top: 0;">RUDY'S</h4>
+                <p style="font-size: 0.75rem; color: #888;">The Toledo classic. Hot dogs & chili fries to keep the 2AM sets moving.</p>
             </div>
-            <div class="stage-card">
-                <h3>CYAN_ROOM</h3>
-                <p>Electro-funk and classic 303 acid basslines.</p>
-                <div class="bpm-tag">128 BPM</div>
+            <div class="vendor-card">
+                <h4 style="font-family: 'Bungee'; margin-top: 0;">FRICKER'S</h4>
+                <p style="font-size: 0.75rem; color: #888;">Frickin' Chicken on the Maumee. Wings, chunks, and festival-only spices.</p>
             </div>
-            <div class="stage-card">
-                <h3>THE_VOID</h3>
-                <p>Experimental ambient and modular synthesis performances.</p>
-                <div class="bpm-tag">VAR_BPM</div>
+            <div class="vendor-card">
+                <h4 style="font-family: 'Bungee'; margin-top: 0;">BALANCE</h4>
+                <p style="font-size: 0.75rem; color: #888;">Healthy Asian fusion for the high-performance techno fan. Clean fuel.</p>
+            </div>
+            <div class="vendor-card">
+                <h4 style="font-family: 'Bungee'; margin-top: 0;">BREW_CO</h4>
+                <p style="font-size: 0.75rem; color: #888;">Local Toledo craft beers and custom "Pulse" energy infusions.</p>
             </div>
         </div>
     </section>
 
     <div class="player-bar">
-        <div class="player-label">LIVE_FEED</div>
-        <iframe width="100%" height="60" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/272378335&color=%23ccff00&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+        <iframe width="100%" height="60" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1435850953&color=%23ccff00&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
     </div>
 
 </body>
