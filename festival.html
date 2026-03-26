@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PULSE SYNC 2026 | Detroit Electronic Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-amber: #ffaa00;
+            --electric-blue: #00f2ff;
+            --deep-black: #050505;
+            --concrete: #1a1a1a;
+            --font-mono: 'IBM Plex Mono', monospace;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            color: #fff;
+            margin: 0;
+            font-family: var(--font-mono);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* DYNAMIC HERO */
+        .fest-hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.8), var(--deep-black)), 
+                        url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-attachment: fixed;
+            text-align: center;
+        }
+
+        .glitch-title {
+            font-family: 'Bungee';
+            font-size: clamp(4rem, 18vw, 12rem);
+            line-height: 0.8;
+            margin: 0;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .glitch-title span { color: var(--neon-amber); display: block; }
+
+        /* THE INTERACTIVE MAP / STAGES */
+        .grid-section { padding: 100px 10%; }
+        
+        .section-tag {
+            font-family: 'Syncopate';
+            font-size: 0.6rem;
+            color: var(--neon-amber);
+            letter-spacing: 10px;
+            margin-bottom: 40px;
+            display: block;
+        }
+
+        .stage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .stage-card {
+            border: 1px solid #222;
+            padding: 40px;
+            transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            background: rgba(255,255,255,0.02);
+            cursor: pointer;
+        }
+
+        .stage-card:hover {
+            border-color: var(--electric-blue);
+            background: rgba(0, 242, 255, 0.05);
+            transform: translateY(-10px);
+        }
+
+        .stage-card h3 { font-family: 'Bungee'; font-size: 2rem; margin: 0; }
+        .stage-status { color: var(--electric-blue); font-size: 0.7rem; margin-top: 10px; display: block; }
+
+        /* VENDOR ALLEY */
+        .vendor-strip {
+            background: var(--concrete);
+            padding: 60px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            border-top: 1px solid var(--neon-amber);
+            border-bottom: 1px solid var(--neon-amber);
+        }
+
+        .vendor-scroll {
+            display: inline-block;
+            animation: scroll 30s linear infinite;
+        }
+
+        .vendor-scroll span {
+            font-family: 'Bungee';
+            font-size: 2rem;
+            margin: 0 40px;
+            color: rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+
+        .vendor-scroll span:hover { color: var(--neon-amber); }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* THE SANCTUARY (QUIET SPACE) */
+        .sanctuary {
+            background: #000;
+            padding: 100px 10%;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            border: 1px solid #111;
+        }
+
+        .sanctuary-text { flex: 1; }
+        .sanctuary-text h2 { font-family: var(--font-serif); font-style: italic; font-size: 4rem; color: var(--electric-blue); }
+
+        /* TICKET WIDGET */
+        .ticket-footer {
+            padding: 100px 10%;
+            text-align: center;
+            background: var(--neon-amber);
+            color: #000;
+        }
+
+        .ticket-footer h2 { font-family: 'Bungee'; font-size: 5rem; margin: 0; }
+        .buy-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 20px 60px;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Bungee';
+            font-size: 1.5rem;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover { transform: scale(1.1); }
+
+    </style>
+</head>
+<body>
+
+    <header class="fest-hero">
+        <h1 class="glitch-title">PULSE<span>SYNC</span></h1>
+        <p style="font-family: 'Syncopate'; letter-spacing: 15px; margin-top: 20px;">DETROIT // 2026</p>
+    </header>
+
+    <div class="vendor-strip">
+        <div class="vendor-scroll">
+            <span>CHARBANZO!</span> <span>313 HOSPITALITY</span> <span>DAWLHAUS COFFEE</span> <span>DETROIT SOUL</span> <span>TECHNO TACO</span>
+            <span>CHARBANZO!</span> <span>313 HOSPITALITY</span> <span>DAWLHAUS COFFEE</span> <span>DETROIT SOUL</span> <span>TECHNO TACO</span>
+        </div>
+    </div>
+
+    <section class="grid-section">
+        <span class="section-tag">SELECT YOUR FREQUENCY // STAGES</span>
+        <div class="stage-grid">
+            <div class="stage-card">
+                <h3>THE FOUNDRY</h3>
+                <span class="stage-status">LIVE // HIGH INTENSITY</span>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 20px;">The heart of the system. Industrial techno and warehouse vibes.</p>
+            </div>
+            <div class="stage-card">
+                <h3>THE ARCHIVE</h3>
+                <span class="stage-status">LIVE // VINYL ONLY</span>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 20px;">Deep cuts, Detroit legends, and rare grooves.</p>
+            </div>
+            <div class="stage-card">
+                <h3>CYBER GARDEN</h3>
+                <span class="stage-status">LIVE // AMBIENT</span>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 20px;">Immersive visuals and downtempo soundscapes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sanctuary">
+        <div class="sanctuary-text">
+            <span class="section-tag" style="color: var(--electric-blue);">PROTOCOL: RECHARGE</span>
+            <h2>The Sanctuary</h2>
+            <p style="color: #666; letter-spacing: 1px;">A sound-dampened architectural space. Low light, oxygen bars, and zero-latency relaxation. Because the rush needs a rest.</p>
+        </div>
+        <div style="flex: 1; border: 1px solid #222; padding: 40px; font-family: 'Bungee'; font-size: 4rem; color: #111;">SILENCE</div>
+    </section>
+
+    <section class="ticket-footer">
+        <span class="section-tag" style="color: #000;">COMMENCE SYNC</span>
+        <h2>GET YOUR PASS</h2>
+        <a href="#" class="buy-btn">ACCESS THE ARCHIVE</a>
+    </section>
+
+</body>
+</html>
