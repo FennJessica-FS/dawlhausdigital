@@ -3,196 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>313 SYNC | Hospitality Architecture</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=IBM+Plex+Mono:wght@300;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <title>313 SYNC | Detroit Hospitality Architecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --detroit-gold: #c5a059;
-            --live-cyan: #00f2ff;
-            --thermal-red: #ff4500;
-            --glass: rgba(10, 10, 10, 0.9);
+            --detroit-brass: #b58921;
+            --foundry-black: #0a0a0a;
+            --concrete: #1a1a1a;
             --font-mono: 'IBM Plex Mono', monospace;
+            --font-serif: 'DM Serif Display', serif;
         }
 
         body {
-            background-color: #030303;
+            background-color: var(--foundry-black);
+            background-image: url("https://www.transparenttextures.com/patterns/stardust.png"); /* Subtle grit */
             color: #fff;
             margin: 0;
             font-family: var(--font-mono);
-            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 1. DYNAMIC HEADER */
-        .status-header {
-            position: fixed;
-            top: 0; width: 100%;
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            z-index: 5000;
-            box-sizing: border-box;
+        /* THE FOUNDRY BADGE */
+        .foundry-badge {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            border: 1px solid var(--detroit-brass);
+            padding: 10px;
+            text-align: center;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.5rem;
+            letter-spacing: 3px;
+            color: var(--detroit-brass);
         }
 
-        .kitchen-load {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 0.6rem;
-            letter-spacing: 2px;
-            color: rgba(255,255,255,0.5);
-        }
-
-        .load-bar { width: 80px; height: 3px; background: #222; position: relative; overflow: hidden; }
-        .load-fill { position: absolute; height: 100%; width: 75%; background: linear-gradient(to right, var(--live-cyan), var(--thermal-red)); animation: pulse 2s infinite alternate; }
-
-        @keyframes pulse { 0% { opacity: 0.6; } 100% { opacity: 1; } }
-
-        /* 2. THE HERO & DASHBOARD */
+        /* HERO: THE 313 ARCHIVE */
         .hospitality-hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.7), #030303), 
-                        url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1600');
+            height: 95vh;
+            background: linear-gradient(rgba(0,0,0,0.6), var(--foundry-black)), 
+                        url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1600');
             background-size: cover;
+            background-position: center;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
+            border-bottom: 2px solid var(--concrete);
+        }
+
+        .hero-title {
+            font-family: 'Bungee', cursive;
+            font-size: clamp(5rem, 15vw, 10rem);
+            line-height: 0.8;
+            margin: 0;
             text-align: center;
         }
 
-        .hero-title { font-family: 'Bungee'; font-size: clamp(4.5rem, 18vw, 12rem); line-height: 0.8; margin: 0; }
-        .hero-title span { color: var(--detroit-gold); display: block; }
-
-        .dashboard-stats {
-            margin-top: 40px;
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+        .hero-title span {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 400;
+            font-size: 0.6em;
+            color: var(--detroit-brass);
+            display: block;
+            margin-top: -10px;
+            letter-spacing: -2px;
         }
 
-        .stat-box { padding: 10px 20px; text-align: left; border-left: 1px solid var(--detroit-gold); }
-        .stat-label { font-size: 0.55rem; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
-        .stat-value { font-family: 'Syncopate'; font-size: 0.8rem; color: #fff; }
+        /* HOUSE PROTOCOLS (The "Vibe" Section) */
+        .protocol-bar {
+            background: var(--concrete);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 40px 10%;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
 
-        /* 3. MENU SYSTEM */
-        .menu-grid { padding: 100px 10%; max-width: 1200px; margin: 0 auto; }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .protocol-item h4 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.6rem;
+            color: var(--detroit-brass);
+            margin-bottom: 10px;
+        }
 
-        .item-card {
-            border-left: 2px solid rgba(255,255,255,0.05);
-            padding: 40px;
-            margin-bottom: 20px;
+        .protocol-item p {
+            font-size: 0.75rem;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+
+        /* THE MENU: BESPOKE & BOLD */
+        .menu-section {
+            padding: 120px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-label {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 3rem;
+            color: var(--detroit-brass);
+            margin-bottom: 60px;
+            display: block;
+            border-bottom: 1px solid var(--detroit-brass);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 100px;
+        }
+
+        .menu-item {
+            position: relative;
+        }
+
+        .item-header {
             display: flex;
             justify-content: space-between;
-            transition: 0.4s;
-            cursor: crosshair;
+            align-items: baseline;
+            border-bottom: 2px solid var(--concrete);
+            padding-bottom: 15px;
         }
 
-        .item-card:hover { border-left-color: var(--live-cyan); background: rgba(255,255,255,0.03); }
-        .item-name { font-family: 'Bungee'; font-size: 1.8rem; margin: 0; }
-        .item-price { font-family: 'Bungee'; color: var(--detroit-gold); font-size: 1.4rem; }
-        .item-desc { font-size: 0.75rem; color: #555; text-transform: uppercase; margin-top: 10px; letter-spacing: 1px; }
+        .item-name {
+            font-family: 'Bungee', cursive;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+        }
 
-        .item-86 { opacity: 0.15; filter: grayscale(1); pointer-events: none; }
+        .item-price {
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            color: var(--detroit-brass);
+        }
+
+        .item-desc {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 15px;
+            line-height: 1.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 86 STATUS: DETROIT STYLE */
+        .item-86 {
+            opacity: 0.15;
+            filter: grayscale(1);
+        }
+
+        .item-86::after {
+            content: "[ 86 ]";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            font-family: 'Bungee';
+            font-size: 3rem;
+            color: var(--detroit-brass);
+            transform: translateY(-50%);
+            opacity: 0.5;
+        }
+
+        .back-nav {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 1000;
+        }
+
+        .back-nav a {
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Syncopate';
+            font-size: 0.6rem;
+            border: 1px solid #333;
+            padding: 12px 20px;
+            background: var(--foundry-black);
+        }
     </style>
 </head>
 <body>
 
-    <header class="status-header">
-        <div class="kitchen-load">
-            <span>KITCHEN_HEAT</span>
-            <div class="load-bar"><div class="load-fill"></div></div>
-            <span id="load-text" style="color: var(--thermal-red)">SYNCING...</span>
-        </div>
-        <div style="font-family: 'Syncopate'; font-size: 0.55rem; letter-spacing: 3px; opacity: 0.6;">
-            LIVE_POS_FEED // <span id="clock">00:00:00</span>
-        </div>
+    <div class="foundry-badge">
+        EST. 313 // FORGED IN DETROIT
+    </div>
+
+    <div class="back-nav">
+        <a href="index.html">← RETURN TO STUDIO</a>
+    </div>
+
+    <header class="hospitality-hero">
+        <h1 class="hero-title">313 <span>Sync</span></h1>
     </header>
 
-    <section class="hospitality-hero">
-        <h1 class="hero-title">313 <span>SYNC</span></h1>
-        
-        <div class="dashboard-stats">
-            <div class="stat-box">
-                <div class="stat-label">Wait Time</div>
-                <div id="wait-val" class="stat-value">--</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">Bar Status</div>
-                <div id="bar-val" class="stat-value">ACTIVE</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">Capacity</div>
-                <div id="cap-val" class="stat-value">--</div>
-            </div>
+    <section class="protocol-bar">
+        <div class="protocol-item">
+            <h4>SERVICE</h4>
+            <p>Real-time Inventory Management</p>
+        </div>
+        <div class="protocol-item">
+            <h4>CULTURE</h4>
+            <p>Bespoke Guest Experiences</p>
+        </div>
+        <div class="protocol-item">
+            <h4>STRENGTH</h4>
+            <p>Heavy-Duty Hospitality Architecture</p>
         </div>
     </section>
 
-    <main class="menu-grid">
-        <div class="item-card reveal">
-            <div><h3 class="item-name">Dawl Burger</h3><p class="item-desc">Wagyu / Aged Cheddar / Black Garlic</p></div>
-            <span class="item-price">22.</span>
-        </div>
-        <div class="item-card reveal item-86">
-            <div><h3 class="item-name">Ribeye</h3><p class="item-desc">Bone-In / 45-Day Aged / Marrow Butter</p></div>
-            <span class="item-price">85.</span>
-        </div>
-        <div class="item-card reveal">
-            <div><h3 class="item-name">Short Rib Poutine</h3><p class="item-desc">Hand-Cut / Local Curds / 12-Hour Braise</p></div>
-            <span class="item-price">19.</span>
+    <main class="menu-section">
+        <span class="category-label">Signature Provisions</span>
+        <div class="menu-grid">
+            
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">The Dawl Burger</span>
+                    <span class="item-price">22.</span>
+                </div>
+                <p class="item-desc">Dry-Aged Wagyu / Reserve Cheddar / Burnt Onion / Brioche.</p>
+            </div>
+
+            <div class="menu-item item-86">
+                <div class="item-header">
+                    <span class="item-name">Bone-In Ribeye</span>
+                    <span class="item-price">85.</span>
+                </div>
+                <p class="item-desc">32oz / 45-Day Aged / Marrow Butter / Smoked Sea Salt.</p>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Marrow & Sourdough</span>
+                    <span class="item-price">18.</span>
+                </div>
+                <p class="item-desc">Roasted Bone Marrow / Herb Salad / Charred Avalon Sourdough.</p>
+            </div>
+
         </div>
     </main>
 
-    <script>
-        function updateSystem() {
-            const now = new Date();
-            const hour = now.getHours();
-            
-            // 1. Clock
-            document.getElementById('clock').innerText = now.toTimeString().split(' ')[0];
+    <footer style="padding: 100px; text-align: center; border-top: 1px solid var(--concrete);">
+        <p style="font-family: 'Syncopate'; font-size: 0.6rem; letter-spacing: 8px; opacity: 0.3;">
+            313 SYNC // DESIGNED FOR THE RUSH
+        </p>
+    </footer>
 
-            // 2. Wait Logic
-            let wait = "0 MIN";
-            let heat = "30%";
-            let cap = "LIGHT";
-
-            if (hour >= 18 && hour < 21) { // Dinner Rush 6-9 PM
-                wait = "45 MIN"; heat = "92% CRITICAL"; cap = "AT CAPACITY";
-            } else if (hour >= 21 && hour < 23) { // Late Night 9-11 PM
-                wait = "15 MIN"; heat = "65% ACTIVE"; cap = "STEADY";
-            } else if (hour >= 23 || hour < 11) { // Closing/Late
-                wait = "KITCHEN CLOSED"; heat = "05% IDLE"; cap = "BAR ONLY";
-            }
-
-            document.getElementById('wait-val').innerText = wait;
-            document.getElementById('load-text').innerText = heat;
-            document.getElementById('cap-val').innerText = cap;
-        }
-
-        // Scroll Reveal
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 150) { reveals[i].classList.add("active"); }
-            }
-        }
-
-        window.addEventListener("scroll", reveal);
-        setInterval(updateSystem, 1000);
-        updateSystem();
-        reveal();
-    </script>
 </body>
 </html>
