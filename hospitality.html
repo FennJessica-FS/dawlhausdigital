@@ -6,23 +6,29 @@
     <title>313 Hospitality Sync | Dawlhaus Digital Proof of Concept</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@300;700&family=Syncopate:wght@700&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
     <style>
         :root {
-            --detroit-gold: #ffcc00; /* Amber glow from your search results */
+            --detroit-gold: #ffcc00;
+            --heat-lamp: #FF4500; /* High-priority Orange */
             --industrial-black: #0d0d0d;
+            --font-mono: 'IBM Plex Mono', monospace;
         }
 
         body {
             background-color: var(--industrial-black);
-            /* Subtle texture overlay for that raw Detroit feel */
             background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
+            color: #fff;
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
         }
         
+        /* THE TICKET (CHIT) HEADER STYLING */
         .hospitality-hero {
             height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(13,13,13,1)), 
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(13,13,13,1)), 
                         url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&q=80&w=1200');
             background-size: cover;
             background-position: center;
@@ -34,25 +40,25 @@
         }
 
         .rush-indicator {
-            background: var(--detroit-gold);
-            color: #000;
-            font-family: var(--font-retro);
+            background: var(--heat-lamp);
+            color: #fff;
+            font-family: var(--font-mono);
             font-size: 0.75rem;
-            padding: 6px 14px;
-            border-radius: 2px;
+            padding: 8px 16px;
+            border: 1px solid #fff;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: bold;
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
             animation: alert-pulse 1.5s infinite ease-in-out;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             display: inline-block;
         }
 
         @keyframes alert-pulse {
-            0% { box-shadow: 0 0 5px rgba(255, 204, 0, 0.3); transform: scale(1); }
-            50% { box-shadow: 0 0 20px rgba(255, 204, 0, 0.8); transform: scale(1.02); }
-            100% { box-shadow: 0 0 5px rgba(255, 204, 0, 0.3); transform: scale(1); }
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .essentials-bar {
@@ -62,27 +68,69 @@
             margin: 25px auto;
             max-width: 650px;
             justify-content: center;
-            font-size: 0.8rem;
-            font-family: var(--font-retro);
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
             letter-spacing: 1px;
             border: 1px solid rgba(255, 204, 0, 0.2);
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
+            text-transform: uppercase;
         }
 
+        /* MENU STYLING */
+        .menu-section { padding: 60px 10%; }
+        
         .menu-category h3 {
-            font-family: var(--font-retro);
+            font-family: 'Syncopate', sans-serif;
             color: var(--detroit-gold);
-            border-bottom: 2px solid #222;
+            border-bottom: 1px solid #333;
             padding-bottom: 10px;
             margin-bottom: 30px;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
         }
 
-        .item-price {
-            color: var(--detroit-gold);
-            font-family: var(--font-retro);
+        .menu-item {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Bungee', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        .item-price { color: var(--heat-lamp); font-family: var(--font-mono); }
+        
+        .item-desc {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 5px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* THE 86 (SOLD OUT) STAMP */
+        .item-86 {
+            opacity: 0.3;
+            filter: grayscale(1);
+        }
+
+        .item-86::after {
+            content: "SOLD OUT // 86";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-5deg);
+            background: var(--heat-lamp);
+            color: white;
+            font-family: var(--font-mono);
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border: 2px solid white;
+            z-index: 10;
         }
 
         .back-nav {
@@ -97,60 +145,45 @@
     <div class="noise-overlay"></div>
     
     <div class="back-nav">
-        <a href="index.html" class="nav-btn" style="font-size: 0.7rem; padding: 8px 15px;">← Return to Dawlhaus</a>
+        <a href="index.html" class="nav-btn" style="text-decoration: none; color: #fff; background: rgba(0,0,0,0.5); padding: 8px 15px; border: 1px solid var(--detroit-gold); font-size: 0.7rem; font-family: var(--font-mono);">← RETURN_TO_DAWLHAUS</a>
     </div>
 
     <header class="hospitality-hero">
         <div class="hero-text">
-            <div class="rush-indicator">Status: Saturday Night Rush</div>
+            <div class="rush-indicator">STATUS: SATURDAY_NIGHT_RUSH</div>
             
-            <h1 style="font-family: 'Bungee'; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1;">313 <span style="color: var(--detroit-gold);">SYNC</span></h1>
+            <p style="font-family: var(--font-mono); color: var(--heat-lamp); font-size: 0.7rem; margin-bottom: 15px;">
+                SYS_TIME: <span id="current-time">00:00:00</span> // DETROIT_313
+            </p>
+
+            <h1 style="font-family: 'Bungee'; font-size: clamp(2.5rem, 6vw, 5rem); margin: 0; line-height: 1;">313 <span style="color: var(--detroit-gold);">SYNC</span></h1>
             
             <div class="essentials-bar">
-                <span style="color: var(--detroit-gold);">●</span> FULL BAR 
-                <span style="color: var(--detroit-gold);">●</span> 45 MIN WAIT 
-                <span style="color: var(--detroit-gold);">●</span> CARRY-OUT OPEN
+                <span>● FULL BAR</span> 
+                <span>● 45 MIN WAIT</span> 
+                <span>● CARRY-OUT OPEN</span>
             </div>
 
-            <div class="cta-group" style="justify-content: center;">
-                <a href="#" class="btn primary" style="background: var(--detroit-gold); border-color: var(--detroit-gold);">Reserve a Table</a>
-                <a href="#" class="btn secondary">Order Carry-Out</a>
+            <div class="cta-group" style="display: flex; gap: 15px; justify-content: center;">
+                <a href="#" class="btn primary" style="background: var(--detroit-gold); color: #000; padding: 12px 24px; text-decoration: none; font-family: 'Bungee';">Reserve</a>
+                <a href="#" class="btn secondary" style="border: 1px solid #fff; color: #fff; padding: 12px 24px; text-decoration: none; font-family: 'Bungee';">Order</a>
             </div>
-            
-            <p style="margin-top: 30px; font-style: italic; opacity: 0.7; font-size: 0.9rem;">
-                "Respect the plate. Respect the clock. Respect the guest."
-            </p>
         </div>
     </header>
-
-    <section style="padding: 60px 10%; background: rgba(0,0,0,0.3);">
-        <div class="card-grid">
-            <div class="glass" style="text-align: center;">
-                <h4 style="color: var(--detroit-gold); font-family: var(--font-retro); margin-bottom: 10px;">The Bar</h4>
-                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Hand-crafted cocktails and local 313 brews. Service until 2 AM.</p>
-            </div>
-            <div class="glass" style="text-align: center;">
-                <h4 style="color: var(--detroit-gold); font-family: var(--font-retro); margin-bottom: 10px;">Carry-Out</h4>
-                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Fast pickup for the neighborhood. Order online, grab at the side window.</p>
-            </div>
-            <div class="glass" style="text-align: center;">
-                <h4 style="color: var(--detroit-gold); font-family: var(--font-retro); margin-bottom: 10px;">The Vibe</h4>
-                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Industrial grit meets high-end service. No reservations under 6 guests.</p>
-            </div>
-        </div>
-    </section>
 
     <section class="menu-section">
         <div class="menu-category">
             <h3>Detroit Soul Fare</h3>
             <div class="menu-grid">
-                <div class="menu-item">
+                
+                <div class="menu-item item-86">
                     <div class="item-header">
                         <span class="item-name">The "Dawl" Burger</span>
                         <span class="item-price">$18</span>
                     </div>
                     <p class="item-desc">Double patty, sharp white cheddar, house-made dill pickles, toasted brioche. No shortcuts.</p>
                 </div>
+
                 <div class="menu-item">
                     <div class="item-header">
                         <span class="item-name">Short Rib Poutine</span>
@@ -158,13 +191,25 @@
                     </div>
                     <p class="item-desc">Hand-cut fries, local cheese curds, 12-hour braised short rib. Pure grit in a bowl.</p>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <footer style="padding: 40px; text-align: center; border-top: 1px solid var(--border); font-size: 0.7rem; opacity: 0.5; letter-spacing: 2px;">
+    <footer style="padding: 40px; text-align: center; opacity: 0.5; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 2px;">
         <p>313 HOSPITALITY SYNC // SERVICE • HONOR • CODE</p>
     </footer>
 
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
+                            now.getMinutes().toString().padStart(2, '0') + ":" + 
+                            now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('current-time').textContent = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
 </body>
 </html>
