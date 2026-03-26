@@ -350,3 +350,22 @@ form input:focus {
     letter-spacing: 4px;
     opacity: 0.3;
 }
+/* THE SCANNER ANIMATION */
+.grid-item::after {
+    content: "";
+    position: absolute;
+    top: -10%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--raw-brass);
+    box-shadow: 0 0 15px var(--raw-brass);
+    z-index: 5;
+    animation: scan-line 4s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes scan-line {
+    0% { top: -10%; }
+    100% { top: 110%; }
+}
