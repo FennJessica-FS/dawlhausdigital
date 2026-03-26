@@ -91,12 +91,14 @@
             color: var(--acid-green);
             background: rgba(0,0,0,0.8);
             text-align: center;
+            transition: 0.2s;
         }
 
         .btn-neon:hover {
             background: var(--acid-green);
             color: #000;
             box-shadow: 0 0 20px var(--acid-green);
+            transform: scale(1.05);
         }
 
         .btn-purple { border-color: var(--electric-purple); color: var(--electric-purple); }
@@ -141,14 +143,26 @@
             background-color: rgba(188, 0, 255, 0.2) !important;
         }
 
-        /* MAP & VENDORS */
+        /* VENDOR CARDS WITH GLITCH HOVER */
+        .vendor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .vendor-card { 
+            background: var(--glass-white); 
+            padding: 30px; 
+            border-left: 3px solid var(--electric-purple); 
+            transition: 0.3s;
+            position: relative;
+        }
+        .vendor-card:hover {
+            background: rgba(188, 0, 255, 0.1);
+            border-left-color: var(--acid-green);
+            animation: glitch 0.3s infinite;
+        }
+
+        /* MAP */
         .map-container { display: grid; grid-template-columns: 1fr 300px; gap: 30px; background: var(--glass-white); padding: 20px; border: 1px solid #222; }
         .map-visual { height: 300px; background: #000; border: 1px solid var(--electric-purple); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .map-marker { position: absolute; width: 12px; height: 12px; background: var(--acid-green); border-radius: 50%; box-shadow: 0 0 10px var(--acid-green); animation: pulse-dot 1.5s infinite; }
         @keyframes pulse-dot { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.8); opacity: 0.4; } 100% { transform: scale(1); opacity: 1; } }
-        
-        .vendor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .vendor-card { background: var(--glass-white); padding: 30px; border-left: 3px solid var(--electric-purple); }
     </style>
 </head>
 <body>
@@ -184,6 +198,20 @@
             <div class="time-unit"><span id="mins">00</span><label>MIN</label></div>
             <div class="time-unit"><span id="secs">00</span><label>SEC</label></div>
         </div>
+
+        <div style="margin-top: 50px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+            <a href="thankyou.html" class="btn-neon glitch-title" style="font-size: 1.2rem; padding: 20px 40px; letter-spacing: 5px; text-decoration: none;">
+                [ INITIATE_TICKETING ]
+            </a>
+            <div style="font-size: 0.6rem; color: var(--electric-purple); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 2px;">
+                <span style="color: var(--acid-green); animation: pulse-dot 1s infinite;">●</span> 
+                Tier_01: Sold_Out // Tier_02: 84% Capacity // System_Stable
+            </div>
+            <div style="display: flex; gap: 15px; margin-top: 20px;">
+                <a href="#map" class="btn-neon" style="font-size: 0.5rem; padding: 8px 15px; border-color: #333; color: #888; text-decoration: none;">[ LOCATE_STAGES ]</a>
+                <a href="#vendors" class="btn-neon" style="font-size: 0.5rem; padding: 8px 15px; border-color: #333; color: #888; text-decoration: none;">[ ACCESS_FUEL_STATION ]</a>
+            </div>
+        </div>
     </section>
 
     <section id="map">
@@ -209,11 +237,11 @@
             <div class="vendor-card"><h4>RUDY'S</h4><p style="font-size: 0.75rem; color: #888;">Hot dogs & chili fries to fuel the 2AM sets.</p></div>
             <div class="vendor-card"><h4>FRICKER'S</h4><p style="font-size: 0.75rem; color: #888;">Chicken chunks on the Maumee River.</p></div>
             <div class="vendor-card"><h4>BALANCE</h4><p style="font-size: 0.75rem; color: #888;">Clean Asian fusion farm bowls.</p></div>
+            <div class="vendor-card"><h4>BREW_CO</h4><p style="font-size: 0.75rem; color: #888;">Local Toledo craft beers and custom 'Pulse' energy infusions.</p></div>
         </div>
     </section>
 
     <script>
-        // CURSOR & BASS FLASH LOGIC
         const cursor = document.getElementById('cursor');
         const grid = document.getElementById('grid-bg');
 
@@ -222,7 +250,6 @@
             cursor.style.top = e.clientY + 'px';
         });
 
-        // Click for Bass Flash
         document.addEventListener('mousedown', () => {
             grid.classList.add('bass-flash');
             cursor.style.borderColor = 'white';
@@ -237,7 +264,6 @@
             cursor.style.height = '20px';
         });
 
-        // Hover expansions
         document.querySelectorAll('a, button, .vendor-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursor.style.width = '45px';
@@ -249,7 +275,6 @@
             });
         });
 
-        // COUNTDOWN LOGIC
         const festDate = new Date("August 14, 2026 12:00:00").getTime();
         setInterval(function() {
             const now = new Date().getTime();
