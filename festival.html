@@ -10,99 +10,71 @@
             --acid-green: #ccff00;
             --electric-purple: #bc00ff;
             --deep-void: #05000a;
+            --glass-white: rgba(255, 255, 255, 0.05);
             --font-techno: 'Syncopate', sans-serif;
             --font-mono: 'IBM Plex Mono', monospace;
         }
 
-        /* CURSOR INVERSION */
+        /* 1. HIGH-FIDELITY CURSOR */
         * { cursor: none !important; }
         #cursor {
             width: 25px; height: 25px;
             border: 2px solid var(--acid-green);
-            position: fixed;
-            pointer-events: none;
-            z-index: 99999;
+            position: fixed; pointer-events: none; z-index: 99999;
             transform: translate(-50%, -50%);
-            mix-blend-mode: difference;
+            transition: width 0.1s, height 0.1s;
         }
-        #cursor.active { width: 80px; height: 80px; background: rgba(255, 255, 255, 0.1); }
+        #cursor.scan { 
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            background: repeating-conic-gradient(from 0deg, var(--acid-green) 0deg 2deg, transparent 2deg 20deg);
+            animation: cur-pulse 1.5s infinite linear;
+        }
+        @keyframes cur-pulse { 0% { transform: translate(-50%, -50%) rotate(0deg); opacity: 1; } 100% { transform: translate(-50%, -50%) rotate(360deg); opacity: 0.3; } }
 
         html { scroll-behavior: smooth; }
         body { 
-            background-color: var(--deep-void); 
-            color: #fff; 
-            margin: 0; 
-            font-family: var(--font-mono); 
-            overflow-x: hidden; 
+            background-color: var(--deep-void); background-image: radial-gradient(circle, rgba(188, 0, 255, 0.05) 1px, transparent 1px); background-size: 80px 80px;
+            color: #fff; margin: 0; font-family: var(--font-mono); overflow-x: hidden; 
         }
 
-        /* SIDE NAVIGATION */
-        .side-nav {
-            position: fixed;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 5000;
+        /* 2. HUd DATA OVERLAY (Side Nav) */
+        .hud-nav {
+            position: fixed; left: 0; top: 0; width: 180px; height: 100vh;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 50px 10px; box-sizing: border-box; z-index: 5000; background: rgba(0,0,0,0.7);
         }
-
-        .nav-btn {
-            font-family: 'Bungee';
-            font-size: 0.9rem;
-            color: #fff;
-            text-decoration: none;
-            padding: 15px 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0,0,0,0.8);
-            transition: 0.3s;
-            text-align: center;
-            width: 140px;
+        .nav-link {
+            font-family: 'Bungee'; font-size: 0.8rem; color: #fff; text-decoration: none;
+            padding: 15px 0; width: 100%; text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            transition: 0.3s; letter-spacing: 2px;
         }
+        .nav-link:hover { color: var(--acid-green); background: linear-gradient(90deg, transparent, rgba(204, 255, 0, 0.03)); border-bottom-color: var(--acid-green); }
+        .nav-link.active { color: var(--acid-green); border-bottom-color: var(--acid-green); text-shadow: 0 0 10px var(--acid-green); }
 
-        .nav-btn:hover {
-            border-color: var(--acid-green);
-            color: var(--acid-green);
-            transform: translateX(10px);
-            box-shadow: -5px 0 15px var(--acid-green);
-        }
+        /* HERO & MAIN TEXT */
+        section { padding: 120px 10% 120px calc(180px + 5%); border-bottom: 1px solid #111; position: relative; z-index: 3; }
+        h1 { font-family: var(--font-techno); font-size: clamp(3rem, 10vw, 6rem); margin: 0; line-height: 0.85; }
+        h2 { font-family: var(--font-techno); font-size: 2.5rem; color: var(--acid-green); margin-bottom: 30px; border-left: 3px solid var(--electric-purple); padding-left: 20px;}
 
-        .nav-btn.buy-tickets {
-            border-color: var(--acid-green);
-            background: var(--acid-green);
-            color: #000;
-        }
+        /* LINEUP & VENDOR DOSSIERS */
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .data-dossier { border: 1px solid #222; padding: 40px; background: var(--glass-white); transition: 0.3s; position: relative; }
+        .data-dossier:hover { border-color: var(--acid-green); box-shadow: 0 0 30px rgba(204, 255, 0, 0.05); animation: glitch 0.3s infinite; }
+        .dossier-id { font-family: 'Bungee'; font-size: 2.2rem; margin-bottom: 10px; }
+        .dossier-status { font-size: 0.7rem; color: var(--electric-purple); letter-spacing: 2px; }
 
-        /* GRID BACKGROUND */
-        #grid-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(188, 0, 255, 0.05) 1px, transparent 1px), 
-                              linear-gradient(90deg, rgba(188, 0, 255, 0.05) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: 1;
-            pointer-events: none;
-        }
-        .bass-flash { background-color: rgba(188, 0, 255, 0.2) !important; }
+        /* MAP ELEMENTS */
+        #map-hud { width: 100%; height: 500px; background: #000; border: 2px solid var(--acid-green); position: relative; display: flex; align-items: center; justify-content: center; }
+        .map-beacon { position: absolute; width: 10px; height: 10px; background: var(--acid-green); border-radius: 50%; animation: beat 1.5s infinite; }
+        @keyframes beat { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
+        
+        #scan-visual { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9000; align-items: center; justify-content: center; color: var(--acid-green); font-family: var(--font-techno); text-align: center;}
+        .scan-circle { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--acid-green); border-top-color: transparent; animation: cur-pulse 1s infinite linear; }
 
-        section { padding: 120px 10% 120px 200px; border-bottom: 1px solid #222; position: relative; z-index: 3; }
-
-        h1 { font-family: var(--font-techno); font-size: clamp(3rem, 10vw, 7rem); margin: 0; line-height: 0.85; }
-        h2 { font-family: var(--font-techno); font-size: 3rem; color: var(--acid-green); margin-bottom: 40px; }
-
-        .hero-player {
-            width: 100%; max-width: 800px;
-            background: #000; padding: 20px;
-            border: 2px solid var(--electric-purple);
-            margin: 40px 0;
-        }
-
-        .lineup-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; width: 100%; }
-        .card { border: 1px solid #333; padding: 50px; background: rgba(255,255,255,0.02); font-family: 'Bungee'; font-size: 2rem; transition: 0.3s; }
-        .card:hover { color: var(--acid-green); border-color: var(--acid-green); background: rgba(204, 255, 0, 0.05); }
-
-        #countdown span { font-size: 5rem; color: var(--acid-green); font-weight: bold; }
+        @keyframes glitch { 0% { transform: translate(0); } 25% { transform: translate(-2px, 2px); } 50% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
     </style>
 </head>
 <body>
@@ -110,114 +82,146 @@
     <div id="grid-bg"></div>
     <div id="cursor"></div>
 
-    <nav class="side-nav">
-        <a href="javascript:void(0)" onclick="generatePass()" class="nav-btn buy-tickets">TICKETS</a>
-        <a href="#lineup" class="nav-btn">LINEUP</a>
-        <a href="#map" class="nav-btn">MAP</a>
-        <a href="#vendors" class="nav-btn">VENDORS</a>
-        <a href="#rules" class="nav-btn">RULES</a>
+    <nav class="hud-nav">
+        <p style="font-family: var(--font-techno); font-size: 0.5rem; color: #555; letter-spacing: 3px; border-bottom: 1px solid #111; padding-bottom: 10px;">SYSTEM_STATUS: ACTIVE</p>
+        <a href="#lineup" class="nav-link">[ LINEUP ]</a>
+        <a href="#map" class="nav-link active">[ SIT_MAP ]</a>
+        <a href="#vendors" class="nav-link">[ FUEL_STATIONS ]</a>
+        <a href="#rules" class="nav-link">[ PROTOCOLS ]</a>
+        <a href="thankyou.html" class="nav-link buy-pass" style="background: var(--acid-green); color: #000; margin-top: 50px;">GET PASS</a>
     </nav>
 
+    <div id="scan-visual">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+            <div class="scan-circle"></div>
+            <h3>BIOMETRIC_VERIFICATION<br>IN_PROGRESS</h3>
+        </div>
+    </div>
+
     <section id="hero" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; text-align: left;">
-        <p style="color: var(--electric-purple); font-weight: bold; letter-spacing: 10px; margin-bottom: 10px;">EST. 2026 // TOLEDO, OH</p>
+        <p style="color: var(--electric-purple); font-weight: bold; letter-spacing: 8px; font-size: 0.7rem; margin-bottom: 5px;">AUGUST 14 2026 // TOLEDO, OH // ARENA_SECTOR</p>
         <h1>PULSE<br>TECHNO<br>FESTIVAL</h1>
         
-        <div class="hero-player">
+        <div style="width: 100%; max-width: 700px; margin: 40px 0; background: #000; padding: 20px; border: 1px solid var(--electric-purple); box-shadow: 0 0 40px rgba(188, 0, 255, 0.1);">
             <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
                 src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1967063683&color=%23bc00ff&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
             </iframe>
         </div>
 
-        <div id="countdown">
-            <span id="days">00</span><label style="font-size: 1.2rem;"> DAYS </label>
-            <span id="hours">00</span><label style="font-size: 1.2rem;"> HOURS </label>
-        </div>
-
-        <div style="margin-top: 40px;">
-            <p id="status-msg" style="font-size: 1.2rem; color: var(--electric-purple); font-weight: bold; height: 30px;"></p>
+        <div style="margin-top: 30px;">
+            <a href="javascript:void(0)" onclick="startVerification()" class="btn-neon" style="font-family: 'Bungee'; font-size: 1.5rem; text-decoration: none; padding: 25px 50px; border: 3px solid var(--acid-green); color: var(--acid-green); background: rgba(0,0,0,0.8);">[ INITIATE_NEURAL_LINK ]</a>
+            <p id="status-msg" style="margin-top: 20px; font-size: 1.2rem; color: var(--electric-purple); font-weight: bold; min-height: 30px;"></p>
         </div>
     </section>
 
     <section id="lineup">
-        <h2>THE LINEUP</h2>
-        <div class="lineup-grid">
-            <div class="card">SUB_ZERO</div>
-            <div class="card">NEON_SOUL</div>
-            <div class="card">TOLEDO_BASS</div>
-            <div class="card">CYBER_KINETIC</div>
+        <h2>ARTIST DOSSIERS</h2>
+        <div class="grid-layout">
+            <div class="data-dossier"><div class="dossier-status">SIGNAL: HIGH_PRIORITY</div><div class="dossier-id">SUB_ZERO</div><p style="font-size: 0.8rem; color: #888;">INDUSTRIAL // SUB-BASS_SPECIALIST</p></div>
+            <div class="data-dossier"><div class="dossier-status">SIGNAL: STABLE</div><div class="dossier-id">NEON_SOUL</div><p style="font-size: 0.8rem; color: #888;">AMBIENT_TECH // VISUAL_SYNC</p></div>
+            <div class="data-dossier"><div class="dossier-status">SIGNAL: STABLE</div><div class="dossier-id">TOLEDO_BASS</div><p style="font-size: 0.8rem; color: #888;">RIVERSIDE_SECTOR // LOCAL_SYNTH</p></div>
+            <div class="data-dossier"><div class="dossier-status">SIGNAL: CRITICAL_MASS</div><div class="dossier-id">CYBER_KINETIC</div><p style="font-size: 0.8rem; color: #888;">EXPERIMENTAL // NEURAL_LINK_ONLY</p></div>
         </div>
     </section>
 
     <section id="map">
-        <h2>SITE MAP</h2>
-        <div class="card" style="font-size: 1.2rem; font-family: var(--font-mono); line-height: 2;">
-            <span style="color: var(--acid-green);">[ MAIN STAGE ]</span> GLASS CITY ARENA - NORTH WING<br>
-            <span style="color: var(--acid-green);">[ FOOD COURT ]</span> THE FUEL STATION - SOUTH PLAZA<br>
-            <span style="color: var(--acid-green);">[ WATER ]</span> SYNC STATION - ALL SECTORS<br>
-            <span style="color: var(--acid-green);">[ VIP ]</span> NEON LOUNGE - OVERLOOK DECK
+        <h2>SIT_MAP // TACTICAL_HUD</h2>
+        <div id="map-hud">
+            <svg id="blueprint" viewBox="0 0 800 500" style="width: 100%; height: 100%; position: absolute; inset: 0; opacity: 0.2;">
+                <rect x="50" y="50" width="700" height="400" fill="none" stroke="var(--acid-green)" stroke-width="2"/>
+                <circle cx="400" cy="250" r="100" fill="none" stroke="var(--acid-green)" stroke-dasharray="10,5"/>
+                <rect x="150" y="350" width="200" height="80" fill="none" stroke="var(--acid-green)" />
+                <line x1="100" y1="100" x2="100" y2="400" stroke="var(--acid-green)" stroke-width="1" stroke-dasharray="5,15"/>
+            </svg>
+            
+            <div style="font-family: var(--font-techno); font-size: 0.6rem; color: var(--acid-green); text-align: center; position: absolute; bottom: 20px; text-transform: uppercase;">TOLEDO_ARENA // GLASS_CITY // HUD_ACTIVE</div>
+            
+            <div class="map-beacon" style="top: 50%; left: 50%; width: 20px; height: 20px; background: #fff;" title="[ MAIN_GRID ]"></div>
+            <div class="map-beacon" style="top: 80%; left: 30%; background: var(--electric-purple);" title="[ FUEL_STATION ]"></div>
+            <div class="map-beacon" style="top: 20%; left: 80%;" title="[ WATER_SYNC ]"></div>
         </div>
     </section>
 
     <section id="vendors">
-        <h2>FOOD & DRINK</h2>
-        <div class="lineup-grid">
-            <div class="card" style="font-size: 1.5rem;">RUDY'S HOT DOGS</div>
-            <div class="artist-card card" style="font-size: 1.5rem;">BALANCE ASIAN FUSION</div>
-            <div class="card" style="font-size: 1.5rem;">FRICKER'S</div>
-            <div class="card" style="font-size: 1.5rem;">BREW_CO DRINK LAB</div>
+        <h2>FUEL_STATIONS // TOLEDO_EATS</h2>
+        <div class="grid-layout">
+            <div class="data-dossier"><div class="dossier-status">STATUS: OPERATIONAL</div><div class="dossier-id" style="font-size: 1.8rem;">RUDY'S HOT DOGS</div></div>
+            <div class="data-dossier"><div class="dossier-status">STATUS: OPERATIONAL</div><div class="dossier-id" style="font-size: 1.8rem;">BALANCE FUSION</div></div>
+            <div class="data-dossier"><div class="dossier-status">STATUS: INVENTORY_LOW</div><div class="dossier-id" style="font-size: 1.8rem; color: var(--electric-purple);">FRICKER'S</div></div>
+            <div class="data-dossier"><div class="dossier-status">STATUS: ACTIVE</div><div class="dossier-id" style="font-size: 1.8rem;">BREW_CO DRINKS</div></div>
         </div>
     </section>
 
     <section id="rules">
-        <h2>FESTIVAL RULES</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+        <h2>PROTOCOLS // FESTIVAL_RULES</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 40px;">
             <div style="border: 2px solid var(--acid-green); padding: 40px; font-size: 1.4rem;">
                 <h3 style="color: var(--acid-green); font-family: 'Bungee';">YES</h3>
                 <ul style="list-style: square;">
-                    <li>Clear bags</li>
-                    <li>Sealed water</li>
-                    <li>Ear protection</li>
+                    <li>Clear bags only</li>
+                    <li>Sealed water bottles</li>
+                    <li>Hearing protection</li>
                 </ul>
             </div>
             <div style="border: 2px solid #ff0055; padding: 40px; font-size: 1.4rem;">
                 <h3 style="color: #ff0055; font-family: 'Bungee';">NO</h3>
                 <ul style="list-style: square;">
-                    <li>Pets (Service Only)</li>
+                    <li>Pets (Service animals only)</li>
                     <li>Flash photography</li>
-                    <li>Bad vibes</li>
+                    <li>Hard drugs // Aggression</li>
                 </ul>
             </div>
         </div>
-        <p style="font-size: 1.5rem;"><b>SMOKING:</b> Designated areas only. <b>ADA:</b> Reserved zones available at all stages. <b>RE-ENTRY:</b> Strictly prohibited.</p>
+        <p style="font-size: 1.5rem; line-height: 1.8;"><b>SMOKING:</b> Designated areas only. <b>ADA ACCESS:</b> Priority zones at all stages. <b>RE-ENTRY:</b> Absolutely prohibited once signal is lost.</p>
     </section>
 
     <script>
         const cursor = document.getElementById('cursor');
-        const grid = document.getElementById('grid-bg');
 
+        // 1. HIGH-FIDELITY CURSOR & SCAN EFFECT
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        document.addEventListener('mousedown', () => {
-            grid.classList.add('bass-flash');
-            setTimeout(() => grid.classList.remove('bass-flash'), 100);
+        document.querySelectorAll('a, .data-dossier, #map-hud, .btn-neon').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('scan'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('scan'));
         });
 
-        document.querySelectorAll('a, .nav-btn').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-        });
-
-        function generatePass() {
+        // 2. $20k INTERACTION: BIOMETRIC VERIFICATION
+        function startVerification() {
+            const visual = document.getElementById('scan-visual');
             const msg = document.getElementById('status-msg');
-            msg.innerText = "REDIRECTING TO SECURE TICKET TERMINAL...";
+            
+            visual.style.display = "flex";
+            msg.innerText = ""; // Clear old message
+
             setTimeout(() => {
-                window.location.href = "thankyou.html";
-            }, 1000);
+                visual.style.display = "none";
+                msg.innerText = "AUTHENTICATION_CONFIRMED: GUEST_PASS_" + Math.floor(Math.random()*9000 + 1000);
+                msg.style.color = "var(--acid-green)";
+
+                setTimeout(() => {
+                    window.location.href = "thankyou.html";
+                }, 1500);
+            }, 2500); // 2.5 second scan
         }
 
+        // 3. NAV ACTIVE STATE
+        window.addEventListener('scroll', () => {
+            const sections = ['lineup', 'map', 'vendors', 'rules'];
+            sections.forEach(s => {
+                const rect = document.getElementById(s).getBoundingClientRect();
+                if (rect.top < 150 && rect.bottom > 150) {
+                    document.querySelector('.nav-link[href="#'+s+'"]').classList.add('active');
+                } else {
+                    document.querySelector('.nav-link[href="#'+s+'"]').classList.remove('active');
+                }
+            });
+        });
+
+        // Simplified Countdown
         const festDate = new Date("August 14, 2026").getTime();
         setInterval(() => {
             const now = new Date().getTime();
