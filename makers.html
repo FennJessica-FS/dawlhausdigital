@@ -3,222 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>313 // INDUSTRIAL_COLLECTIVE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+    <title>313 // ARCHIVE_SYSTEM_v1.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=IBM+Plex+Mono:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --carhartt-brown: #3D2B1F;
-            --brass-plate: #E6A313;
-            --black-iron: #080808;
-            --blueprint-white: #ffffff;
+            --raw-brass: #D4AF37;   /* Authentic metallic gold */
+            --steel-dark: #050505;  /* Deeper than black */
+            --zinc: #2a2a2a;        /* Cold metal grey */
+            --white-print: #e0e0e0; /* Off-white drafting paper */
         }
 
-        /* DETROIT D CURSOR */
+        /* CUSTOM DETROIT D CURSOR */
         html, body, a, button {
             cursor: url('detroit-d.png') 0 0, auto !important;
         }
 
         body {
-            background-color: var(--black-iron);
-            color: var(--blueprint-white);
-            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--steel-dark);
+            color: var(--white-print);
+            font-family: 'IBM Plex Mono', monospace;
             margin: 0;
+            overflow-x: hidden;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            /* GRIT TEXTURE OVERLAY */
-            background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
-            background-size: 20px 20px;
         }
 
-        /* 1. THE SLOW-STEEL TICKER */
-        .marquee-strip {
-            background: var(--carhartt-brown);
-            color: var(--brass-plate);
-            padding: 15px 0;
-            border-bottom: 1px solid var(--brass-plate);
-            overflow: hidden;
+        /* 1. THE PRECISION INTERFACE HEADER */
+        .interface-header {
+            border-bottom: 1px solid var(--zinc);
+            padding: 10px 20px;
             display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            background: #000;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .marquee-content {
-            display: flex;
-            white-space: nowrap;
-            animation: steel-slide 60s linear infinite;
-            font-family: 'Syncopate', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 8px;
+        /* 2. THE CINEMATIC MARQUEE (SLOW & DELIBERATE) */
+        .marquee-container {
+            background: var(--raw-brass);
+            color: #000;
+            padding: 20px 0;
+            overflow: hidden;
+            border-bottom: 1px solid #000;
         }
 
-        @keyframes steel-slide {
+        .marquee-track {
+            display: flex;
+            white-space: nowrap;
+            animation: move-slow 80s linear infinite;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 15px;
+            font-weight: 700;
+        }
+
+        @keyframes move-slow {
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
         }
 
-        /* 2. THE ARCHITECTURAL HERO */
-        .hero-vessel {
+        /* 3. THE HERO: SYSTEM ARCHIVE v1.0 */
+        .hero-section {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            height: 95vh;
-            border-bottom: 1px solid #222;
+            grid-template-columns: repeat(12, 1fr);
+            height: 85vh;
+            border-bottom: 1px solid var(--zinc);
         }
 
-        .visual-pane {
+        .hero-visual {
+            grid-column: span 7;
             background: url('image_cfce6b.jpg') center/cover no-repeat;
-            filter: grayscale(1) contrast(1.5) brightness(0.4);
-            border-right: 1px solid #222;
+            filter: grayscale(1) contrast(1.7) brightness(0.3);
+            border-right: 1px solid var(--zinc);
             position: relative;
         }
 
-        /* TECHNICAL OVERLAY */
-        .visual-pane::after {
-            content: "REF_313_RUSSELL_ST";
+        .hero-visual::before {
+            content: "";
             position: absolute;
-            bottom: 40px;
-            left: 40px;
-            font-family: monospace;
-            font-size: 0.7rem;
-            color: var(--brass-plate);
-            border: 1px solid var(--brass-plate);
-            padding: 5px 10px;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.8) 0%, transparent 100%);
         }
 
-        .text-pane {
-            padding: 10%;
+        .hero-content {
+            grid-column: span 5;
+            padding: 60px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             background: #000;
         }
 
-        .text-pane h1 {
+        .hero-content h1 {
             font-family: 'Syncopate', sans-serif;
-            font-weight: 700;
-            font-size: clamp(3rem, 8vw, 6rem);
-            line-height: 0.9;
+            font-size: clamp(2rem, 5vw, 4rem);
+            line-height: 0.8;
             margin: 0;
             letter-spacing: -2px;
-            color: var(--blueprint-white);
         }
 
-        .text-pane h1 span {
-            color: var(--brass-plate);
+        .hero-content h1 span {
+            color: var(--raw-brass);
             display: block;
         }
 
-        /* 3. ASYMMETRICAL "BLUEPRINT" GRID */
-        .blueprint-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            padding: 2px;
-            gap: 2px;
-            background: #222;
+        .data-point {
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid var(--zinc);
+            font-size: 0.8rem;
+            line-height: 1.8;
+            color: #888;
         }
 
-        .grid-cell {
+        /* 4. ASYMMETRICAL DATA FEED */
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            padding: 1px;
+            gap: 1px;
+            background: var(--zinc);
+        }
+
+        .grid-item {
             position: relative;
+            height: 700px;
             background: #000;
-            height: 550px;
             overflow: hidden;
         }
 
-        .grid-cell img {
+        .grid-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(1) contrast(1.2) brightness(0.5);
-            transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            filter: grayscale(1) brightness(0.4);
+            transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        .grid-cell:hover img {
-            filter: grayscale(0) brightness(0.8);
-            transform: scale(1.02);
+        .grid-item:hover img {
+            filter: grayscale(0) brightness(0.7);
+            transform: scale(1.05);
         }
 
-        .large-cell { grid-column: span 8; }
-        .small-cell { grid-column: span 4; }
+        .span-8 { grid-column: span 8; }
+        .span-4 { grid-column: span 4; }
 
-        .data-tag {
+        .tag-coord {
             position: absolute;
-            top: 30px;
-            left: 30px;
-            font-family: monospace;
-            font-size: 0.8rem;
-            color: #555;
+            top: 40px;
+            left: 40px;
+            font-size: 0.7rem;
+            background: var(--raw-brass);
+            color: #000;
+            padding: 5px 12px;
+            font-weight: 700;
             z-index: 10;
         }
 
-        /* 4. THE MANIFESTO (FOOTER) */
-        .manifesto {
-            padding: 120px 8%;
-            background: #f5f5f5;
-            color: #000;
+        /* 5. THE MANIFEST FOOTER */
+        .manifest-footer {
+            padding: 100px 60px;
+            background: #0a0a0a;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             gap: 100px;
         }
 
-        .manifesto h2 {
+        .footer-logo {
             font-family: 'Syncopate', sans-serif;
-            font-size: 3rem;
-            margin: 0;
+            font-size: 2.5rem;
+            color: var(--white-print);
         }
 
-        .manifesto-detail {
-            font-family: 'Space Grotesk';
-            font-weight: 300;
-            border-top: 1px solid #000;
-            padding-top: 20px;
+        .footer-col h4 {
+            border-bottom: 1px solid var(--raw-brass);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 0.8rem;
         }
 
     </style>
 </head>
 <body>
 
-    <div class="marquee-strip">
-        <div class="marquee-content">
-            DETROIT ARTIST COLLECTIVE // 1600 CLAY ST // RUSSELL INDUSTRIAL CENTER // RAW OUTPUT // NO SHORTCUTS // DETROIT ARTIST COLLECTIVE // 1600 CLAY ST // RUSSELL INDUSTRIAL CENTER // RAW OUTPUT // NO SHORTCUTS // 
+    <div class="interface-header">
+        <span>[ SYSTEM_STATUS: ONLINE ]</span>
+        <span>LAT: 42.3744° N // LONG: 83.0645° W</span>
+        <span>UNIT_313_ARCHIVE</span>
+    </div>
+
+    <div class="marquee-container">
+        <div class="marquee-track">
+            DETROIT INDUSTRIAL COLLECTIVE // RUSSELL ST. FACILITY // RAW OUTPUT // BUILT FOR THE CITY // EST. 313 // DETROIT INDUSTRIAL COLLECTIVE // RUSSELL ST. FACILITY // RAW OUTPUT // BUILT FOR THE CITY // EST. 313 //
         </div>
     </div>
 
-    <section class="hero-vessel">
-        <div class="visual-pane"></div>
-        <div class="text-pane">
-            <p style="font-family: monospace; font-size: 0.8rem; color: #444; margin-bottom: 20px;">[ ATELIER_ACTIVE_313 ]</p>
-            <h1>INDUSTRIAL<span>COLLECTIVE</span></h1>
-            <p style="margin-top: 40px; font-weight: 300; color: #666; max-width: 400px; text-transform: none;">
-                A convergence of professional makers, architectural fabricators, and Detroit artists operating out of the Russell Industrial Center.
-            </p>
+    <section class="hero-section">
+        <div class="hero-visual"></div>
+        <div class="hero-content">
+            <div style="font-size: 0.7rem; color: var(--raw-brass); margin-bottom: 10px;">DATA_PHASE_04</div>
+            <h1>MAKER<br><span>CORPS</span></h1>
+            <div class="data-point">
+                <strong>SPECIFICATION:</strong> HIGH-OUTPUT FABRICATION<br>
+                <strong>LOCATION:</strong> 1600 CLAY ST, DETROIT<br>
+                <strong>INTENT:</strong> DOCUMENTING THE ARCHITECTURAL AND INDUSTRIAL GRIT OF THE RUSSELL INDUSTRIAL CENTER.
+            </div>
         </div>
     </section>
 
-    <div class="blueprint-grid">
-        <div class="grid-cell large-cell">
-            <div class="data-tag">DATA_SET: 01 // ORIGIN_RUSSELL</div>
+    <div class="archive-grid">
+        <div class="grid-item span-8">
+            <div class="tag-coord">ITEM_REF: RUSSELL_MAIN_GRID</div>
             <img src="image_cfce6b.jpg" alt="Russell Industrial">
         </div>
-        <div class="grid-cell small-cell">
-            <div class="data-tag">DATA_SET: 02 // FABRICATION</div>
-            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80" alt="Steel Work">
+        <div class="grid-item span-4">
+            <div class="tag-coord">ITEM_REF: CORE_FABRICATION</div>
+            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80" alt="Iron Work">
         </div>
     </div>
 
-    <footer class="manifesto">
-        <div>
-            <h2>MAKER<br>CORPS</h2>
+    <footer class="manifest-footer">
+        <div class="footer-logo">MAKER<br>CORPS</div>
+        <div class="footer-col">
+            <h4>FACILITY</h4>
+            <p style="font-size: 0.8rem; line-height: 2;">
+                1600 CLAY ST<br>
+                DETROIT, MI 48211
+            </p>
         </div>
-        <div class="manifesto-detail">
-            <strong>FACILITY</strong><br>
-            1600 CLAY ST<br>
-            DETROIT, MI 48211
-        </div>
-        <div class="manifesto-detail">
-            <strong>CONTACT</strong><br>
-            COLLECTIVE@313.COM<br>
-            @DAWLHAUS_DIGITAL
+        <div class="footer-col">
+            <h4>COLLECTIVE</h4>
+            <p style="font-size: 0.8rem; line-height: 2;">
+                SYSTEM_NOMINAL<br>
+                ACCESS_ACTIVE_313
+            </p>
         </div>
     </footer>
 
