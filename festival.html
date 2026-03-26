@@ -28,7 +28,7 @@
             background-size: 50px 50px;
         }
 
-        /* STICKY MENU */
+        /* NAVIGATION STICKY */
         .cta-header {
             position: fixed;
             top: 60px;
@@ -81,15 +81,46 @@
 
         #countdown { display: flex; gap: 20px; margin-top: 30px; font-weight: 700; text-shadow: 0 0 10px var(--acid-green); }
         .time-unit { display: flex; flex-direction: column; align-items: center; }
-        .time-unit span { font-size: 1.8rem; color: var(--acid-green); }
+        .time-unit span { font-size: 2rem; color: var(--acid-green); }
         .time-unit label { font-size: 0.5rem; color: #666; }
 
-        /* MAP STYLES */
-        .map-container { display: grid; grid-template-columns: 1fr 300px; gap: 30px; background: var(--glass-white); padding: 20px; border: 1px solid #222; }
-        .map-visual { height: 250px; background: #111; border: 1px solid var(--electric-purple); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .map-marker { position: absolute; width: 15px; height: 15px; background: var(--acid-green); border-radius: 50%; box-shadow: 0 0 10px var(--acid-green); }
-        .map-key { padding: 20px; background: #000; border-left: 2px solid var(--acid-green); }
-        
+        /* FAUX MAP STYLING */
+        .map-container {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 30px;
+            background: var(--glass-white);
+            padding: 20px;
+            border: 1px solid #222;
+        }
+
+        .map-visual {
+            height: 300px;
+            background: #111;
+            border: 1px solid var(--electric-purple);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        .map-marker {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: var(--acid-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--acid-green);
+        }
+
+        .map-key {
+            padding: 20px;
+            background: #000;
+            border-left: 2px solid var(--acid-green);
+        }
+
         /* VENDOR GRID */
         .vendor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .vendor-card { background: var(--glass-white); padding: 30px; border-left: 3px solid var(--electric-purple); transition: 0.3s; }
@@ -113,9 +144,9 @@
         <h1 style="font-family: var(--font-techno); font-size: clamp(2rem, 8vw, 5.5rem); margin: 0; line-height: 1;">PULSE<span>TECH_FEST</span></h1>
         
         <div class="hero-player">
-            <p style="font-size: 0.6rem; margin-bottom: 15px; color: var(--acid-green); font-family: var(--font-techno); letter-spacing: 3px;">STREAM_SOURCE: VERIFIED_TECHNO</p>
+            <p style="font-size: 0.6rem; margin-bottom: 15px; color: var(--acid-green); font-family: var(--font-techno); letter-spacing: 3px;">AUDIO_SOURCE: SUBDERMAL_SOUND</p>
             <iframe width="100%" height="200" scrolling="no" frameborder="no" allow="autoplay" 
-                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1435850953&color=%23bc00ff&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true">
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1967063683&color=%23bc00ff&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true">
             </iframe>
         </div>
 
@@ -131,14 +162,23 @@
         <h2>SITE_ORIENTATION</h2>
         <div class="map-container">
             <div class="map-visual">
-                <span style="font-family: 'Bungee'; opacity: 0.1; font-size: 3rem;">MAUMEE_RIVER</span>
-                <div class="map-marker" style="top: 20%; left: 30%;"></div>
-                <div class="map-marker" style="top: 65%; left: 75%; background: #fff;"></div>
-                <div class="map-marker" style="top: 45%; left: 55%; background: var(--electric-purple);"></div>
+                <span style="font-family: 'Bungee'; opacity: 0.1; font-size: 4rem; transform: rotate(-15deg);">GLASS_CITY</span>
+                <div class="map-marker" style="top: 25%; left: 35%;" title="Pulse Stage"></div>
+                <div class="map-marker" style="top: 65%; left: 80%; background: #fff;" title="Water"></div>
+                <div class="map-marker" style="top: 50%; left: 55%; background: var(--electric-purple);" title="Food"></div>
             </div>
             <div class="map-key">
-                <p style="font-size: 0.7rem; color: var(--acid-green);">[X] MAIN STAGE<br>[O] WATER STATION<br>[F] FOOD CIRCUIT</p>
-                <p style="font-size: 0.55rem; color: #444; margin-top: 20px; line-height: 1.5;">GLASS CITY CONVENTION CENTER<br>TOLEDO, OH 43604</p>
+                <p style="font-size: 0.7rem; color: var(--acid-green); font-weight: bold; margin-bottom: 20px;">MAP KEY & INSTRUCTIONS:</p>
+                <p style="font-size: 0.65rem; line-height: 1.8;">
+                    <span style="color: var(--acid-green);">[●]</span> MAIN_STAGES<br>
+                    <span style="color: var(--electric-purple);">[●]</span> FOOD_VENDING<br>
+                    <span style="color: #fff;">[●]</span> WATER_FILL_STATIONS<br>
+                    <span style="border-bottom: 1px dashed #fff;">[---]</span> RESTROOMS
+                </p>
+                <hr style="border: 0; border-top: 1px solid #222; margin: 20px 0;">
+                <p style="font-size: 0.6rem; color: #888; text-transform: uppercase; letter-spacing: 1px;">
+                    Look for illuminated neon signs at the festival for real-time directions to all facilities.
+                </p>
             </div>
         </div>
     </section>
@@ -146,9 +186,9 @@
     <section id="vendors">
         <h2>FUEL_STATION // LOCAL EATS</h2>
         <div class="vendor-grid">
-            <div class="vendor-card"><h4>RUDY'S</h4><p style="font-size: 0.75rem; color: #888;">Toledo's famous chili dogs.</p></div>
-            <div class="vendor-card"><h4>FRICKER'S</h4><p style="font-size: 0.75rem; color: #888;">Frickin' Chicken wings & chunks.</p></div>
-            <div class="vendor-card"><h4>BALANCE</h4><p style="font-size: 0.75rem; color: #888;">Healthy Asian fusion farm bowls.</p></div>
+            <div class="vendor-card"><h4>RUDY'S</h4><p style="font-size: 0.75rem; color: #888;">Toledo's famous chili dogs. The 2AM essential.</p></div>
+            <div class="vendor-card"><h4>FRICKER'S</h4><p style="font-size: 0.75rem; color: #888;">Frickin' Chicken wings and chunks for the crowd.</p></div>
+            <div class="vendor-card"><h4>BALANCE</h4><p style="font-size: 0.75rem; color: #888;">Clean fuel: Asian fusion bowls and bubble tea.</p></div>
         </div>
     </section>
 
