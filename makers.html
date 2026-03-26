@@ -7,16 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=IBM+Plex+Mono:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --raw-brass: #D4AF37;   /* Authentic metallic gold */
-            --steel-dark: #050505;  /* Deeper than black */
-            --zinc: #2a2a2a;        /* Cold metal grey */
-            --white-print: #e0e0e0; /* Off-white drafting paper */
+            --raw-brass: #D4AF37;   /* Metallic Accent */
+            --steel-dark: #050505;  /* Deep Background */
+            --zinc: #2a2a2a;        /* Border/Grid lines */
+            --white-print: #e0e0e0; /* Drafting paper text */
         }
 
-        /* CUSTOM DETROIT D CURSOR */
-        html, body, a, button {
-            cursor: url('detroit-d.png') 0 0, auto !important;
-        }
+        * { cursor: crosshair; } /* Precision Pointer */
 
         body {
             background-color: var(--steel-dark);
@@ -27,45 +24,21 @@
             text-transform: uppercase;
         }
 
-        /* 1. THE PRECISION INTERFACE HEADER */
+        /* 1. TOP INTERFACE BAR */
         .interface-header {
             border-bottom: 1px solid var(--zinc);
-            padding: 10px 20px;
+            padding: 12px 30px;
             display: flex;
             justify-content: space-between;
-            font-size: 0.7rem;
-            letter-spacing: 3px;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
             background: #000;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        /* 2. THE CINEMATIC MARQUEE (SLOW & DELIBERATE) */
-        .marquee-container {
-            background: var(--raw-brass);
-            color: #000;
-            padding: 20px 0;
-            overflow: hidden;
-            border-bottom: 1px solid #000;
-        }
-
-        .marquee-track {
-            display: flex;
-            white-space: nowrap;
-            animation: move-slow 80s linear infinite;
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 15px;
-            font-weight: 700;
-        }
-
-        @keyframes move-slow {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-
-        /* 3. THE HERO: SYSTEM ARCHIVE v1.0 */
+        /* 2. HERO: ARCHITECTURAL SCALE */
         .hero-section {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
@@ -75,22 +48,15 @@
 
         .hero-visual {
             grid-column: span 7;
-            background: url('image_cfce6b.jpg') center/cover no-repeat;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80') center/cover no-repeat;
             filter: grayscale(1) contrast(1.7) brightness(0.3);
             border-right: 1px solid var(--zinc);
             position: relative;
         }
 
-        .hero-visual::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, rgba(0,0,0,0.8) 0%, transparent 100%);
-        }
-
         .hero-content {
             grid-column: span 5;
-            padding: 60px;
+            padding: 80px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -99,10 +65,10 @@
 
         .hero-content h1 {
             font-family: 'Syncopate', sans-serif;
-            font-size: clamp(2rem, 5vw, 4rem);
-            line-height: 0.8;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 0.85;
             margin: 0;
-            letter-spacing: -2px;
+            letter-spacing: -3px;
         }
 
         .hero-content h1 span {
@@ -110,27 +76,53 @@
             display: block;
         }
 
-        .data-point {
-            margin-top: 40px;
-            padding: 20px;
-            border: 1px solid var(--zinc);
-            font-size: 0.8rem;
-            line-height: 1.8;
-            color: #888;
+        /* 3. THE MANIFEST: PROOF OF CAPABILITY */
+        .manifest-container {
+            padding: 80px 60px;
+            background: #000;
+            border-bottom: 1px solid var(--zinc);
         }
 
-        /* 4. ASYMMETRICAL DATA FEED */
+        .manifest-title {
+            font-family: 'Syncopate';
+            font-size: 0.8rem;
+            color: var(--raw-brass);
+            margin-bottom: 40px;
+            letter-spacing: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+        }
+
+        th {
+            text-align: left;
+            border-bottom: 1px solid var(--zinc);
+            padding: 20px 0;
+            color: #555;
+            letter-spacing: 2px;
+        }
+
+        td {
+            padding: 25px 0;
+            border-bottom: 1px solid var(--zinc);
+        }
+
+        .highlight { color: var(--raw-brass); font-weight: 700; }
+
+        /* 4. SCANNER GRID */
         .archive-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            padding: 1px;
+            grid-template-columns: 1fr 1fr;
             gap: 1px;
             background: var(--zinc);
         }
 
         .grid-item {
             position: relative;
-            height: 700px;
+            height: 600px;
             background: #000;
             overflow: hidden;
         }
@@ -139,109 +131,175 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(1) brightness(0.4);
+            filter: grayscale(1) brightness(0.35);
             transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         .grid-item:hover img {
             filter: grayscale(0) brightness(0.7);
-            transform: scale(1.05);
         }
 
-        .span-8 { grid-column: span 8; }
-        .span-4 { grid-column: span 4; }
-
-        .tag-coord {
+        /* THE ANIMATED SCAN LINE */
+        .grid-item::after {
+            content: "";
             position: absolute;
-            top: 40px;
-            left: 40px;
-            font-size: 0.7rem;
+            top: -10%;
+            left: 0;
+            width: 100%;
+            height: 1px;
             background: var(--raw-brass);
-            color: #000;
-            padding: 5px 12px;
-            font-weight: 700;
-            z-index: 10;
+            box-shadow: 0 0 15px var(--raw-brass);
+            z-index: 5;
+            animation: scan 6s linear infinite;
+            opacity: 0.5;
         }
 
-        /* 5. THE MANIFEST FOOTER */
-        .manifest-footer {
-            padding: 100px 60px;
-            background: #0a0a0a;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 100px;
+        @keyframes scan {
+            0% { top: -10%; }
+            100% { top: 110%; }
         }
 
-        .footer-logo {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 2.5rem;
-            color: var(--white-print);
+        /* 5. WORK ORDER FORM (CARBON COPY FEEL) */
+        .work-order-section {
+            padding: 120px 60px;
+            background: #000;
         }
 
-        .footer-col h4 {
-            border-bottom: 1px solid var(--raw-brass);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 0.8rem;
+        .form-wrap {
+            border: 1px solid var(--raw-brass);
+            padding: 50px;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
         }
 
+        .form-wrap::before {
+            content: "FORM_313_ORDER";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #000;
+            padding: 0 10px;
+            font-size: 0.6rem;
+            color: var(--raw-brass);
+        }
+
+        input, textarea, select {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--zinc);
+            color: white;
+            padding: 15px 0;
+            width: 100%;
+            margin-bottom: 30px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        button {
+            background: var(--raw-brass);
+            color: black;
+            border: none;
+            padding: 20px;
+            width: 100%;
+            font-weight: 900;
+            font-family: 'Syncopate';
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: white;
+        }
+
+        #coord-tracker {
+            position: fixed;
+            pointer-events: none;
+            font-size: 10px;
+            color: var(--raw-brass);
+            z-index: 10000;
+        }
     </style>
 </head>
 <body>
 
-    <div class="interface-header">
-        <span>[ SYSTEM_STATUS: ONLINE ]</span>
-        <span>LAT: 42.3744° N // LONG: 83.0645° W</span>
-        <span>UNIT_313_ARCHIVE</span>
-    </div>
+    <div id="coord-tracker">X: 000 // Y: 000</div>
 
-    <div class="marquee-container">
-        <div class="marquee-track">
-            DETROIT INDUSTRIAL COLLECTIVE // RUSSELL ST. FACILITY // RAW OUTPUT // BUILT FOR THE CITY // EST. 313 // DETROIT INDUSTRIAL COLLECTIVE // RUSSELL ST. FACILITY // RAW OUTPUT // BUILT FOR THE CITY // EST. 313 //
-        </div>
+    <div class="interface-header">
+        <span>[ STATUS: OPERATIONAL ]</span>
+        <span>LOCATION: DETROIT_313</span>
+        <span>REF_ID: COLLECTIVE_ARCHIVE</span>
     </div>
 
     <section class="hero-section">
         <div class="hero-visual"></div>
         <div class="hero-content">
-            <div style="font-size: 0.7rem; color: var(--raw-brass); margin-bottom: 10px;">DATA_PHASE_04</div>
-            <h1>MAKER<br><span>CORPS</span></h1>
-            <div class="data-point">
-                <strong>SPECIFICATION:</strong> HIGH-OUTPUT FABRICATION<br>
-                <strong>LOCATION:</strong> 1600 CLAY ST, DETROIT<br>
-                <strong>INTENT:</strong> DOCUMENTING THE ARCHITECTURAL AND INDUSTRIAL GRIT OF THE RUSSELL INDUSTRIAL CENTER.
-            </div>
+            <div style="font-size: 0.7rem; color: var(--raw-brass); margin-bottom: 15px;">SERVICE_LEVEL_v.4</div>
+            <h1>INDUSTRIAL<br><span>SOLUTIONS</span></h1>
+            <p style="margin-top: 40px; color: #555; text-transform: none; line-height: 1.8; font-size: 0.9rem;">
+                Strategic fabrication and high-fidelity industrial design. We execute at architectural scale for clients who demand precision and grit.
+            </p>
         </div>
     </section>
 
-    <div class="archive-grid">
-        <div class="grid-item span-8">
-            <div class="tag-coord">ITEM_REF: RUSSELL_MAIN_GRID</div>
-            <img src="image_cfce6b.jpg" alt="Russell Industrial">
-        </div>
-        <div class="grid-item span-4">
-            <div class="tag-coord">ITEM_REF: CORE_FABRICATION</div>
-            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80" alt="Iron Work">
-        </div>
+    <div class="manifest-container">
+        <div class="manifest-title">RECENT_CAPABILITIES_LOG</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>REF_CODE</th>
+                    <th>MATERIAL_SPEC</th>
+                    <th>COMPLETION</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="highlight">UNIT_313_STEEL</td>
+                    <td>High-Carbon Steel / Zinc Coat</td>
+                    <td>Q1_2026</td>
+                    <td>[ ARCHIVED ]</td>
+                </tr>
+                <tr>
+                    <td class="highlight">ARCH_FACADE_02</td>
+                    <td>Brushed Brass / Glass Pane</td>
+                    <td>Q2_2026</td>
+                    <td>[ IN_PROGRESS ]</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <footer class="manifest-footer">
-        <div class="footer-logo">MAKER<br>CORPS</div>
-        <div class="footer-col">
-            <h4>FACILITY</h4>
-            <p style="font-size: 0.8rem; line-height: 2;">
-                1600 CLAY ST<br>
-                DETROIT, MI 48211
-            </p>
+    <div class="archive-grid">
+        <div class="grid-item"><img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80"></div>
+        <div class="grid-item"><img src="https://images.unsplash.com/photo-1517594422361-5eeb8ae275a9?q=80"></div>
+    </div>
+
+    <section class="work-order-section">
+        <div class="form-wrap">
+            <h2 style="font-family: 'Syncopate'; font-size: 1.2rem; margin-bottom: 40px;">INITIATE_WORK_ORDER</h2>
+            <form>
+                <input type="text" placeholder="CLIENT_ENTITY_NAME">
+                <input type="email" placeholder="SECURE_EMAIL_ENDPOINT">
+                <select>
+                    <option>TIER: $10,000 - $25,000</option>
+                    <option>TIER: $25,000 - $50,000</option>
+                    <option>TIER: INDUSTRIAL_CONTRACT</option>
+                </select>
+                <textarea placeholder="PROJECT_SCOPE_DETAILS" rows="4"></textarea>
+                <button type="button">SUBMIT_ARCHIVE_REQUEST</button>
+            </form>
         </div>
-        <div class="footer-col">
-            <h4>COLLECTIVE</h4>
-            <p style="font-size: 0.8rem; line-height: 2;">
-                SYSTEM_NOMINAL<br>
-                ACCESS_ACTIVE_313
-            </p>
-        </div>
-    </footer>
+    </section>
+
+    <script>
+        document.addEventListener('mousemove', (e) => {
+            const tracker = document.getElementById('coord-tracker');
+            tracker.style.left = e.clientX + 15 + 'px';
+            tracker.style.top = e.clientY + 15 + 'px';
+            tracker.innerHTML = `LOC_X: ${e.clientX} // LOC_Y: ${e.clientY}`;
+        });
+    </script>
 
 </body>
 </html>
