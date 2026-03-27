@@ -1,336 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS VANE | EDITORIAL & ACCOLADES</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ALEXIS VANE | EDITORIAL</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Playfair+Display:italic,wght@700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            background: #0a0a0a; 
-            color: #ffffff;
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        /* 1. TOP STATUS MARQUEE */
-        .marquee {
-            background: #ffffff;
-            color: #000;
-            padding: 15px 0;
-            overflow: hidden;
-            white-space: nowrap;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 8px;
-            font-size: 0.8rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+      body {
+        background: #000;
+        color: #ffffff;
+        font-family: "Space Grotesk", sans-serif;
+        overflow-x: hidden;
+      }
 
-        .marquee-content {
-            display: inline-block;
-            animation: scroll 25s linear infinite;
-        }
+      /* NAVIGATION - TOP LOCKED */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 40px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.9) 0%,
+          transparent 100%
+        );
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 5px;
+      }
 
-        @keyframes scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        transition: 0.3s;
+      }
+      nav a:hover {
+        opacity: 0.5;
+      }
 
-        /* NAVIGATION */
-        nav {
-            position: absolute;
-            top: 60px; width: 100%;
-            padding: 40px 60px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 100;
-            text-transform: uppercase;
-            font-size: 10px;
-            letter-spacing: 5px;
-        }
+      /* HERO - THE FIXED OVERLAP */
+      .hero {
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5%;
+      }
 
-        nav a { color: #fff; text-decoration: none; font-weight: 700; border-bottom: 1px solid #fff; padding-bottom: 4px;}
+      .hero-text {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        pointer-events: none;
+        /* ADDS CONTRAST SO TEXT IS VISIBLE OVER WHITE BACKGROUNDS */
+        text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
 
-        /* HERO SECTION */
+      .hero-text h1 {
+        font-size: clamp(5rem, 18vw, 15rem);
+        line-height: 0.8;
+        text-transform: uppercase;
+        letter-spacing: -0.05em;
+      }
+
+      .hero-text h1 span {
+        display: block;
+        color: transparent;
+        /* Thicker stroke for better visibility */
+        -webkit-text-stroke: 2px #ffffff;
+      }
+
+      .hero-image-container {
+        position: absolute;
+        width: 45%;
+        height: 70%;
+        right: 10%;
+        top: 15%;
+        z-index: 1;
+        border: 1px solid #1a1a1a;
+        overflow: hidden;
+      }
+
+      /* Adds a subtle dark tint to the image so white text pops */
+      .hero-image-container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent);
+        z-index: 2;
+      }
+
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        background: url("https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=800")
+          center/cover;
+        filter: grayscale(1);
+      }
+
+      /* 2. THE ACCOLADES (Back by popular demand) */
+      .accolades-bar {
+        background: #0d0d0d;
+        padding: 40px 5%;
+        display: flex;
+        justify-content: space-around;
+        border-top: 1px solid #1a1a1a;
+        border-bottom: 1px solid #1a1a1a;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+      .stat-item h4 {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+      }
+      .stat-item p {
+        font-size: 9px;
+        letter-spacing: 3px;
+        color: #555;
+        text-transform: uppercase;
+      }
+
+      /* 3. THE GALLERY */
+      .gallery {
+        padding: 100px 5%;
+        background: #000;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .gallery-item {
+        aspect-ratio: 3/4;
+        background: #111;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(1);
+        transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+      }
+
+      .gallery-item:hover img {
+        filter: grayscale(0);
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        opacity: 0.6;
+      }
+
+      /* FOOTER LINKS */
+      .footer-nav {
+        padding: 150px 5%;
+        border-top: 1px solid #1a1a1a;
+      }
+      .nav-big-link {
+        display: block;
+        font-size: clamp(3rem, 8vw, 8rem);
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        line-height: 1;
+        padding: 30px 0;
+        border-bottom: 1px solid #111;
+        transition: 0.4s;
+      }
+      .nav-big-link:hover {
+        color: #888;
+        padding-left: 40px;
+      }
+
+      footer {
+        padding: 60px 5%;
+        text-align: center;
+        color: #222;
+        font-size: 10px;
+        letter-spacing: 5px;
+      }
+
+      @media (max-width: 900px) {
         .hero {
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding-top: 100px;
+          flex-direction: column;
+          justify-content: flex-start;
+          padding-top: 150px;
         }
-
-        .hero h1 {
-            font-size: clamp(4rem, 20vw, 16rem);
-            line-height: 0.8;
-            z-index: 2;
-            text-transform: uppercase;
-            letter-spacing: -0.05em;
-            text-align: center;
+        .hero-image-container {
+          position: relative;
+          width: 100%;
+          height: 50vh;
+          right: 0;
+          top: 0;
+          order: -1;
+          margin-bottom: 40px;
         }
-
-        .hero h1 span {
-            display: block;
-            color: transparent;
-            -webkit-text-stroke: 1.5px #ffffff;
-        }
-
-        .hero-bg-image {
-            position: absolute;
-            width: 35%;
-            height: 55%;
-            background: url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=800') center/cover;
-            right: 15%;
-            top: 20%;
-            z-index: 1;
-            filter: grayscale(1) contrast(1.2);
-            opacity: 0.6;
-        }
-
-        /* 2. ACCOLADES & MAGAZINE SECTION */
-        .accolades {
-            padding: 100px 10%;
-            border-top: 1px solid #222;
-            background: #0d0d0d;
-        }
-
-        .section-label {
-            font-size: 10px;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: #555;
-            margin-bottom: 60px;
-            display: block;
-        }
-
-        .press-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            align-items: baseline;
-        }
-
-        .press-item {
-            border-bottom: 1px solid #222;
-            padding-bottom: 20px;
-        }
-
-        .press-item h3 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .press-item p {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #888;
-        }
-
-        /* 3. ASYMMETRIC EDITORIAL GALLERY */
-        .editorial-gallery {
-            padding: 100px 10%;
-            background: #0a0a0a;
-        }
-
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 30px;
-            margin-top: 40px;
+          grid-template-columns: 1fr;
         }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            background: #111;
+        .accolades-bar {
+          flex-direction: column;
+          gap: 30px;
         }
-
-        .img-container {
-            width: 100%;
-            height: 100%;
-            filter: grayscale(1);
-            transition: 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
-        }
-
-        .gallery-item:hover .img-container {
-            filter: grayscale(0);
-            transform: scale(1.05);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .large { grid-column: span 8; height: 600px; }
-        .tall { grid-column: span 4; height: 800px; grid-row: span 2; }
-        .small { grid-column: span 8; height: 400px; margin-top: -200px; }
-
-        .overlay {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%;
-            padding: 40px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            opacity: 0;
-            transition: 0.5s ease;
-        }
-
-        .gallery-item:hover .overlay { opacity: 1; }
-        .overlay p { font-size: 10px; letter-spacing: 3px; font-weight: 700; margin-bottom: 5px; }
-        .overlay span { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; }
-
-        /* 4. BIG LINKS SECTION */
-        .links-section {
-            padding: 150px 10% 100px 10%;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 50px;
-        }
-
-        .big-links a {
-            display: block;
-            font-size: clamp(3rem, 8vw, 6rem);
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            line-height: 1;
-            margin-bottom: 30px;
-            transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-        }
-
-        .big-links a:hover {
-            padding-left: 40px;
-            color: #888;
-        }
-
-        .description {
-            font-size: 1.4rem;
-            font-weight: 300;
-            line-height: 1.5;
-            color: #888;
-            align-self: end;
-            padding-bottom: 40px;
-            border-left: 1px solid #333;
-            padding-left: 40px;
-        }
-
-        footer {
-            padding: 80px 10%;
-            text-align: center;
-            color: #333;
-            font-size: 10px;
-            letter-spacing: 5px;
-            border-top: 1px solid #111;
-        }
-
-        @media (max-width: 900px) {
-            .gallery-grid { display: flex; flex-direction: column; }
-            .large, .tall, .small { height: 400px; margin-top: 0; }
-            .links-section { grid-template-columns: 1fr; }
-        }
+      }
     </style>
-</head>
-<body>
-
-    <div class="marquee">
-        <div class="marquee-content">
-            VOGUE INTERNATIONAL • BAZAAR • NYFW HEAD STYLIST • EDITORIAL EXCELLENCE • VOGUE INTERNATIONAL • BAZAAR • NYFW HEAD STYLIST • EDITORIAL EXCELLENCE •
-        </div>
-    </div>
-
+  </head>
+  <body>
     <nav>
-        <a href="index.html">← DAWLHAUS</a>
-        <div>NEW YORK / LONDON / PARIS</div>
+      <a href="index.html">← DAWLHAUS</a>
+      <div>NYC / LDN / PAR</div>
+      <a href="#">BOOK CHAIR</a>
     </nav>
 
     <section class="hero">
-        <div class="hero-bg-image"></div>
-        <h1>ALEXIS<br><span>VANE</span></h1>
+      <div class="hero-image-container">
+        <div class="hero-image"></div>
+      </div>
+      <div class="hero-text">
+        <h1>ALEXIS<br /><span>VANE</span></h1>
+      </div>
     </section>
 
-    <section class="accolades">
-        <span class="section-label">Selected Features & Awards</span>
-        <div class="press-grid">
-            <div class="press-item">
-                <h3>Vogue</h3>
-                <p>September Issue '25</p>
-            </div>
-            <div class="press-item">
-                <h3>Bazaar</h3>
-                <p>Cover Feature: Geometry</p>
-            </div>
-            <div class="press-item">
-                <h3>Elle</h3>
-                <p>Top 10 Global Stylists</p>
-            </div>
-            <div class="press-item">
-                <h3>Mastery</h3>
-                <p>Innovator of the Year</p>
-            </div>
-        </div>
+    <section class="accolades-bar">
+      <div class="stat-item">
+        <h4>Vogue</h4>
+        <p>Editorial Feature</p>
+      </div>
+      <div class="stat-item">
+        <h4>Marie Claire</h4>
+        <p>Global Campaign</p>
+      </div>
+      <div class="stat-item">
+        <h4>Bazaar</h4>
+        <p>September Issue</p>
+      </div>
+      <div class="stat-item">
+        <h4>NYFW</h4>
+        <p>Lead Stylist</p>
+      </div>
     </section>
 
-    <section class="editorial-gallery">
-        <span class="section-label">Selected Editorial Works</span>
-        <div class="gallery-grid">
-            <div class="gallery-item large">
-                <div class="img-container">
-                    <img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&q=80&w=800" alt="Vogue Editorial">
-                    <div class="overlay">
-                        <p>VOGUE GERMANY / ISSUE 09</p>
-                        <span>"GEOMETRIC FLUIDITY"</span>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-item tall">
-                <div class="img-container">
-                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=800" alt="Bazaar Spread">
-                    <div class="overlay">
-                        <p>HARPER'S BAZAAR</p>
-                        <span>"THE NEW ARCHITECT"</span>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-item small">
-                <div class="img-container">
-                    <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=800" alt="NYFW">
-                    <div class="overlay">
-                        <p>NYFW BACKSTAGE</p>
-                        <span>"PRECISION UNDER PRESSURE"</span>
-                    </div>
-                </div>
-            </div>
+    <section class="gallery">
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&q=80&w=800"
+          />
+          <div class="caption">Vogue Editorial</div>
         </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=800"
+          />
+          <div class="caption">Marie Claire '25</div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=800"
+          />
+          <div class="caption">NYFW Backstage</div>
+        </div>
+      </div>
     </section>
 
-    <section class="links-section">
-        <div class="big-links">
-            <a href="#">Portfolio</a>
-            <a href="#">Education</a>
-            <a href="#">Book Chair</a>
-        </div>
-        <div class="description">
-            Architectural precision. High-fashion movement. Alexis Vane defines the intersection of geometry and hair for the world's most prestigious houses.
-        </div>
+    <section class="footer-nav">
+      <a href="#" class="nav-big-link">Portfolio</a>
+      <a href="#" class="nav-big-link">Education</a>
+      <a href="#" class="nav-big-link">Studio</a>
     </section>
 
-    <footer>
-        © 2026 ALEXIS VANE CONCEPT / DAWLHAUS DIGITAL / NYC
-    </footer>
-
-</body>
+    <footer>© 2026 ALEXIS VANE CONCEPT // NYC</footer>
+  </body>
 </html>
