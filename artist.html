@@ -3,23 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS VANE | EDITORIAL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+    <title>ALEXIS VANE | EDITORIAL & ACCOLADES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
     <style>
-        /* KILL THE OLD STYLES */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            background: #0a0a0a; /* Deep luxury black */
+            background: #0a0a0a; 
             color: #ffffff;
             font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
         }
 
-        /* NAVIGATION OVERLAY */
+        /* 1. TOP STATUS MARQUEE */
+        .marquee {
+            background: #ffffff;
+            color: #000;
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 8px;
+            font-size: 0.8rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 25s linear infinite;
+        }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* NAVIGATION */
         nav {
             position: absolute;
-            top: 0; width: 100%;
+            top: 60px; width: 100%;
             padding: 40px 60px;
             display: flex;
             justify-content: space-between;
@@ -31,7 +58,7 @@
 
         nav a { color: #fff; text-decoration: none; font-weight: 700; border-bottom: 1px solid #fff; padding-bottom: 4px;}
 
-        /* HERO SECTION - MASSIVE SCALE */
+        /* HERO SECTION */
         .hero {
             height: 100vh;
             width: 100%;
@@ -39,10 +66,11 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            padding-top: 100px;
         }
 
         .hero h1 {
-            font-size: clamp(4rem, 20vw, 18rem);
+            font-size: clamp(4rem, 20vw, 16rem);
             line-height: 0.8;
             z-index: 2;
             text-transform: uppercase;
@@ -53,49 +81,121 @@
         .hero h1 span {
             display: block;
             color: transparent;
-            -webkit-text-stroke: 1.5px #ffffff; /* The "Award Winning" Outline */
+            -webkit-text-stroke: 1.5px #ffffff;
         }
 
-        /* FLOATING BACKGROUND IMAGE */
         .hero-bg-image {
             position: absolute;
-            width: 40%;
-            height: 60%;
+            width: 35%;
+            height: 55%;
             background: url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=800') center/cover;
             right: 15%;
-            top: 15%;
+            top: 20%;
             z-index: 1;
-            filter: grayscale(1) contrast(1.1);
-            opacity: 0.5;
+            filter: grayscale(1) contrast(1.2);
+            opacity: 0.6;
         }
 
-        /* THE MARQUEE STRIP */
-        .marquee {
-            border-top: 1px solid #333;
-            border-bottom: 1px solid #333;
-            padding: 25px 0;
-            overflow: hidden;
-            white-space: nowrap;
+        /* 2. ACCOLADES & MAGAZINE SECTION */
+        .accolades {
+            padding: 100px 10%;
+            border-top: 1px solid #222;
+            background: #0d0d0d;
         }
 
-        .marquee-content {
-            display: inline-block;
-            animation: scroll 30s linear infinite;
-            font-weight: 700;
+        .section-label {
+            font-size: 10px;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            letter-spacing: 10px;
-            font-size: 1.2rem;
-            color: #444;
+            color: #555;
+            margin-bottom: 60px;
+            display: block;
         }
 
-        @keyframes scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
+        .press-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            align-items: baseline;
         }
 
-        /* ASYMMETRIC LINKS */
+        .press-item {
+            border-bottom: 1px solid #222;
+            padding-bottom: 20px;
+        }
+
+        .press-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .press-item p {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+        }
+
+        /* 3. ASYMMETRIC EDITORIAL GALLERY */
+        .editorial-gallery {
+            padding: 100px 10%;
+            background: #0a0a0a;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            background: #111;
+        }
+
+        .img-container {
+            width: 100%;
+            height: 100%;
+            filter: grayscale(1);
+            transition: 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        .gallery-item:hover .img-container {
+            filter: grayscale(0);
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .large { grid-column: span 8; height: 600px; }
+        .tall { grid-column: span 4; height: 800px; grid-row: span 2; }
+        .small { grid-column: span 8; height: 400px; margin-top: -200px; }
+
+        .overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            opacity: 0;
+            transition: 0.5s ease;
+        }
+
+        .gallery-item:hover .overlay { opacity: 1; }
+        .overlay p { font-size: 10px; letter-spacing: 3px; font-weight: 700; margin-bottom: 5px; }
+        .overlay span { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; }
+
+        /* 4. BIG LINKS SECTION */
         .links-section {
-            padding: 150px 10%;
+            padding: 150px 10% 100px 10%;
             display: grid;
             grid-template-columns: 1.2fr 1fr;
             gap: 50px;
@@ -128,17 +228,33 @@
             padding-left: 40px;
         }
 
-        @media (max-width: 768px) {
+        footer {
+            padding: 80px 10%;
+            text-align: center;
+            color: #333;
+            font-size: 10px;
+            letter-spacing: 5px;
+            border-top: 1px solid #111;
+        }
+
+        @media (max-width: 900px) {
+            .gallery-grid { display: flex; flex-direction: column; }
+            .large, .tall, .small { height: 400px; margin-top: 0; }
             .links-section { grid-template-columns: 1fr; }
-            .hero-bg-image { width: 80%; right: 10%; }
         }
     </style>
 </head>
 <body>
 
+    <div class="marquee">
+        <div class="marquee-content">
+            VOGUE INTERNATIONAL • BAZAAR • NYFW HEAD STYLIST • EDITORIAL EXCELLENCE • VOGUE INTERNATIONAL • BAZAAR • NYFW HEAD STYLIST • EDITORIAL EXCELLENCE •
+        </div>
+    </div>
+
     <nav>
         <a href="index.html">← DAWLHAUS</a>
-        <div>NYC / LDN / PAR</div>
+        <div>NEW YORK / LONDON / PARIS</div>
     </nav>
 
     <section class="hero">
@@ -146,11 +262,60 @@
         <h1>ALEXIS<br><span>VANE</span></h1>
     </section>
 
-    <div class="marquee">
-        <div class="marquee-content">
-            VOGUE • BAZAAR • NYFW • EDITORIAL • VOGUE • BAZAAR • NYFW • EDITORIAL • VOGUE • BAZAAR • NYFW • EDITORIAL • VOGUE • BAZAAR • NYFW • EDITORIAL • 
+    <section class="accolades">
+        <span class="section-label">Selected Features & Awards</span>
+        <div class="press-grid">
+            <div class="press-item">
+                <h3>Vogue</h3>
+                <p>September Issue '25</p>
+            </div>
+            <div class="press-item">
+                <h3>Bazaar</h3>
+                <p>Cover Feature: Geometry</p>
+            </div>
+            <div class="press-item">
+                <h3>Elle</h3>
+                <p>Top 10 Global Stylists</p>
+            </div>
+            <div class="press-item">
+                <h3>Mastery</h3>
+                <p>Innovator of the Year</p>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="editorial-gallery">
+        <span class="section-label">Selected Editorial Works</span>
+        <div class="gallery-grid">
+            <div class="gallery-item large">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&q=80&w=800" alt="Vogue Editorial">
+                    <div class="overlay">
+                        <p>VOGUE GERMANY / ISSUE 09</p>
+                        <span>"GEOMETRIC FLUIDITY"</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item tall">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=800" alt="Bazaar Spread">
+                    <div class="overlay">
+                        <p>HARPER'S BAZAAR</p>
+                        <span>"THE NEW ARCHITECT"</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item small">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=800" alt="NYFW">
+                    <div class="overlay">
+                        <p>NYFW BACKSTAGE</p>
+                        <span>"PRECISION UNDER PRESSURE"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="links-section">
         <div class="big-links">
@@ -159,12 +324,12 @@
             <a href="#">Book Chair</a>
         </div>
         <div class="description">
-            Architectural precision. High-fashion movement. Alexis Vane defines the intersection of geometry and hair.
+            Architectural precision. High-fashion movement. Alexis Vane defines the intersection of geometry and hair for the world's most prestigious houses.
         </div>
     </section>
 
-    <footer style="padding: 100px 10%; text-align: center; color: #333; font-size: 10px; letter-spacing: 5px;">
-        © 2026 ALEXIS VANE CONCEPT / DAWLHAUS DIGITAL
+    <footer>
+        © 2026 ALEXIS VANE CONCEPT / DAWLHAUS DIGITAL / NYC
     </footer>
 
 </body>
