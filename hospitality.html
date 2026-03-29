@@ -1,340 +1,683 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>313 SYNC | Hospitality Architecture</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The 313 Sports House | Detroit</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Lobster&family=Space+Grotesk:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --detroit-brass: #b58921;
-            --reserve-silver: #a8a8a8;
-            --foundry-black: #0a0a0a;
-            --concrete: #1a1a1a;
-            --font-mono: 'IBM Plex Mono', monospace;
-            --font-serif: 'DM Serif Display', serif;
+      :root {
+        --tigers-orange: #ff671f;
+        --lions-blue: #0076b6;
+        --stadium-black: #050505;
+        --text-white: #ffffff;
+        --score-green: #00ff41;
+        --glass: rgba(255, 255, 255, 0.05);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-color: var(--stadium-black);
+        color: var(--text-white);
+        font-family: "Space Grotesk", sans-serif;
+        margin: 0;
+        overflow-x: hidden;
+      }
+
+      /* TOP UTILITY BAR */
+      .utility-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 30px;
+        background: #000;
+        font-family: "Bungee Inline";
+        font-size: 0.7rem;
+        border-bottom: 1px solid #222;
+        color: #888;
+      }
+      #radio-live {
+        background: #d32f2f;
+        color: #fff;
+        padding: 4px 12px;
+        text-decoration: none;
+        border-radius: 3px;
+        display: none;
+        animation: pulse-red 2s infinite;
+      }
+      @keyframes pulse-red {
+        0% {
+          box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7);
         }
-
-        body {
-            background-color: var(--foundry-black);
-            background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
-            color: #fff;
-            margin: 0;
-            font-family: var(--font-mono);
-            -webkit-font-smoothing: antialiased;
-            scroll-behavior: smooth;
+        70% {
+          box-shadow: 0 0 0 10px rgba(211, 47, 47, 0);
         }
-
-        /* SYSTEM STATUS TOP BAR */
-        .system-top-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 40px;
-            background: rgba(0,0,0,0.95);
-            border-bottom: 1px solid var(--concrete);
-            font-family: 'Syncopate';
-            font-size: 0.55rem;
-            letter-spacing: 4px;
-            color: var(--detroit-brass);
-            position: sticky;
-            top: 0;
-            z-index: 2000;
-            backdrop-filter: blur(15px);
+        100% {
+          box-shadow: 0 0 0 0 rgba(211, 47, 47, 0);
         }
+      }
 
-        /* HERO ARCHITECTURE */
-        .hospitality-hero {
-            padding: 140px 40px 60px;
-            text-align: center;
+      /* VIDEO BACKGROUND */
+      .video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: #000;
+      }
+      .video-background video {
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.3;
+        filter: grayscale(100%) brightness(0.5);
+      }
+
+      /* TICKERS */
+      .live-ticker {
+        background: #000;
+        border-bottom: 2px solid var(--tigers-orange);
+        padding: 12px 0;
+        overflow: hidden;
+        white-space: nowrap;
+        z-index: 1001;
+        position: relative;
+        font-family: "Bungee Inline";
+        font-size: 0.75rem;
+        color: #fff;
+      }
+      .ticker-content {
+        display: inline-block;
+        animation: marquee 35s linear infinite;
+      }
+      @keyframes marquee {
+        0% {
+          transform: translateX(100%);
         }
-
-        .hero-title {
-            font-family: 'Bungee';
-            font-size: clamp(3.5rem, 12vw, 8rem);
-            line-height: 0.8;
-            margin: 0;
-            letter-spacing: -2px;
+        100% {
+          transform: translateX(-100%);
         }
+      }
 
-        .hero-title span {
-            font-family: var(--font-serif);
-            font-style: italic;
-            color: var(--detroit-brass);
-            font-size: 0.6em;
-            display: block;
+      /* LOGO BAR */
+      .logo-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px;
+        background: rgba(0, 0, 0, 0.85);
+        border-bottom: 1px solid #222;
+      }
+      .logo-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+      .logo-link img {
+        height: 40px;
+        transition: 0.4s;
+        cursor: pointer;
+      }
+      .logo-link:hover img {
+        transform: scale(1.2) rotate(5deg);
+        filter: drop-shadow(0 0 15px var(--tigers-orange));
+      }
+
+      nav {
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(25px);
+        border-bottom: 1px solid #333;
+        padding: 20px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        text-align: center;
+      }
+      nav a {
+        color: var(--text-white);
+        text-decoration: none;
+        font-family: "Bungee Inline";
+        font-size: 0.75rem;
+        margin: 0 15px;
+        transition: 0.3s;
+        letter-spacing: 1px;
+      }
+      nav a:hover {
+        color: var(--tigers-orange);
+        text-shadow: 0 0 10px var(--tigers-orange);
+      }
+
+      /* HERO */
+      .hero {
+        position: relative;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .hero h1 {
+        font-family: "Bungee Inline";
+        font-size: clamp(3.5rem, 12vw, 7rem);
+        margin: 0;
+        text-shadow: 4px 4px 0px var(--lions-blue);
+      }
+      .hero h1 span {
+        color: var(--tigers-orange);
+      }
+      .hero p {
+        font-family: "Lobster";
+        font-size: 2.8rem;
+        color: var(--text-white);
+        margin-top: -10px;
+        opacity: 0.9;
+      }
+
+      /* SECTIONS */
+      .container {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 80px 20px;
+      }
+      .section-title {
+        font-family: "Bungee Inline";
+        font-size: 3rem;
+        border-left: 15px solid var(--tigers-orange);
+        padding-left: 25px;
+        margin: 80px 0 40px;
+        color: var(--lions-blue);
+      }
+
+      .status-card {
+        background: var(--glass);
+        border: 1px solid #333;
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 60px;
+        font-family: "Bungee Inline";
+        border-radius: 4px;
+      }
+      .dot {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        animation: blink 1.5s infinite;
+      }
+      .open {
+        background: var(--score-green);
+        box-shadow: 0 0 15px var(--score-green);
+      }
+      .closed {
+        background: #ff3b3b;
+        box-shadow: 0 0 15px #ff3b3b;
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        gap: 30px;
+      }
+      .menu-card {
+        background: var(--glass);
+        backdrop-filter: blur(15px);
+        padding: 40px;
+        border: 1px solid #222;
+        transition: 0.4s;
+      }
+      .menu-card:hover {
+        border-color: var(--tigers-orange);
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+      .menu-card h3 {
+        font-family: "Lobster";
+        font-size: 2.5rem;
+        color: var(--tigers-orange);
+        margin-bottom: 25px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 15px;
+      }
+
+      .item {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
+      .item-name {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #fff;
+      }
+      .item-desc {
+        font-size: 0.85rem;
+        color: #aaa;
+        display: block;
+        margin-top: 4px;
+      }
+      .item-price {
+        font-family: "Bungee Inline";
+        color: var(--tigers-orange);
+        font-size: 1rem;
+      }
+
+      .dj-row {
+        display: flex;
+        align-items: center;
+        background: var(--glass);
+        border: 1px solid #333;
+        padding: 30px;
+        margin-bottom: 20px;
+        transition: 0.3s;
+      }
+      .dj-time {
+        font-family: "Bungee Inline";
+        color: var(--tigers-orange);
+        width: 150px;
+        border-right: 2px solid #444;
+        margin-right: 30px;
+        font-size: 1.1rem;
+      }
+
+      .map-frame {
+        filter: grayscale(1) invert(0.92) contrast(1.2);
+        border: 4px solid #222;
+        height: 450px;
+      }
+
+      .reserve-panel {
+        position: fixed;
+        right: -450px;
+        top: 0;
+        width: 400px;
+        height: 100%;
+        background: rgba(5, 5, 5, 0.98);
+        backdrop-filter: blur(40px);
+        z-index: 2000;
+        transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        border-left: 2px solid var(--tigers-orange);
+        padding: 60px 30px;
+        box-sizing: border-box;
+      }
+      .reserve-panel.active {
+        right: 0;
+      }
+      .cta-btn {
+        background: var(--tigers-orange);
+        color: #fff;
+        border: none;
+        padding: 20px 40px;
+        font-family: "Bungee Inline";
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      @keyframes blink {
+        0% {
+          opacity: 1;
         }
-
-        /* NAVIGATION CONSOLE */
-        .menu-nav {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            padding: 40px 0;
-            position: sticky;
-            top: 50px;
-            background: var(--foundry-black);
-            z-index: 1000;
-            border-bottom: 1px solid var(--concrete);
+        50% {
+          opacity: 0.4;
         }
-
-        .nav-btn {
-            background: none;
-            border: 1px solid #222;
-            color: #555;
-            padding: 12px 25px;
-            font-family: 'Syncopate';
-            font-size: 0.6rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-            letter-spacing: 2px;
-            text-decoration: none;
+        100% {
+          opacity: 1;
         }
-
-        .nav-btn:hover {
-            border-color: var(--detroit-brass);
-            color: #fff;
-            background: rgba(181, 137, 33, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .nav-btn.active {
-            border-color: var(--detroit-brass);
-            color: var(--detroit-brass);
-            background: rgba(181, 137, 33, 0.05);
-        }
-
-        /* SECTIONS */
-        .section-header {
-            padding: 100px 10% 20px;
-            font-family: var(--font-serif);
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            color: var(--detroit-brass);
-            border-bottom: 1px solid var(--detroit-brass);
-            margin: 0 10% 50px;
-            font-style: italic;
-        }
-
-        .reserve-header {
-            color: var(--reserve-silver);
-            border-bottom-color: var(--reserve-silver);
-        }
-
-        .menu-container {
-            padding: 0 10% 120px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-        }
-
-        /* THE CARD SYSTEM */
-        .menu-card {
-            border: 1px solid var(--concrete);
-            padding: 35px;
-            background: rgba(255,255,255,0.01);
-            transition: 0.4s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .menu-card:hover {
-            border-color: var(--detroit-brass);
-            background: rgba(255,255,255,0.03);
-        }
-
-        .reserve-card:hover {
-            border-color: var(--reserve-silver);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .item-name {
-            font-family: 'Bungee';
-            font-size: 1.6rem;
-            margin: 15px 0;
-            line-height: 1;
-        }
-
-        .item-price {
-            font-family: var(--font-serif);
-            font-size: 2.2rem;
-            color: var(--detroit-brass);
-        }
-
-        .reserve-price { color: var(--reserve-silver); }
-
-        .item-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.65rem;
-            color: #555;
-            border-top: 1px solid #222;
-            padding-top: 20px;
-            margin-top: 20px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .status-dot {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 6px;
-            background: var(--detroit-brass);
-        }
-
-        /* THE "86" LOGIC */
-        .item-86 { opacity: 0.1; filter: grayscale(1); pointer-events: none; }
-
-        .back-nav {
-            position: fixed;
-            bottom: 40px;
-            left: 40px;
-            z-index: 1000;
-        }
-
-        .back-nav a {
-            text-decoration: none;
-            color: #fff;
-            font-family: 'Syncopate';
-            font-size: 0.55rem;
-            border: 1px solid #333;
-            padding: 12px 20px;
-            background: #000;
-        }
+      }
     </style>
-</head>
-<body>
-
-    <div class="system-top-bar">
-        <span>313_SYNC_V2.0</span>
-        <span style="color: #fff;">HOUSE PULSE: <span id="pulse">THE RUSH</span> // 74°F</span>
-        <span id="clock">DETROIT // 00:00:00</span>
+  </head>
+  <body>
+    <div class="utility-bar">
+      <div id="detroit-weather">DETROIT: 48°F | CLEAR</div>
+      <a
+        href="https://www.audacy.com/971theticket/listen"
+        target="_blank"
+        id="radio-live"
+        >● LIVE ON 97.1 THE TICKET</a
+      >
     </div>
 
-    <header class="hospitality-hero">
-        <h1 class="hero-title">313 <span>Operations</span></h1>
-    </header>
+    <div class="video-background">
+      <video autoplay muted loop playsinline>
+        <source
+          src="https://assets.mixkit.io/videos/preview/mixkit-night-city-skyline-time-lapse-9118-large.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </div>
 
-    <nav class="menu-nav">
-        <a href="#provisions" class="nav-btn">PROVISIONS</a>
-        <a href="#libations" class="nav-btn">LIBATIONS</a>
-        <a href="#reserve" class="nav-btn">RESERVE</a>
+    <div class="live-ticker">
+      <div class="ticker-content">
+        TIGERS OPENING DAY: 04 DAYS : 22 HOURS — ONLY 4 BOXES REMAINING —
+        PISTONS 102 - RAPTORS 98 (FINAL) — RED WINGS GAME TONIGHT @ 7PM
+      </div>
+    </div>
+
+    <div class="logo-bar">
+      <div class="logo-row">
+        <a
+          href="https://www.mlb.com/tigers/schedule"
+          target="_blank"
+          class="logo-link"
+          ><img
+            src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Detroit_Tigers_logo.svg"
+            alt="Tigers"
+        /></a>
+        <a
+          href="https://www.detroitlions.com/schedule/"
+          target="_blank"
+          class="logo-link"
+          ><img
+            src="https://upload.wikimedia.org/wikipedia/en/7/71/Detroit_Lions_logo.svg"
+            alt="Lions"
+        /></a>
+        <a
+          href="https://www.nba.com/pistons/schedule"
+          target="_blank"
+          class="logo-link"
+          ><img
+            src="https://cdn.nba.com/teams/uploads/sites/1610612765/2021/09/dp-primary.svg"
+            alt="Pistons"
+        /></a>
+        <a
+          href="https://mgoblue.com/sports/football/schedule"
+          target="_blank"
+          class="logo-link"
+          ><img
+            src="https://mgoblue.com/images/sng_2023/main_nav_logo.svg"
+            alt="U of M"
+        /></a>
+        <a
+          href="https://msuspartans.com/sports/football/schedule"
+          target="_blank"
+          class="logo-link"
+          ><img
+            src="https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/msuspartans.com/images/nextgen_2024/main_nav_logo.svg"
+            alt="MSU"
+        /></a>
+        <a
+          href="https://www.wnba.com/schedule"
+          target="_blank"
+          class="logo-link"
+          ><img
+            src="https://upload.wikimedia.org/wikipedia/en/b/b8/WNBA_logo.svg"
+            alt="WNBA"
+            style="
+              height: 42px;
+              filter: drop-shadow(0 0 5px rgba(255, 103, 31, 0.4));
+            "
+        /></a>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#food">THE SPREAD</a>
+      <a href="#drinks">BAR & VINES</a>
+      <a href="#djs">DJ RESIDENCY</a>
+      <a href="#find">LOCATION</a>
+      <a
+        href="javascript:void(0)"
+        onclick="toggleReserve()"
+        style="color: var(--tigers-orange)"
+        >RESERVE A BOX</a
+      >
     </nav>
 
-    <div id="provisions" class="section-header">Provisions</div>
-    <main class="menu-container">
+    <div id="reservePanel" class="reserve-panel">
+      <button
+        onclick="toggleReserve()"
+        style="
+          background: none;
+          border: none;
+          color: #fff;
+          font-size: 2.5rem;
+          cursor: pointer;
+          position: absolute;
+          top: 20px;
+          right: 20px;
+        "
+      >
+        ×
+      </button>
+      <h2
+        style="
+          font-family: 'Bungee Inline';
+          color: var(--tigers-orange);
+          font-size: 2rem;
+        "
+      >
+        RESERVE BOX
+      </h2>
+      <form style="margin-top: 40px">
+        <input
+          type="text"
+          placeholder="Your Name"
+          style="
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: #111;
+            border: 1px solid #444;
+            color: #fff;
+            font-family: 'Space Grotesk';
+          "
+        />
+        <select
+          style="
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: #111;
+            border: 1px solid #444;
+            color: #fff;
+            font-family: 'Space Grotesk';
+          "
+        >
+          <option>Select Game/Event</option>
+          <option>Tigers Opening Day</option>
+          <option>Detroit Grand Prix</option>
+          <option>Lions Game Day</option>
+        </select>
+        <button type="button" class="cta-btn" style="width: 100%">
+          REQUEST BOOKING
+        </button>
+      </form>
+    </div>
+
+    <section class="hero">
+      <h1>THE 313 <span>SPORTS HOUSE</span></h1>
+      <p>Detroit's Premier Game-Day Flagship</p>
+      <button
+        class="cta-btn"
+        onclick="toggleReserve()"
+        style="margin-top: 30px"
+      >
+        RESERVE YOUR FRONT ROW
+      </button>
+      <div
+        style="
+          margin-top: 25px;
+          font-family: 'Space Grotesk';
+          font-size: 0.85rem;
+          letter-spacing: 2px;
+          color: #888;
+          text-transform: uppercase;
+        "
+      >
+        <span
+          style="color: var(--tigers-orange); animation: blink 1.5s infinite"
+          >●</span
+        >
+        Opening Day: Only 4 Boxes Remaining
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="status-card" id="live-status"></div>
+
+      <h2 class="section-title" id="food">The Full Spread</h2>
+      <div class="menu-grid">
         <div class="menu-card">
-            <div class="card-header">
-                <span style="font-size: 0.6rem; color: var(--detroit-brass);">HOUSE_SIGNATURE</span>
-                <span class="item-price">24.</span>
+          <h3>Stadium Carry-Out</h3>
+          <div class="item">
+            <div class="item-info">
+              <span class="item-name">Walking Taco</span
+              ><span class="item-desc"
+                >Fritos bag style, seasoned beef/beans, crema.</span
+              >
             </div>
-            <span class="item-name">The Foundry Burger</span>
-            <p style="color: #777; font-size: 0.8rem; line-height: 1.6;">DRY-AGED WAGYU / RESERVE CHEDDAR / BURNT ONION JAM / TRUFFLE AIOLI.</p>
-            <div class="item-meta">
-                <span>PREP: 12 MIN</span>
-                <span><span class="status-dot"></span>STOCK: HIGH</span>
+            <span class="item-price">$12</span>
+          </div>
+          <div class="item">
+            <div class="item-info">
+              <span class="item-name">Hot Dog In A Bag</span
+              ><span class="item-desc"
+                >Classic ball park dog with all the fixings.</span
+              >
             </div>
+            <span class="item-price">$9</span>
+          </div>
         </div>
-
-        <div class="menu-card item-86">
-            <div class="card-header">
-                <span style="font-size: 0.6rem;">MARKET_ENTRY</span>
-                <span class="item-price">85.</span>
-            </div>
-            <span class="item-name">Bone-In Ribeye</span>
-            <p style="color: #777; font-size: 0.8rem; line-height: 1.6;">32OZ BONE-IN / 45-DAY CELLAR AGED / BONE MARROW BUTTER / SMOKED SALT.</p>
-            <div class="item-meta">
-                <span>PREP: 25 MIN</span>
-                <span>STOCK: DEPLETED</span>
-            </div>
-        </div>
-    </main>
-
-    <div id="libations" class="section-header">Libations</div>
-    <main class="menu-container">
         <div class="menu-card">
-            <div class="card-header">
-                <span style="font-size: 0.6rem; color: var(--detroit-brass);">CRAFT_COCKTAIL</span>
-                <span class="item-price">18.</span>
+          <h3>The Sidelines</h3>
+          <div class="item">
+            <div class="item-info">
+              <span class="item-name">The "Cade" Mushroom Patty</span
+              ><span class="item-desc"
+                >Grilled portobello, swiss, stadium mustard.</span
+              >
             </div>
-            <span class="item-name">Motor City Old Fashioned</span>
-            <p style="color: #777; font-size: 0.8rem; line-height: 1.6;">DETROIT BOURBON / MAPLE / BLACK WALNUT BITTERS / SMOKED CEDAR.</p>
-            <div class="item-meta">
-                <span>STRENGTH: HEAVY</span>
-                <span><span class="status-dot"></span>BAR: ACTIVE</span>
+            <span class="item-price">$16</span>
+          </div>
+          <div class="item">
+            <div class="item-info">
+              <span class="item-name">Totcho Totcho Man</span
+              ><span class="item-desc"
+                >Crispy tater tots, nacho cheese, jalapeños.</span
+              >
             </div>
+            <span class="item-price">$13</span>
+          </div>
         </div>
+      </div>
 
+      <h2 class="section-title" id="drinks">Bar & Vines</h2>
+      <div class="menu-grid">
         <div class="menu-card">
-            <div class="card-header">
-                <span style="font-size: 0.6rem; color: var(--detroit-brass);">HOUSE_POUR</span>
-                <span class="item-price">16.</span>
-            </div>
-            <span class="item-name">313 Gin & Tonic</span>
-            <p style="color: #777; font-size: 0.8rem; line-height: 1.6;">LOCAL BOTANICAL GIN / HOUSE-MADE TONIC / CHARRED GRAPEFRUIT.</p>
-            <div class="item-meta">
-                <span>TEMP: 38°F</span>
-                <span><span class="status-dot"></span>STOCK: STEADY</span>
-            </div>
+          <h3>On Tap & Bottled</h3>
+          <div class="item">
+            <span>Two Hearted IPA</span><span class="item-price">$8</span>
+          </div>
+          <div class="item">
+            <span>Stroh's Lager</span><span class="item-price">$6</span>
+          </div>
+          <div class="item">
+            <span>Detroit Liquid Gold</span><span class="item-price">$9</span>
+          </div>
         </div>
-    </main>
-
-    <div id="reserve" class="section-header reserve-header">The Reserve Cellar</div>
-    <main class="menu-container">
-        <div class="menu-card reserve-card">
-            <div class="card-header">
-                <span style="font-size: 0.6rem; color: var(--reserve-silver);">VINTAGE_SELECTION</span>
-                <span class="item-price reserve-price">450.</span>
-            </div>
-            <span class="item-name">2014 Reserve Cabernet</span>
-            <p style="color: #777; font-size: 0.8rem; line-height: 1.6;">NAPA VALLEY / LIMITED RELEASE / HAND-CRAFTED FRENCH OAK AGING.</p>
-            <div class="item-meta">
-                <span>CELLAR: 55°F</span>
-                <span><span class="status-dot" style="background: var(--reserve-silver);"></span>QTY: 4</span>
-            </div>
+        <div class="menu-card">
+          <h3>Sober Stadium</h3>
+          <div class="item">
+            <span>The No-Hitter Mocktail</span
+            ><span class="item-price">$9</span>
+          </div>
+          <div class="item">
+            <span>Nitro Cold Brew</span><span class="item-price">$7</span>
+          </div>
         </div>
-
-        <div class="menu-card reserve-card">
-            <div class="card-header">
-                <span style="font-size: 0.6rem; color: var(--reserve-silver);">RARE_SPIRIT</span>
-                <span class="item-price reserve-price">120.</span>
-            </div>
-            <span class="item-name">Single Barrel Bourbon</span>
-            <p style="color: #777; font-size: 0.8rem; line-height: 1.6;">2-OZ POUR / CHARRED OAK / CARAMELIZED VANILLA / 114 PROOF.</p>
-            <div class="item-meta">
-                <span>POUR: NEAT</span>
-                <span><span class="status-dot" style="background: var(--reserve-silver);"></span>STOCK: LOW</span>
-            </div>
+        <div class="menu-card" id="brunch">
+          <h3>Sunday Brunch</h3>
+          <div class="item">
+            <span>Quarterback Quiche</span><span class="item-price">$14</span>
+          </div>
+          <div class="item">
+            <span>Pancake Field Goal</span><span class="item-price">$12</span>
+          </div>
         </div>
-    </main>
+        <div class="menu-card">
+          <h3>The Vines</h3>
+          <div class="item">
+            <span>House Cabernet</span><span class="item-price">$11</span>
+          </div>
+          <div class="item">
+            <span>House Chardonnay</span><span class="item-price">$11</span>
+          </div>
+        </div>
+      </div>
 
-    <div class="back-nav">
-        <a href="index.html">← RETURN TO STUDIO</a>
+      <h2 class="section-title" id="djs">Turntable Residency</h2>
+      <div class="dj-row">
+        <div class="dj-time">FRI 9PM-2AM</div>
+        <div>
+          <h4 style="margin: 0; font-size: 1.4rem">TECHNO TOWN TAKE OVER</h4>
+          <p style="margin: 5px 0 0; color: #888">
+            Deep house and Detroit techno roots.
+          </p>
+        </div>
+      </div>
+      <div class="dj-row">
+        <div class="dj-time">SAT 10PM-2AM</div>
+        <div>
+          <h4 style="margin: 0; font-size: 1.4rem">THE 313 MIX-UP</h4>
+          <p style="margin: 5px 0 0; color: #888">
+            High-energy stadium anthems and hip-hop.
+          </p>
+        </div>
+      </div>
+
+      <h2 class="section-title" id="find">Visit the House</h2>
+      <div class="map-frame" id="find">
+        <iframe
+          width="100%"
+          height="100%"
+          frameborder="0"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d188764.12995325997!2d-83.18491845!3d42.3527027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8824ca0110cb1d75%3A0x5776864e35b9c4d2!2sDetroit%2C%20MI!5e0!3m2!1sen!2sus!4v1711735000000!5m2!1sen!2sus"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
 
     <script>
-        function updateClock() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
-            document.getElementById('clock').innerText = 'DETROIT // ' + timeString;
-            
-            // Pulse Logic
-            const hours = now.getHours();
-            let status = "STEADY";
-            if (hours >= 18 && hours <= 21) status = "THE RUSH";
-            if (hours >= 22) status = "LAST CALL";
-            if (hours < 11) status = "CLOSED";
-            document.getElementById('pulse').innerText = status;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
+      function toggleReserve() {
+        document.getElementById("reservePanel").classList.toggle("active");
+      }
+      function updateSite() {
+        const now = new Date();
+        const day = now.getDay();
+        const hour = now.getHours();
+        const status = document.getElementById("live-status");
+        let open =
+          (day >= 1 && day <= 4 && hour >= 11 && hour < 23) ||
+          ((day == 5 || day == 6) && (hour >= 11 || hour < 2)) ||
+          (day == 0 && hour >= 10 && hour < 22);
+        status.innerHTML = open
+          ? '<span class="dot open"></span> STATUS: OPEN LIVE'
+          : '<span class="dot closed"></span> STATUS: CLOSED';
+        status.style.color = open ? "var(--score-green)" : "#ff3b3b";
+        const radio = document.getElementById("radio-live");
+        let isGameTime =
+          (day >= 1 && day <= 5 && hour >= 18 && hour < 23) ||
+          ((day == 0 || day == 6) && hour >= 11 && hour < 23);
+        radio.style.display = isGameTime ? "inline-block" : "none";
+      }
+      updateSite();
+      setInterval(updateSite, 60000);
     </script>
-
-</body>
+  </body>
 </html>
