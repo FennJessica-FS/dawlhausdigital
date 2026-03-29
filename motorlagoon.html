@@ -19,7 +19,7 @@
         box-sizing: border-box;
       }
 
-      /* --- 100K FINISHING TOUCHES: FILM & CRT EFFECTS --- */
+      /* --- FINISHING TOUCHES: FILM & CRT EFFECTS --- */
       body::before {
         content: "";
         position: fixed;
@@ -359,6 +359,27 @@
       .glitch-active {
         animation: glitch 0.3s linear;
       }
+      .nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-family: "Bangers";
+  letter-spacing: 1px;
+}
     </style>
   </head>
   <body>
@@ -378,11 +399,19 @@
       </div>
     </div>
 
-    <nav>
-      <div class="logo">MOTOR LAGOON</div>
-      <button class="dossier-btn" onclick="toggleMenu()">OPEN DOSSIER</button>
-    </nav>
-
+   <nav class="nav glass">
+  <div class="nav-content">
+    <div class="logo-group">
+      <span class="system-status"></span>
+      <h1 class="logo">MOTOR_LAGOON</h1>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">← BACK_TO_DAWLHAUS</a>
+      <a href="#menu" class="nav-link">PROVISIONS</a>
+      <a href="#contact" class="nav-btn">BOOK_DECK</a>
+    </div>
+  </div>
+</nav>
     <section class="hero">
       <video autoplay muted loop playsinline class="video-background">
         <source
