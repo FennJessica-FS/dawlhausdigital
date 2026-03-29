@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>THE MOTOR LAGOON | DETROIT TIKI</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☣️</text></svg>"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=Creepster&family=Space+Grotesk:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* --- 100K FINISHING TOUCHES: FILM & CRT EFFECTS --- */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain.png");
+        opacity: 0.04;
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      .scanlines {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.1) 50%
+          ),
+          linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.03),
+            rgba(0, 255, 0, 0.01),
+            rgba(0, 0, 255, 0.03)
+          );
+        background-size: 100% 3px, 2px 100%;
+        pointer-events: none;
+        z-index: 998;
+      }
+
+      body {
+        background: #020502;
+        color: #fdf5e6;
+        font-family: "Space Grotesk", sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* --- EMERGENCY TICKER --- */
+      .ticker-wrap {
+        width: 100%;
+        overflow: hidden;
+        background: #39ff14;
+        color: #000;
+        font-family: "Bangers";
+        font-size: 0.9rem;
+        padding: 5px 0;
+        position: fixed;
+        top: 0;
+        z-index: 1001;
+      }
+
+      .ticker {
+        display: inline-block;
+        white-space: nowrap;
+        padding-left: 100%;
+        animation: ticker 30s linear infinite;
+      }
+
+      @keyframes ticker {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(-100%, 0);
+        }
+      }
+
+      /* --- NAVIGATION --- */
+      nav {
+        padding: 45px 5% 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #000;
+        border-bottom: 4px solid #39ff14;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .logo {
+        font-family: "Bangers", cursive;
+        font-size: 2.2rem;
+        color: #39ff14;
+        text-shadow: 3px 3px #ff00ff;
+      }
+
+      .dossier-btn {
+        font-family: "Bangers";
+        color: #fff;
+        background: none;
+        border: 2px solid #ff00ff;
+        padding: 8px 20px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .dossier-btn:hover {
+        background: #ff00ff;
+        color: #000;
+        box-shadow: 0 0 20px #ff00ff;
+      }
+
+      /* --- HERO & STATUS --- */
+      .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)),
+          url("https://images.unsplash.com/photo-1574096079513-d8259312b785?auto=format&fit=crop&q=80&w=1600");
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+      }
+
+      .status-sign {
+        font-family: "Bangers";
+        font-size: 1.4rem;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+      }
+
+      .status-open {
+        color: #39ff14;
+        text-shadow: 0 0 10px #39ff14;
+        animation: flicker 4s infinite;
+      }
+      .status-closed {
+        color: #ff0000;
+        text-shadow: 0 0 5px #ff0000;
+        opacity: 0.6;
+      }
+
+      @keyframes flicker {
+        0%,
+        19%,
+        21%,
+        23%,
+        25%,
+        54%,
+        56%,
+        100% {
+          opacity: 1;
+        }
+        20%,
+        22%,
+        24%,
+        55% {
+          opacity: 0.4;
+        }
+      }
+
+      .hero h1 {
+        font-family: "Bangers", cursive;
+        font-size: clamp(4rem, 18vw, 11rem);
+        line-height: 0.85;
+        text-shadow: 5px 5px 0px #000, 10px 10px 0px #39ff14;
+      }
+
+      .hero h2 {
+        font-family: "Creepster", cursive;
+        color: #ff00ff;
+        font-size: clamp(2rem, 5vw, 4rem);
+        transform: rotate(-3deg);
+        margin-top: -15px;
+      }
+
+      /* --- THE DOSSIER OVERLAY --- */
+      #menu-overlay {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100%;
+        background: #050a05;
+        z-index: 2000;
+        transition: 0.7s cubic-bezier(0.85, 0, 0.15, 1);
+        padding: 120px 5% 60px;
+        overflow-y: auto;
+      }
+
+      #menu-overlay.active {
+        right: 0;
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 35px;
+      }
+
+      .menu-box {
+        border: 4px solid #39ff14;
+        padding: 30px;
+        background: #000;
+        box-shadow: 12px 12px 0px #ff00ff;
+        position: relative;
+      }
+
+      .stamp {
+        position: absolute;
+        top: 15px;
+        right: -15px;
+        border: 4px solid #ff0000;
+        color: #ff0000;
+        font-family: "Bangers";
+        padding: 4px 15px;
+        transform: rotate(12deg);
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      .menu-box h3 {
+        font-family: "Bangers";
+        font-size: 2.2rem;
+        border-bottom: 2px solid #39ff14;
+        margin-bottom: 20px;
+      }
+
+      .item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+      .item span:last-child {
+        color: #39ff14;
+      }
+      .desc {
+        font-size: 0.8rem;
+        color: #777;
+        font-style: italic;
+        margin-bottom: 15px;
+      }
+
+      .info-row {
+        margin-bottom: 12px;
+        border-left: 3px solid #ff00ff;
+        padding-left: 15px;
+      }
+      .info-row b {
+        display: block;
+        font-family: "Bangers";
+        color: #ff00ff;
+        font-size: 1.1rem;
+      }
+
+      /* --- THE ORACLE --- */
+      .oracle-box {
+        grid-column: 1 / -1;
+        background: rgba(57, 255, 20, 0.05);
+        border: 4px dashed #39ff14;
+        text-align: center;
+        padding: 40px;
+      }
+
+      #oracle-btn {
+        background: #39ff14;
+        border: none;
+        font-family: "Bangers";
+        font-size: 1.8rem;
+        padding: 10px 30px;
+        cursor: pointer;
+        box-shadow: 0 0 15px #39ff14;
+      }
+
+      #oracle-out {
+        font-family: "Creepster";
+        font-size: 2rem;
+        color: #ff00ff;
+        margin-top: 20px;
+      }
+
+      footer {
+        padding: 80px;
+        text-align: center;
+        font-family: "Bangers";
+        color: #222;
+        letter-spacing: 8px;
+      }
+      .video-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Keeps it full screen */
+        z-index: -1; /* Pushes it BEHIND the text */
+        filter: grayscale(1) contrast(1.5) brightness(0.3); /* Makes it moody & vintage */
+        pointer-events: none;
+      }
+
+      .hero {
+        position: relative; /* This is crucial for the video to stay inside the box */
+        overflow: hidden;
+      }
+      /* --- CURSOR & INTERACTION --- */
+      html {
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="2" fill="%2339ff14"/><line x1="16" y1="0" x2="16" y2="32" stroke="%2339ff14" stroke-width="1"/><line x1="0" y1="16" x2="32" y2="16" stroke="%2339ff14" stroke-width="1"/></svg>')
+            16 16,
+          auto;
+      }
+
+      button:hover,
+      .dossier-btn:hover {
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="6" fill="%23ff00ff" fill-opacity="0.5"/><circle cx="16" cy="16" r="2" fill="%23ff00ff"/></svg>')
+            16 16,
+          pointer;
+      }
+
+      /* --- GLITCH ANIMATION --- */
+      @keyframes glitch {
+        0% {
+          transform: translate(0);
+          text-shadow: 5px 5px 0px #000, 10px 10px 0px #39ff14;
+        }
+        2% {
+          transform: translate(-5px, 2px);
+          text-shadow: 5px 5px 0px #ff00ff, -5px -5px 0px #39ff14;
+        }
+        4% {
+          transform: translate(5px, -2px);
+          opacity: 0.8;
+        }
+        6% {
+          transform: translate(0);
+        }
+      }
+
+      .glitch-active {
+        animation: glitch 0.3s linear;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scanlines"></div>
+    <audio
+      id="vault-sound"
+      src="https://www.soundjay.com/mechanical/sounds/mechanical-clunk-1.mp3"
+      preload="auto"
+    ></audio>
+
+    <div class="scanlines"></div>
+    <div class="ticker-wrap">
+      <div class="ticker">
+        EMERGENCY BROADCAST: KAIJU SIGHTINGS REPORTED NEAR EASTERN MARKET //
+        STROH'S RESERVES AT 15% // TONIGHT: VINYL VAMPIRISM STARTS AT 9PM // NO
+        REFUNDS FOR MONSTER ATTACKS // DETROIT EST. 2026 //
+      </div>
+    </div>
+
+    <nav>
+      <div class="logo">MOTOR LAGOON</div>
+      <button class="dossier-btn" onclick="toggleMenu()">OPEN DOSSIER</button>
+    </nav>
+
+    <section class="hero">
+      <video autoplay muted loop playsinline class="video-background">
+        <source
+          src="https://assets.mixkit.co/videos/preview/mixkit-grainy-film-texture-with-scratches-and-dust-34567-large.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      <div id="live-status" class="status-sign"></div>
+      <h2>ATTACK OF THE</h2>
+      <h1>MOTOR<br />LAGOON</h1>
+
+      <button
+        class="dossier-btn"
+        id="main-act"
+        onclick="toggleMenu()"
+        style="margin-top: 40px; font-size: 1.6rem; padding: 15px 40px"
+      >
+        ENTER SYSTEM
+      </button>
+    </section>
+
+    <div id="menu-overlay">
+      <div style="text-align: right; margin-bottom: 30px">
+        <button class="dossier-btn" onclick="toggleMenu()">
+          [ CLOSE FILE ]
+        </button>
+      </div>
+
+      <div class="menu-grid">
+        <div class="menu-box">
+          <div class="stamp">CLASSIFIED</div>
+          <h3>FUEL INJECTED</h3>
+          <div class="item"><span>8-Mile Zombie</span><span>$18</span></div>
+          <p class="desc">
+            Three rums, grapefruit, and a dash of industrial waste.
+          </p>
+          <div class="item"><span>Toxic Mai Tai</span><span>$15</span></div>
+          <div class="item"><span>Stroh's Lager</span><span>$5</span></div>
+          <div class="item"><span>Natty Daddy</span><span>$3</span></div>
+        </div>
+
+        <div class="menu-box">
+          <h3>RATIONS</h3>
+          <div class="item"><span>Better Made Chips</span><span>$4</span></div>
+          <p class="desc">Detroit's finest. Served in a bucket.</p>
+          <div class="item"><span>Spicy Chex Mix</span><span>$5</span></div>
+          <div class="item">
+            <span>Roast Beast Sliders</span><span>$12</span>
+          </div>
+          <div class="item"><span>Frankenweenies</span><span>$9</span></div>
+        </div>
+
+        <div class="menu-box">
+          <h3>SHOWTIMES</h3>
+          <div class="info-row"><b>TUESDAY — SUNDAY</b> 6:00 PM — 1:00 AM</div>
+          <div class="info-row"><b>MONDAY</b> CLOSED, YOU MONSTERS!</div>
+          <p style="font-size: 0.7rem; margin-top: 15px">
+            *Last call before the monsters wake up.
+          </p>
+        </div>
+
+        <div class="menu-box">
+          <div class="stamp" style="border-color: #39ff14; color: #39ff14">
+            UPCOMING
+          </div>
+          <h3>RITUALS</h3>
+          <div class="info-row">
+            <b>VINYL VAMPIRISM</b> Wed / Industrial Vinyl
+          </div>
+          <div class="info-row">
+            <b>KAIJU KITCHEN</b> Sun / 60s Monster Matinee
+          </div>
+        </div>
+
+        <div class="oracle-box">
+          <h3 style="font-family: 'Bangers'; color: #fff; margin-bottom: 10px">
+            CONSULT THE ORACLE
+          </h3>
+          <p style="font-size: 0.8rem; margin-bottom: 20px">
+            LET THE SYSTEM CHOOSE YOUR FATE.
+          </p>
+          <button id="oracle-btn" onclick="runOracle()">REVEAL FATE</button>
+          <div id="oracle-out"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer>DETROIT IS FOR MONSTERS</footer>
+
+    <script>
+      function updateStatus() {
+        const now = new Date();
+        const day = now.getDay();
+        const hour = now.getHours();
+        const el = document.getElementById("live-status");
+        const btn = document.getElementById("main-act");
+
+        let open = false;
+        // Open 6pm-1am Tue-Sun (Closed Mon)
+        if (day !== 1) {
+          // Not Monday
+          if (hour >= 18 || hour < 1) open = true;
+        }
+        // Handle Sunday night bleeding into Monday 1am
+        if (day === 1 && hour < 1) open = true;
+
+        if (open) {
+          el.innerHTML = "● SYSTEM STATUS: OPEN";
+          el.className = "status-sign status-open";
+          btn.innerHTML = "ENTER THE LAGOON";
+        } else {
+          el.innerHTML = "○ SYSTEM STATUS: CLOSED";
+          el.className = "status-sign status-closed";
+          btn.innerHTML = "VIEW ARCHIVES";
+        }
+      }
+
+      function toggleMenu() {
+        document.getElementById("menu-overlay").classList.toggle("active");
+        document.body.style.overflow = document
+          .getElementById("menu-overlay")
+          .classList.contains("active")
+          ? "hidden"
+          : "auto";
+      }
+
+      function runOracle() {
+        const d = [
+          "A Toxic Mai Tai",
+          "A Cold Stroh's",
+          "An 8-Mile Zombie",
+          "A Natty Daddy",
+        ];
+        const s = [
+          "Better Made Chips",
+          "Roast Beast Sliders",
+          "Frankenweenies",
+          "Chex Mix",
+        ];
+
+        const out = document.getElementById("oracle-out");
+        const btn = document.getElementById("oracle-btn");
+
+        // 1. Give it a "Loading" state
+        out.innerText = "CONSULTING SYSTEM...";
+        btn.style.opacity = "0.5";
+        btn.innerText = "WAITING...";
+
+        // 2. Wait 600ms before showing the result (the "Thinking" part)
+        setTimeout(() => {
+          const drink = d[Math.floor(Math.random() * d.length)];
+          const snack = s[Math.floor(Math.random() * s.length)];
+
+          out.innerText = drink + " & " + snack;
+          btn.style.opacity = "1";
+          btn.innerText = "REVEAL FATE";
+        }, 600);
+      }
+      setInterval(updateStatus, 60000);
+      updateStatus();
+      document.addEventListener("mousemove", (e) => {
+        const moveX = (e.clientX - window.innerWidth / 2) * 0.015;
+        const moveY = (e.clientY - window.innerHeight / 2) * 0.015;
+
+        // Target the H1 and H2 to move in slightly different directions
+        document.querySelector(
+          ".hero h1"
+        ).style.transform = `translate(${moveX}px, ${moveY}px)`;
+        document.querySelector(
+          ".hero h2"
+        ).style.transform = `translate(${-moveX}px, ${-moveY}px) rotate(-3deg)`;
+      });
+      // THE GLITCH TIMER - Activates every 8 seconds
+      setInterval(() => {
+        const title = document.querySelector(".hero h1");
+        if (title) {
+          title.classList.add("glitch-active");
+          // Remove the class after the animation ends (0.3s) so it can trigger again
+          setTimeout(() => title.classList.remove("glitch-active"), 300);
+        }
+      }, 8000);
+    </script>
+  </body>
+</html>
