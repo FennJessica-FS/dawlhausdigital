@@ -444,48 +444,65 @@
 
     <button id="backToTop" onclick="window.scrollTo(0,0)">↑</button>
 
-    <script>
-      let currdeg = 0;
-      const items = document.querySelectorAll(".carousel-item");
-      const angleStep = 360 / items.length;
+  <script>
+  let currdeg = 0;
+  const items = document.querySelectorAll(".carousel-item");
+  const angleStep = 360 / items.length;
 
-      function rotate(direction) {
-        currdeg += direction * angleStep;
-        items.forEach((item, index) => {
-          const angle = index * angleStep + currdeg;
-          const normalizedAngle = ((angle % 360) + 360) % 360;
-          const zDepth = window.innerWidth < 600 ? 450 : 700;
-          const opacity =
-            normalizedAngle === 0
-              ? 1
-              : normalizedAngle > 90 && normalizedAngle < 270
-              ? 0
-              : 0.4;
-          const scale = normalizedAngle === 0 ? 1 : 0.6;
-          item.style.transform = `rotateY(${angle}deg) translateZ(${zDepth}px) scale(${scale})`;
-          item.style.opacity = opacity;
-          item.style.zIndex = normalizedAngle === 0 ? 100 : 1;
-        });
+  function rotate(direction) {
+    currdeg += direction * angleStep;
+    items.forEach((item, index) => {
+      const angle = index * angleStep + currdeg;
+      // Normalizes angle between 0 and 360
+      const normalizedAngle = ((angle % 360) + 360) % 360;
+      
+      // Responsive depth
+      const zDepth = window.innerWidth < 600 ? 350 : 600;
+      
+      // Improved visibility logic
+      let opacity = 0.3;
+      let scale = 0.6;
+      let zIndex = 1;
+
+      if (normalizedAngle < 15 || normalizedAngle > 345) {
+        opacity = 1;
+        scale = 1;
+        zIndex = 100;
+      } else if (normalizedAngle > 90 && normalizedAngle < 270) {
+        opacity = 0.1; // Peek-a-boo effect for back items
       }
 
-      let touchstartX = 0;
-      const container = document.getElementById("shop");
-      container.addEventListener("touchstart", (e) => {
-        touchstartX = e.changedTouches[0].screenX;
-      });
-      container.addEventListener("touchend", (e) => {
-        const touchendX = e.changedTouches[0].screenX;
-        if (touchstartX - touchendX > 50) rotate(1);
-        if (touchendX - touchstartX > 50) rotate(-1);
-      });
+      item.style.transform = `rotateY(${angle}deg) translateZ(${zDepth}px) scale(${scale})`;
+      item.style.opacity = opacity;
+      item.style.zIndex = zIndex;
+    });
+  }
 
-      window.addEventListener("resize", () => rotate(0));
-      rotate(0);
+  // Touch Support
+  let touchstartX = 0;
+  const container = document.getElementById("shop");
+  container.addEventListener("touchstart", (e) => {
+    touchstartX = e.changedTouches[0].screenX;
+  });
+  container.addEventListener("touchend", (e) => {
+    const touchendX = e.changedTouches[0].screenX;
+    if (touchstartX - touchendX > 50) rotate(1);
+    if (touchendX - touchstartX > 50) rotate(-1);
+  });
 
-      window.onscroll = () => {
-        document.getElementById("backToTop").style.display =
-          window.scrollY > 500 ? "block" : "none";
-      };
-    </script>
+  // Initial Load & Resize
+  window.addEventListener("resize", () => rotate(0));
+  
+  // Start the carousel positions immediately
+  document.addEventListener("DOMContentLoaded", () => {
+    rotate(0);
+  });
+
+  // Back to top visibility
+  window.onscroll = () => {
+    const btt = document.getElementById("backToTop");
+    if(btt) btt.style.display = window.scrollY > 500 ? "block" : "none";
+  };
+</script>
   </body>
 </html>
