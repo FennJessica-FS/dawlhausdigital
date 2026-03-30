@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>313 // BRAND_PLAYGROUND</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=IBM+Plex+Mono:wght@400;700&family=Archivo+Black&family=Playfair+Display:ital,wght@1,900&family=Bebas+Neue&family=Space+Mono:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #fdfdfd;
+        --text: #111;
+        --accent: #0047ff;
+      }
+      body.dark-mode {
+        --bg: #0a0a0a;
+        --text: #fff;
+        --accent: #ccff00;
+      }
+
+      * {
+        box-sizing: border-box;
+        transition: 0.2s ease-out;
+      }
+      body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: "IBM Plex Mono", monospace;
+        margin: 0;
+        text-transform: uppercase;
+        line-height: 1.4;
+        overflow-x: hidden;
+      }
+
+      /* INTERACTIVE STATUS BAR */
+      .status-bar {
+        background: var(--text);
+        color: var(--bg);
+        padding: 12px 5%;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.6rem;
+        font-weight: 700;
+        border-bottom: 2px solid var(--accent);
+        position: sticky;
+        top: 0;
+        z-index: 11000;
+      }
+
+      header {
+        padding: 80px 5% 40px;
+        border-bottom: 2px solid var(--text);
+        perspective: 1000px;
+      }
+      .tagline {
+        color: var(--accent);
+        font-weight: 900;
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
+
+      /* GLITCH TITLE EFFECT */
+      h1 {
+        font-family: "Archivo Black";
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        margin: 0;
+        letter-spacing: -3px;
+        line-height: 0.9;
+        cursor: crosshair;
+        display: inline-block;
+        transition: transform 0.1s linear;
+      }
+      h1:hover {
+        font-style: italic;
+        color: var(--accent);
+        letter-spacing: 2px;
+      }
+
+      .intro-text {
+        text-transform: none;
+        max-width: 650px;
+        margin-top: 20px;
+        font-size: 1rem;
+        opacity: 0.8;
+      }
+
+      /* THE GRID */
+      .playground-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      }
+
+      .brand-kit {
+        padding: 50px 35px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        position: relative;
+      }
+      .dark-mode .brand-kit {
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .kit-1 {
+        --kit-accent: #0047ff;
+      }
+      .kit-2 {
+        --kit-accent: #d4af37;
+      }
+      .kit-3 {
+        --kit-accent: #ccff00;
+      }
+      .kit-4 {
+        --kit-accent: #ff0055;
+      }
+      .kit-5 {
+        --kit-accent: #00ffa3;
+      }
+      .kit-6 {
+        --kit-accent: #7000ff;
+      }
+
+      .logo-preview {
+        height: 160px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      .industry-tag {
+        display: inline-block;
+        padding: 5px 12px;
+        background: var(--kit-accent);
+        color: #000;
+        font-size: 0.6rem;
+        font-weight: 900;
+      }
+
+      /* LOGO RENDERS */
+      .render {
+        text-align: center;
+        width: 100%;
+        pointer-events: none;
+      }
+      .style-1 {
+        font-family: "Archivo Black";
+        font-size: 2.5rem;
+        letter-spacing: -2px;
+      }
+      .style-2 {
+        font-family: "Playfair Display";
+        font-size: 2.2rem;
+        font-style: italic;
+        text-transform: none;
+      }
+      .style-3 {
+        font-family: "Syncopate";
+        font-size: 0.7rem;
+        letter-spacing: 10px;
+      }
+      .style-4 {
+        font-family: "Bebas Neue";
+        font-size: 3.5rem;
+        line-height: 0.8;
+      }
+      .style-5 {
+        font-family: "Space Mono";
+        font-size: 1.8rem;
+        border: 3px solid var(--kit-accent);
+        padding: 5px 15px;
+      }
+      .style-6 {
+        font-family: "Archivo Black";
+        font-size: 2.2rem;
+        font-style: italic;
+        text-decoration: underline;
+        text-decoration-color: var(--kit-accent);
+      }
+
+      /* INTERACTION ELEMENTS */
+      .swatch-group {
+        display: flex;
+        gap: 10px;
+        margin: 15px 0;
+      }
+      .swatch {
+        width: 42px;
+        height: 42px;
+        border: 2px solid var(--text);
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      .swatch:hover {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      .inquire-btn {
+        margin-top: 20px;
+        padding: 15px;
+        border: 2px solid var(--text);
+        background: transparent;
+        color: var(--text);
+        font-family: "Archivo Black";
+        font-size: 0.7rem;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+      }
+      .inquire-btn:hover {
+        background: var(--text);
+        color: var(--bg);
+      }
+
+      .input-bar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #111;
+        padding: 20px 5%;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        z-index: 10000;
+      }
+      .input-bar input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid var(--accent);
+        color: #fff;
+        font-family: "Archivo Black";
+        font-size: 1.2rem;
+        outline: none;
+        padding: 5px;
+      }
+
+      #toast {
+        position: fixed;
+        top: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--accent);
+        color: #000;
+        padding: 12px 24px;
+        font-weight: 900;
+        display: none;
+        z-index: 20000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      @media (max-width: 600px) {
+        .input-bar {
+          padding: 15px;
+          flex-direction: column;
+        }
+        .input-bar input {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="status-bar">
+      <span>SYSTEM_STATUS: OPERATIONAL</span>
+      <span id="clock">00:00:00</span>
+      <span>LOC: DETROIT_MI // 313</span>
+    </div>
+
+    <div id="toast">HEX_COPIED</div>
+
+    <header>
+      <div class="tagline">IDENTITY_LAB // v19.0</div>
+      <h1 id="glitchTitle">BRAND_GEN</h1>
+      <p class="intro-text">
+        <strong>Welcome to the Lab.</strong> This is how Dawlhaus Digital builds
+        visual DNA. Type your brand name below to live-generate 6 unique
+        identity systems. Tap swatches to copy values, or
+        <strong>INQUIRE</strong> to finalize a kit.
+      </p>
+    </header>
+
+    <section class="playground-grid" id="main-grid"></section>
+
+    <div style="height: 140px"></div>
+
+    <div class="input-bar">
+      <input
+        type="text"
+        id="brandInput"
+        placeholder="TYPE YOUR BRAND..."
+        onkeyup="syncAll()"
+      />
+      <button
+        onclick="document.body.classList.toggle('dark-mode')"
+        style="
+          background: var(--accent);
+          border: none;
+          padding: 12px 20px;
+          font-weight: 900;
+          cursor: pointer;
+          border-radius: 4px;
+        "
+      >
+        THEME_FLIP
+      </button>
+    </div>
+
+    <script>
+      // DATA HUB
+      const kitData = [
+        {
+          id: 1,
+          name: "BRUTAL",
+          tag: "STREETWEAR + CULTURE",
+          font: "style-1",
+          colors: ["#111", "#0047ff", "#ddd"],
+        },
+        {
+          id: 2,
+          name: "LUXE",
+          tag: "RETAIL + HOSPITALITY",
+          font: "style-2",
+          colors: ["#fcfcfc", "#d4af37", "#1a1a1a"],
+        },
+        {
+          id: 3,
+          name: "TECH",
+          tag: "SAAS + INNOVATION",
+          font: "style-3",
+          colors: ["#000", "#ccff00", "#333"],
+        },
+        {
+          id: 4,
+          name: "STADIUM",
+          tag: "SPORTS + EVENTS",
+          font: "style-4",
+          colors: ["#ff0055", "#000", "#eee"],
+        },
+        {
+          id: 5,
+          name: "CYBER",
+          tag: "DIGITAL + GAMING",
+          font: "style-5",
+          colors: ["#00ffa3", "#111", "#444"],
+        },
+        {
+          id: 6,
+          name: "STUDIO",
+          tag: "STUDIO + DESIGN",
+          font: "style-6",
+          colors: ["#7000ff", "#fff", "#222"],
+        },
+      ];
+
+      // RENDER KITS
+      const grid = document.getElementById("main-grid");
+      kitData.forEach((k) => {
+        grid.innerHTML += `
+                <div class="brand-kit kit-${k.id}" id="k-${k.id}">
+                    <div class="logo-preview"><div class="render ${
+                      k.font
+                    } out-text">313</div></div>
+                    <div>
+                        <span class="industry-tag">${k.tag}</span>
+                        <div class="swatch-group">
+                            ${k.colors
+                              .map(
+                                (c) =>
+                                  `<div class="swatch" style="background:${c}" onclick="copyColor('k-${k.id}', '${c}')"></div>`
+                              )
+                              .join("")}
+                        </div>
+                        <div style="font-size:0.5rem; opacity:0.5;">TYPOGRAPHY_REF: ${k.font.toUpperCase()}</div>
+                        <a href="#" class="inquire-btn" onclick="sendInquiry('${
+                          k.tag
+                        }')">GET THIS KIT</a>
+                    </div>
+                </div>
+            `;
+      });
+
+      // LIVE LOGIC
+      function syncAll() {
+        let val = document.getElementById("brandInput").value || "313";
+        document
+          .querySelectorAll(".out-text")
+          .forEach((el) => (el.innerText = val));
+      }
+
+      function copyColor(id, hex) {
+        navigator.clipboard.writeText(hex);
+        const kit = document.getElementById(id);
+        const originalBg = kit.style.background;
+        kit.style.background = hex;
+        const toast = document.getElementById("toast");
+        toast.innerText = `HEX_COPIED: ${hex}`;
+        toast.style.display = "block";
+        setTimeout(() => {
+          kit.style.background = originalBg;
+          toast.style.display = "none";
+        }, 1000);
+      }
+
+      function sendInquiry(style) {
+        const brandName = document.getElementById("brandInput").value || "313";
+        const email = "Dawlhausdigital@GMAIL.COM";
+        const subject = `Inquiry: ${brandName} [${style}]`;
+        const body = `Hi! I love the ${style} look for "${brandName}." Let's start the branding process.`;
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent(
+          subject
+        )}&body=${encodeURIComponent(body)}`;
+      }
+
+      // INTERACTIVE HEADER LOGIC
+      setInterval(() => {
+        document.getElementById("clock").innerText =
+          new Date().toLocaleTimeString();
+      }, 1000);
+
+      const title = document.getElementById("glitchTitle");
+      document.addEventListener("mousemove", (e) => {
+        let x = (window.innerWidth / 2 - e.pageX) / 25;
+        let y = (window.innerHeight / 2 - e.pageY) / 25;
+        title.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+      });
+    </script>
+  </body>
+</html>
